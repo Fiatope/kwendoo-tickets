@@ -1,0 +1,86 @@
+en:
+  projects:
+    index:
+      title: 'Kwendoo Ticketing'
+      recommended: 'Recommended'
+      near: 'Projects Near'
+      coming_soon: 'Coming Soon'
+      public_c: "Discover Events"
+      parts:
+        first:
+          titla: "BUY YOUR EVENT TICKETS ONLINE"
+          titlb: " "
+          public_c: "Discover Events"
+        second:
+          title: "SO EASY" 
+          titla: "1. Select"
+          titladesc: "select the event you want to attend."
+          titlb: "2.Pay"
+          titlbdesc: " Pay your event tickets using Mobile Money or Credit cards "
+          titlc: "4. Share"
+          titlcdesc: "Easily share the event you are attending to your family and friends."
+          titld: "3. Collect"
+          titlddesc: "Collect your tickets at the checkpoint or download it through your Mobile."
+          getstarted: "Get Started"
+          knowmuch: "Learn More"
+        third:
+          title: "WHY CHOOSE TICKETS KWENDOO?"
+          titla: "Secure"
+          titladesc: "Secured by https encryption"
+          titlb: "Share"
+          titlbdesc: "You can easily share the event you are attending to your family and friends."
+          titlc: "Easy payment"
+          titlcdesc: "Easily pay your tickets by Mobile Money or Credit card"
+          titld: "Collect"
+          titlddesc: "Easily download your ticket or collect it to the event checkpoint. " 
+        fourth:
+          title: "PUBLIC EVENTS"
+          discover: "Discover other public events"
+          titlepartners: ""
+          press: ""
+          public_c: "Discover Events"
+      join:
+        join_the_neighborhood: 'Join Kwendoo'
+        already_joined: 'Already joined? Sign in.'
+        sign_in: 'Sign in'
+      hero:
+        title: 'We make possible joint action and impact<strong></strong>.'
+        subtitle: "Fiatope is the best way to earn golden impressions while doing good to communities and people."
+        email_placeholder: 'My email'
+        submit: 'Join the Newsletter'
+      how-it-works:
+        one:
+          headline: 'Pots'
+          text: 'You can create a pot to fund actions for local communities in Africa. As a remote member of such a community or as a sympathizer, you can contribute to such a pot.'
+          button: 'Pot space'
+        two:
+          headline: 'Projects'
+          text: "If you have an original and ambitious project in need of new funding sources, if you would like to make impact by helping such projects happen, you've come to the right place."
+          button: 'Project space'
+        three:
+          headline: 'For Citizens'
+          text: 'Want to earn perks while enhancing projects? What you do matters. Welcome to Kwendoo Tickets.'
+          button: 'Find Projects'
+      start-one:
+        title: 'Have a project in need of funding?'
+        button: 'Start one'
+         
+        four:
+          button: 'How does it work?'
+      how-it-works-bis:
+        five:
+          headline: 'How does it work?'
+      why-fiatope:
+        six:
+          headline: 'Why should i use Kwendoo Rwanda?'
+          button: 'Why should i use Kwendoo Rwanda?'
+      start-one:
+        seven:
+          headline: ' Project to be financed?'
+          button: 'Launch your Campaign'
+      mission:
+        height:
+          headline: 'Our mission'
+      channels:
+        there: 'We where there'
+

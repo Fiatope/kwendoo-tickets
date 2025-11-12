@@ -1,0 +1,6 @@
+fr:
+  shared:
+    payments:
+      mobile_money:
+        pay_cta: "Payer avec Mobile Money"
+        payingaccountidatsp_label: "Votre numéro de téléphone"

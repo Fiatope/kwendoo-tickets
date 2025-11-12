@@ -1,0 +1,64 @@
+/ = f.input :profile_type, collection: {' Person'=> 'personal', 'Organization (Company, Foundation, etc...)'=> 'organization'}, as: :radio_buttons
+.row
+  .large-8.medium-8.columns
+    #personal-name.profile-type-name style="#{"display: none;" unless @user.personal?}"
+      = f.label :name, required_by_mangopay(:name, t('users.edit.mangopay.name').capitalize)
+      = f.input :name, as: :string, label: false
+
+    #organization-name.profile-type-name style="#{"display: none;" unless @user.organization?}"
+
+      = f.fields_for :organization, include_id: false do |o|
+
+        = o.label :name, required_by_mangopay(:name, t('users.edit.mangopay.organization_name').capitalize)
+        = o.input :name, as: :string, label: false
+  
+    = f.label :birthday, required_by_mangopay(:birthday, t('users.edit.mangopay.birthday').capitalize)
+    /= date_select("user", :birthday, order: [:year], default: Date.today)
+    = f.input :birthday, as: :string, label: false  
+
+    = f.label :nationality, required_by_mangopay(:nationality, t('users.edit.mangopay.nationality').capitalize)
+    = country_select("user", :nationality, selected: resource.nationality.present? ? resource.nationality : 'FR')
+
+    = f.label :residence_country, required_by_mangopay(:residence_country, t('users.edit.mangopay.residence_country').capitalize)
+    = country_select("user", :residence_country, selected: resource.residence_country.present? ? resource.residence_country : 'FR')
+
+    = f.label :phone, t('users.edit.mangopay.phone').capitalize
+    = f.input :phone_number, as: :string, label:false
+
+    = f.input :email, as: :string
+
+  .large-4.medium-4.columns
+    #personal-images.profile-type-images.personal style="#{"display: none;" unless @user.personal?}"
+      .usr-upld-img.usr-upld-pctr data-param="uploaded_image"
+        span.info Drop an image here
+        - unless @user.uploaded_image.url.nil?
+          / = image_tag @user.uploaded_image_url(:thumb_avatar), class: "uploaded-image"
+          = image_tag @user.uploaded_image.url, class: "uploaded-image"
+        - else
+          = image_tag @user.gravatar_url, class: "uploaded-image"
+
+      = f.input :uploaded_image, as: :file, input_html: { class: 'fallback' }
+      i = t('simple_form.hints.user.uploaded_image')
+
+  .large-4.medium-4.columns
+    #organization-images.profile-type-images.organization style="#{"display: none;" unless @user.organization?}"
+      .usr-upld-img.usr-upld-cp data-param="organization_attributes[image]"
+        span.info Drop an image here
+        - unless @user.uploaded_image.url.nil?
+          / = image_tag @user.organization.image_url(:thumb), class: "uploaded-image"
+          = image_tag @user.uploaded_image.url, class: "uploaded-image"
+        - else
+          = image_tag @user.gravatar_url, class: "uploaded-image"
+
+      = f.fields_for :organization, include_id: true do |o|
+        = o.input :image, as: :file, input_html: { class: 'fallback' }
+      i = t('simple_form.hints.organization.image')
+
+/  .large-12.columns
+/    = f.input :bio
+
+  .large-6.medium-6.columns
+    = f.input :phone_number, as: :string, required: true
+
+/  .large-6.medium-6.columns
+/    = f.input :other_url

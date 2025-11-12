@@ -1,0 +1,237 @@
+- content_for :title, t('.title')
+
+- channel = controller.channel
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+            br
+            h4 = t('.subtitle')
+        h6.text-center
+            = link_to t('.who.button0'), new_project_path, class: 'button large large-6 columns large-centered'   
+
+  .white
+    section.steps
+      .row
+        - if channel
+          - steps = channel.start
+        - else
+          - steps = OpenStruct.new first_step_icon: 'et-pencil', first_step_title: t('.steps.first.title'), first_step_description: t('.steps.first.description'),
+                                   second_step_icon:'et-bell', second_step_title: t('.steps.second.title'), second_step_description: t('.steps.second.description'),
+                                   third_step_icon: 'et-basket', third_step_title: t('.steps.third.title'), third_step_description: t('.steps.third.description')
+
+        - for step in [:first, :second, :third]
+          .large-4.columns
+            .large-11.columns.large-centered.rounded-top
+              .step
+                i[class="icon-#{steps.send("#{step}_step_icon")}"]
+                h5 = steps.send("#{step}_step_title")
+                /p = steps.send("#{step}_step_description")
+
+
+    section.presentation
+    .row
+      h3.text-center
+        = t('.presentation.title')
+        br
+        br
+        iframe width="376" height="220" src="//www.youtube.com/embed/aJ1oA-zEZYc?rel=0&modestbranding=1&theme=light&autoplay=0" frameborder="0" allowfullscreen=''
+        br
+        = link_to "Suivre @#{::Configuration[:twitter_username]}", "http://twitter.com/#{::Configuration[:twitter_username]}", class: 'twitter-follow-button', data: { button: 'blue', :'text-color' => '#ffffff', :'link-color' => '#ffffff', width: '448px' }
+        br
+        .fb-like data-href="#{Configuration['facebook_url']}" data-width="224" data-height="40" data-header="false" data-show-border="false" data-colorscheme="dark" data-layout="standard" data-action="like" data-show-faces="false" data-send="false"
+
+
+    .row
+      .large-10.columns.large-centered
+        hr
+
+    section.type
+      .row
+        .large-12.columns
+            h3.text-center 
+              = t('.type.title')
+            .large-2.columns
+                i.icon-fa-medkit
+                h5 = t('.type.urgency')
+            .large-2.columns
+                i.icon-fa-gift.large
+                h5 = t('.type.birthday')
+            .large-2.columns
+                i.icon-fa-group
+                h5 = t('.type.tontine')
+            .large-2.columns
+                i.icon-fa-rocket
+                h5 = t('.type.project')
+            .large-2.columns
+                i.icon-fa-magnet
+                h5 = t('.type.wedding')
+            .large-2.columns
+                i.icon-fa-heart
+                h5 = t('.type.help')
+        .large-8.columns.large-centered
+          .row      
+        h6.text-center    
+            = link_to t('.who.button0'), new_project_path, class: 'button large large-4 columns large-centered'
+ 
+
+
+        h3.text-center
+          = image_tag "Front_Page_Kwendoo_sized.jpg"
+          .row
+        h4.text-center
+          | Kwendoo est la 1ere ,agaseke en ligne dédiée aux communautés éparpillées dans le monde. Cotisez de partout, en toute sécurité, puis dépensez ou transférez là-bas pour aider un proche, offrir un cadeau, réaliser un projet associatif, un voyage, engager une action humanitaire
+          | 
+      .row
+        .large-10.columns.large-centered
+          hr
+
+
+    section.who
+      .row
+        .large-12.columns
+          - unless channel
+            h3 = t('.who.title')
+            .large-4.columns
+              .large-10.columns.large-centered
+                i.icon-fa-heart
+                h5 = t('.who.Association')
+            .large-4.columns
+              .large-10.columns.large-centered
+                i.icon-fa-group
+                h5 = t('.who.Communities')
+            .large-4.columns
+              .large-10.columns.large-centered
+                i.icon-fa-male
+                h5 = t('.who.People')
+        .large-11.columns.large-centered
+          .row
+
+    .row
+      .large-10.columns.large-centered
+        hr
+
+    section.public
+      .row
+        .large-12.columns
+            h3.text-center
+              = t('.public.title')
+      .row
+      h6.text-center   
+        = link_to t('.public.button1'), discover_path, class: 'button large large-4 columns large-centered'
+
+    .row
+      .large-10.columns.large-centered
+        hr
+
+
+    section.work
+      .row
+        .large-12.columns
+          h3 = t('.work.title')
+          h4 = t('.work.subtitle')
+      .row
+        .large-4.small-6.columns
+          i.icon-et-book-open
+          h5 = t('.work.reason.title')
+          /p = t('.work.reason.description')
+        .large-4.small-6.columns
+          i.icon-fa-gift
+          h5 = t('.work.detailed.title')
+          /p = t('.work.detailed.description')
+        .large-4.small-6.columns
+          i.icon-et-link
+          h5 = t('.work.engagement.title')
+          /p = t('.work.engagement.description')
+        .large-4.small-6.columns  
+          i.icon-fa-facebook
+          h5 = t('.work.social.title')
+        .large-4.small-6.columns
+          i.icon-fa-picture
+          h5 = t('.work.picture.title')
+        .large-4.small-6.columns
+          i.icon-fa-download
+          h5 = t('.work.widget.title')
+
+      .row  
+        .large-12.columns.large-centered
+          hr     
+
+    section.actualités
+      .row
+        h3.text-center
+          = t('.actualités.title')
+      .row
+        h4.text-center
+          |
+          a[href="http://www.kwendoo.rw"] = image_tag "100iemeCagnotte.jpg"
+        h4.text-center
+          = t('.actualités.description')
+   
+    .row
+      .large-12.columns.large-centered
+        hr 
+      
+    section.secure
+      .row
+        h3.text-center
+          = t('.payments.title')
+          br
+          br
+        h4.text-center
+          | Vos contributions et vos duseke sont sécurisées par nos partenaires de confiance et agréés 
+          br
+          = image_tag "Mangopay.jpg"
+          = image_tag "Credi_Mutuel_Arkea.jpg"
+          = image_tag "Payline.jpg"
+      .row
+        h4.text-center
+          | Kwendoo est autorisé à afficher le label de financement participatif de la Banque de France
+          br
+          = image_tag "Label_Financement_Participatif.jpg"
+      .row
+        h4.text-center
+          | L'ensemble de votre activité sur Kwendoo.rw est sécurisée par chiffrement 
+          = image_tag "Chiffrement_HTTPS.jpg"
+          | certifié par
+          = image_tag "Geotrust.jpg"
+      .row
+        h4.text-center
+          | Nous acceptons les cartes bancaires Visa et Master Card. Nous allons bientôt accepter Sofort 
+          = image_tag "mangopay-creditcard.png" 
+
+    .row
+      .large-12.columns.large-centered
+        hr
+
+    section.partners
+      .row
+        h3.text-center
+          = t('.partners.title')  
+        h4.text-center
+          | 
+          /a[href="http://www.afrimarket.fr"] = image_tag "Logo-AfriMarket-Small.png"
+
+      .row
+        .large-12.columns.large-centered
+          hr
+
+
+    section.press
+    .row
+      h3.text-center
+        | La Presse en parle
+      ul.list-inline
+      - @press_assets.each do |asset|
+        li.large-3.columns
+           = link_to asset.url, target: :blank, title: asset.title do
+             = image_tag asset.image.thumb.url
+

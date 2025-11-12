@@ -1,0 +1,11 @@
+fr:
+  facebook_locale: 'fr_FR'
+  site:
+    title: "Achetez vos billets d'évènements en ligne"
+    meta_title:  "%{title} · %{company_name}"
+    description: "Kwendoo Tickets c'est la plateforme d'achat de billets d'évènements en l'honneur de causes sociales ou humanitaires"
+    keywords: "billets, évènement, spectacle, concert, humanitaire, social"
+    email:
+      contact: 'contact@kwendoo.com'
+    ograph:
+      description: "La meilleure solution pour vos billets d'évènements de charité"

@@ -1,0 +1,5 @@
+# pack-refs with: peeled 
+25f9fca67fc197deb0395c11cf43d61a9bac7196 refs/heads/fix-safari
+53f44f3a4357a4e582cff980ebc068515f75beec refs/heads/master
+af2ea73b911351775dafb724091bde4d55ca6064 refs/tags/v1.0.1
+018032371e84560dd5b66a3d41aa4568285d500d refs/tags/v2.0.0

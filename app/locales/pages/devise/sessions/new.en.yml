@@ -1,0 +1,19 @@
+en:
+  devise:
+    sessions:
+      new:
+        no_account_html: "Not with Tickets Kwendoo yet? <strong>Sign up</strong>"
+        titles:
+          site: 'Log in'
+          header: 'Get Through'
+        links:
+          register: "Go join <i class='icon-et-right-circled'></i>"
+          forgot_password: "Did you forget your password?"
+          new_user_confirmation: "Confirm email"
+        form:
+          labels:
+            remember_me: 'Remember mee'
+          inputs:
+            submit: 'Log in'
+            facebook: 'Facebook'
+            google: 'Google'

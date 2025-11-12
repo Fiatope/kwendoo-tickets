@@ -1,0 +1,19 @@
+rw:
+  project:
+    display_status:
+      expired: 'Yarengeje igihe'
+      failed: 'byanze'
+      successful: 'byagezweho'
+      waiting_confirmation: 'Hategerejwe kwemeza'
+      waiting_funds: 'gategereje inkunga'
+      not_reached_goal: 'ntikageze ku ntego'
+      draft: 'igerageza'
+    organization_type:
+      municipality: 'Umuntu ku giti cye'
+      neighborhood_organization: 'Umushinga utegamiye kuri leta'
+      registered_nonprofit: 'Asosiyasiyo'
+      public_private_partnership: 'yihariye kubafatanyabikorwa'
+      cid_bid: 'cid bid'
+      nonprofit_501c3: 'nonprofit_501c3'
+      other: 'ibindi'
+      not_sure: 'kompanyi igitangira'

@@ -1,0 +1,36 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Dear, #{resource.user.display_name}!
+br
+br
+|You asked refund your #{resource.class.model_name.human} to #{link_to(resource.project.name, project_url(resource.project))}.  
+br
+br
+|Here is the recapitualitf of the initial transaction
+br
+br
+|Amount of #{resource.class.model_name.human}: 
+strong #{number_to_currency resource.value, precision: 0}
+br
+|#{resource.class.model_name.human} effectuée le: 
+strong #{l resource.created_at.to_date, format: :long}
+br
+|
+br
+br
+|You will be reimbursed by credit to the bank account attached to the credit card you used. The appropriation will appear under the heading. "MANGOPAY COMMERCE ELECTRONIQUE"
+br
+|Please keep this email for future reference.
+br
+|If you wish to contact #{resource.project.user.name}, send an email to #{mail_to resource.project.user.email}.
+br
+br
+|For any other questions, send an email to #{mail_to Configuration[:email_contact]} or access our #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|kindest regarly,
+br
+|The team #{Configuration[:company_name]}

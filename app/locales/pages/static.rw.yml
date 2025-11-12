@@ -1,0 +1,18 @@
+rw:
+  static:
+    faq:
+      title: "Ibibazo bikunzwe kubazwa"
+    privacy:
+      title: "Privacy Policy"
+    terms:
+      title: "Terms of use"
+    how_it_works:
+      title: 'uko bikora'
+    start_terms:
+      title: 'Amategeko namabwiriza'
+      explore_curious: "Gira ibyo ureba hanoooking around!"
+      explore_projects: "Ndashaka kureba indi imushinga."
+      submit: "Aha kuri kiye!"
+      send_project: "Ndashaka kwemeza umushinga wanjye."
+    base:
+      title: 'Uyu ni umusingi wa paji idahinduka'

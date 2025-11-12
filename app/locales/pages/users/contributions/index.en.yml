@@ -1,0 +1,12 @@
+en:
+  users:
+    contributions:
+      index:
+        heading: Your tickets
+        table:
+          code_heading: Reference
+          project_heading: Event
+          value_heading: Amount
+          payment_method_heading: Payment method
+          card_type_heading: Card type
+          created_at_heading: Paid on

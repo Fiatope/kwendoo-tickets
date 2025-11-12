@@ -1,0 +1,15 @@
+rw:
+  devise:
+    passwords:
+      edit:
+        titles:
+          site: 'Gushyiraho ijambobanga'
+          header: 'Hindura ijambobanga'
+        form:
+          hint:
+            password_length: 'Rigomba kugira inyuguti 6 byibuze.'
+          labels:
+            password: 'Ijambobanga rishya'
+            password_confirmation: 'subiramo ijambobanga'
+          inputs:
+            submit: 'bika uninjire'

@@ -1,0 +1,16 @@
+- user = @notification.user
+- recommended = Project.visible.with_state('online').recommended.limit(3)
+
+| Salut
+- if user.name
+  | , #{user.name}!
+
+br/
+br/
+| Merci de rejoindre Kwendoo, la cagnotte en ligne solidaire.
+br
+br
+| Bien à vous,
+br
+| L équipe #{Configuration[:company_name]}
+

@@ -1,0 +1,17 @@
+	<%= content_for :title, t('.title') %>
+
+	<div class="background-full flex-container text-center">
+		<div class="background-title flex-item">
+			<h2>Contact Participants</h2>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="info text-center">
+		        Use this form to send an email to the people you would like to invite to participate in the Event..
+                        We will let you choose the content of your email. Make sure you include your event link (below).
+                        Only those to whom you send the link have access to your event page.
+
+		</div>
+		<%= render 'form', :message => @message %>
+	</div>

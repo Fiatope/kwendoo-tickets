@@ -1,0 +1,20 @@
+- content_for :page_content do
+  h2 = t('.heading')
+  .large-12
+    table.table
+      thead.bg-success
+        tr
+          th = t('.table.code_heading')
+          th = t('.table.project_heading')
+          th = t('.table.value_heading')
+          th = t('.table.payment_method_heading')              
+          th = t('.table.card_type_heading')              
+          th = t('.table.created_at_heading')              
+      tbody
+        - current_user.contributions.each do |contribution|
+          = render 'users/contributions/contribution', contribution: contribution
+
+- if request.xhr?
+  = yield :page_content
+- else
+  = render template: 'users/edit'

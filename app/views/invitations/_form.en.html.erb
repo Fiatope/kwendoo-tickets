@@ -1,0 +1,31 @@
+<div class="row form">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for @invitation do |f| %>
+
+		<%= f.label :"Name of Sender", class: 'strong-label' %>
+		<%= f.text_field :name, placeholder: "Your name as it will appears to recipients", class:"wrap"%>
+
+		<%= f.label :Email, class: 'strong-label' %>
+		<%= f.text_field :email, placeholder: " "%>
+
+    <%= f.label :"Link to the event (Copy and paste)", class: 'strong-label' %>
+    <%= f.text_field :link, placeholder: "Link to send in message"%>
+
+    <%= f.label :Recipients, class: 'strong-label' %>
+    <%= f.text_field :recipients, placeholder: "Emails of people to be invited to buy tickets of events separated by commas"%>
+
+		<%= f.label :Subject, class: 'strong-label' %>
+                <%= f.text_field :subject, placeholder: "Indicate the subject"%>
+
+		<%= f.label :"Message Body", class: 'strong-label'  %> 
+		<%= f.text_area :message, placeholder: "Specify your message to your event participants. Include the event link here" %>
+
+		<%= f.hidden_field :type, value:nil %>
+
+		<%= f.submit :Send, class: 'btn btn-medium-green btn-block' %>
+
+
+		<% end %>
+
+	</div>
+</div>

@@ -1,0 +1,9 @@
+en:
+  neighborly:
+    balanced:
+      order:
+        description: "Project #%{project_id} %{project_name}"
+      refund:
+        description: 'Refund for %{resource_name} #%{resource_id}'
+      refund_reasons:
+        match_automatic: 'Automatic refund done after match finishing without use entire paid value'

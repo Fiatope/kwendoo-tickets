@@ -1,0 +1,14 @@
+rw:
+  users:
+    authorizations:
+      title: Huhuza konti'
+      connect:
+        facebook: 'Huza Facebook'
+        twitter: 'Huza Twitter'
+        google_oauth2: 'Huza Google'
+        linkedin: 'Huza Linkedin'
+      disconnect:
+        facebook: 'Funga Facebook'
+        twitter: 'Funga Twitter'
+        google_oauth2: 'Funga Google'
+        linkedin: 'Funga Linkedin'

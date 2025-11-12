@@ -1,0 +1,203 @@
+<%= content_for :title, t('.title') %>
+<% channel = controller.channel %>
+
+<%= render 'carrousel' %> 
+
+<!-- ======= Services Section ======= -->
+<section id="services" class="services section-bg">
+	<div class="container" data-aos="fade-up">
+
+	  <div class="section-title text-center">
+		<h2><%= t('.parts.second.title') %></h2>
+	  </div>
+
+	  <div class="row">
+		<div class="col-xl-3 col-md-3 d-flex align-items-stretch " data-aos="zoom-in" data-aos-delay="100">
+		  <div class="icon-box">
+			<div class="icon"><i class="glyphicon glyphicon-check"></i></div>
+			<h4><%= t('.parts.second.titla') %></h4>
+			<p class="text-justify"><%= t('.parts.second.titladesc') %>	</p>
+		  </div>
+		</div>
+
+		<div class="col-xl-3 col-md-3 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+		  <div class="icon-box">
+			<div class="icon"><i class="glyphicon glyphicon-euro"></i></div>
+			<h4><%= t('.parts.second.titlb') %></h4>
+			<p class="text-justify"><%= t('.parts.second.titlbdesc') %></p>
+		  </div>
+		</div>
+
+		<div class="col-xl-3 col-md-3 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+			<div class="icon-box">
+			  <div class="icon"><i class="glyphicon glyphicon-piggy-bank"></i></div>
+			  <h4><%= t('.parts.second.titld') %></h4>
+			  <p class="text-justify"><%= t('.parts.second.titlddesc') %></p>
+			</div>
+		  </div>
+
+		  <div class="col-xl-3 col-md-3 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+			<div class="icon-box">
+			  <div class="icon"><i class='glyphicon glyphicon-share'></i></div>
+			  <h4><%= t('.parts.second.titlc') %></h4>
+			  <p class="text-justify"><%= t('.parts.second.titlcdesc') %></p>
+			</div>
+		  </div>
+
+		</div>
+
+		<div> &nbsp;</div>
+
+	  </div>
+	</section>
+<!-- End Services Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="discover text-center">
+	<div class="discover-title">
+		
+	</div>
+	<div class="container discover-item">
+		<div class="row">
+			<div class="col-sm-6 col-lg-3 col-md-3 yellowyellow">
+				<div class="discover-icon">
+					<%= image_tag	"circle.svg" %>
+				</div>
+				<div class="discover-title-item">	
+					<%= t('.parts.second.titla') %>		
+				</div>
+				<div class="discover-description-item">
+					<%= t('.parts.second.titladesc') %>	
+				</div>
+			</div>
+			<div class="col-sm-6 col-lg-3 col-md-3 greengreen">
+				<div class="why-icon">
+					<%= image_tag	"money.svg" %>
+				</div>
+				<div class="discover-title-item">
+					<%= t('.parts.second.titlb') %>			
+				</div>
+				<div class="discover-description-item">		
+					<%= t('.parts.second.titlbdesc') %>
+				</div>
+			</div>
+			<div class="col-sm-6 col-lg-3 col-md-3 purplepurple">
+				<div class="why-icon">
+					<%= image_tag	"collect.png" %>
+				</div>
+				<div class="discover-title-item">
+					<%= t('.parts.second.titld') %>
+				</div>
+				<div class="discover-description-item">
+					<%= t('.parts.second.titlddesc') %>
+				</div>
+			</div>   
+
+			<div class="col-sm-6 col-lg-3 col-md-3 redred">
+				<div class="discover-icon">
+					<%= image_tag	"up-arrow.svg" %>
+				</div>
+				<div class="discover-title-item">
+					<%= t('.parts.second.titlc') %>			
+				</div>
+				<div class="discover-description-item">		
+					<%= t('.parts.second.titlcdesc') %>
+				</div>
+			</div> -->
+    
+
+
+			
+		<!-- </div>
+	</div>
+	
+	<div class="see-more">
+		<%= link_to link_to t('.parts.second.getstarted'), main_app.new_project_path, class: 'btn-medium-black-border' %>
+		<%= link_to t('.parts.second.knowmuch'), how_it_works_path, class: 'btn-medium-black-border' %>
+	</div>
+</div> -->
+
+
+
+<div class="discover text-center"> 
+	<div class="why-text">
+		<%= t('.parts.fourth.title') %>
+	</div>
+	<div class="container">
+		<div class="row">
+			<% if @featured.size >0 %>
+				<% for project in @featured %>
+					<%= render 'project', project: project %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="see-more">
+		<%= link_to t('.parts.fourth.discover'), discover_path, class: 'btn btn-medium-green' %>
+	</div>
+</div>
+
+
+<section id="services" class="services section-bg">
+	<div class="container" data-aos="fade-up">
+
+	  <div class="section-title text-center">
+		<h2><%= t('.parts.third.title') %></h2>
+	  </div>
+
+	  <div class="row">
+		<div class="col-xl-3 col-md-3 d-flex align-items-stretch " data-aos="zoom-in" data-aos-delay="100">
+		  <div class="icon-box">
+			<div class="icon"><i class="glyphicon glyphicon-lock"></i></div>
+			<h4><%= t('.parts.third.titla') %></h4>
+			<p class="text-center"><%= t('.parts.third.titladesc') %>	</p>
+		  </div>
+		</div>
+
+		<div class="col-xl-3 col-md-3 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
+		  <div class="icon-box">
+			<div class="icon"><i class="glyphicon glyphicon-euro"></i></div>
+			<h4><%= t('.parts.third.titlc') %></h4>
+			<p class="text-center"><%= t('.parts.third.titlcdesc') %></p>
+		  </div>
+		</div>
+
+		<div class="col-xl-3 col-md-3 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
+			<div class="icon-box">
+			  <div class="icon"><i class="glyphicon glyphicon-piggy-bank"></i></div>
+			  <h4><%= t('.parts.third.titld') %></h4>
+			  <p class="text-center"><%= t('.parts.third.titlddesc') %></p>
+			</div>
+		  </div>
+
+		  <div class="col-xl-3 col-md-3 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
+			<div class="icon-box">
+			  <div class="icon"><i class='glyphicon glyphicon-share'></i></div>
+			  <h4><%= t('.parts.third.titlb') %></h4>
+			  <p class="text-center"><%= t('.parts.third.titlbdesc') %></p>
+			</div>
+		  </div>
+
+		</div>
+
+		<div> &nbsp;</div>
+
+	  </div>
+	</section>
+<!-- End Services Section -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/25325120.js"></script>
+<!-- End of HubSpot Embed Code -->
+
+

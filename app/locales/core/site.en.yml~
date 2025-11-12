@@ -1,0 +1,11 @@
+en:
+  facebook_locale: 'en_US'
+  site:
+    title: "Acting together"
+    meta_title:  "%{title} · %{company_name}"
+    description: "Crowdfunding for projects in Africa"
+    keywords: "Diaspora, africa, cagnotte, crowdfunding, projects, events, communities "
+    email:
+      contact: 'contact@fiatope.com'
+    ograph:
+      description: "Fiatope provides you with the means to participate in events, actions and projects that matter for you."

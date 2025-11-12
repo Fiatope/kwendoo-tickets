@@ -1,0 +1,23 @@
+|Chèr(e) #{resource.user.display_name}!
+br
+br
+|Ce mail confirme le paiement de votre(s) billet(s) pour #{link_to(resource.project.name, project_url(resource.project))}. Veuillez garder cet email comme reçu de votre paiement. Si vous avez payé par carte de crédit, la dépense apparaîtra sur votre relevé bancaire sous l'intitulé Mangopay - Kwendoo.
+br
+br
+|Montant du paiement
+strong #{number_to_currency resource.value, unit: resource.payment_method == 'MasterCard Internet Gateway Service (MIGS)' || resource.payment_method == 'mangopay-creditcard' ? "EUR" : 'FCFA', precision: 0}
+br
+|paiement effectuée le:
+strong #{l resource.created_at.to_date, format: :long}
+br
+br
+|Référence du paiement:
+strong #{resource.key}
+br
+br
+|Pour toute question, écrivez nous #{mail_to Configuration[:email_contact]} ou accédez à nos #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Bien à vous,
+br
+|L'équipe #{Configuration[:company_name]}

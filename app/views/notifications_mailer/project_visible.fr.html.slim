@@ -1,0 +1,37 @@
+- project = @notification.project
+|Chèr(e),#{project.user.display_name}.
+br
+br
+|Nous vous remercions de votre confiance à #{Configuration[:company_name]}.
+br
+br
+|L'évènement #{@notification.project.name} est désormais en ligne sur tickets.kwendoo.com. Vous pouvez d'ores et déjà envoyer le lien ci-après aux participants 
+= link_to(project.name, project_url(project))
+br
+br
+h2 Voici quelques astuces pour réussir votre agaseke
+br
+
+    Strong Expliquer clairement les objectifs 
+    br
+    | Il est important pour vos participants de comprendre l'évènement pour lequel ils sont emmenés à participer.
+    br
+    br
+    strong Relancer les potentiels participants à l'évènement
+    br
+    | Renvoyer des rappels à ceux qui n'ont pas encore acheté de billets permet de maximiser la partcipation. 
+    br
+    br
+    strong Faire un partage sur les réseaux sociaux
+    br
+    | Les boutons de réseaux sociaux sur votre page Kwendoo Tickets permettent à toute personne de partager l'évènement sur Facebook et Whatsapp.
+    br
+    br
+    strong Agrémenter la page de l'évènement
+    br
+    | Ajouter une photo de profil sur la page de l'évènement et une vidéo fun, amusante ou émouvante la rendra plus dynamique.
+    br
+    br
+|Maintenant C'est à vous! Bonne chance!     
+br
+|L'équipe #{Configuration[:company_name]}

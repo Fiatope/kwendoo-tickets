@@ -1,0 +1,18 @@
+- update = Update.find @notification.update_id
+br
+br
+|Chèr(e), #{@notification.user.display_name}, une mise à jour a été apportée pour l'agaseke  #{update.project.name} sur #{Configuration[:company_name]}!
+br
+br
+| Voir la mise à jour #{link_to "ici", project_url(update.project, anchor: "updates")}
+br
+br
+h2 #{link_to update.title, project_url(update.project, anchor: "updates")}
+= update.comment_html
+br
+br
+hr
+br
+| Bien à vous,
+br
+|L équipe #{Configuration[:company_name]}

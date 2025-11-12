@@ -1,0 +1,21 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Agaseke: #{resource.project.name}
+br/
+|Urufunguzo: 
+strong #{resource.key}
+br/
+|numero yatanzwe wishyuye #: 
+strong #{resource.payment_id}
+br/
+|Uburyo wakoresheje wishyura: 
+strong #{resource.payment_method} 
+br/
+br/
+|Iyi #{resource.class.model_name.human} yaba yahagaritswe, yaba kubera umuterankunga cyangwa kampani y'ubucuruzi.
+br/
+|Mwasuzuma ku rubuga rwa interineti mwifashishije uburyo bwo kwishyura cg uko bihagaze.
+

@@ -1,0 +1,11 @@
+en:
+  facebook_locale: 'en_US'
+  site:
+    title: "Achetez vos billest d'évènements en ligne"
+    meta_title:  "%{title} · %{company_name}"
+    description: "Simple, safe & easy online fundraising website for personal causes, life events, charities. Get started in less than a minute. Signing Up is FREE"
+    keywords: "evenst, ticketing, online ticketing, charity events, conferences, forums "
+    email:
+      contact: 'contact@kwendoo.com'
+    ograph:
+      description: "Attend your event or manage your ticket sale without stress. "

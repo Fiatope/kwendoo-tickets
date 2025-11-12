@@ -1,0 +1,46 @@
+rw:
+  controllers:
+    unauthorized: "Ntimwerewe gukoresha aka gace" 
+    unsubscribes:
+      create:
+        success: "Amakuru yabiswe neza! "
+    projects:
+      contributions:
+        new:
+          no_reward: "Nta shimwe nkeneye ndashaka gusa kugufasha ku mushinga wawe!"
+        create:
+          error: "ooops! Habayeho ikibazo muguranga umusanzu wanyu. Mwongere."
+        credits_checkout:
+          no_credits: "Nta mafaranga ufite ahagije yashyigikira uyu mushinga."
+          success: "Murakoze Mutanze umusanzu mukoresheje amafaranga."
+        pay:
+          credit_card_description: "Umushinga wabanje %{project_name} hamwe %{value} (plus fees)"
+          echeck_description: "Umushinga wabanje %{project_name} hamwe %{value} (plus fees)"
+          paypal_description: "Umushinga wabanje %{project_name} hamwe %{value} (plus fees)"
+          no_credits: "Nta mafaranga ufite ahagije yashyigikira uyu mushinga."
+          success: "Mwatanze umusanzu wanyu neza. Murakoze!"
+        vpc_payment:
+          success: "You successfully contributed %{amount} RWF. Thank you!"
+          error: "Oh noez! There was an error processing your contribution. Please try again (Error returned by Mastercard: %{error})"
+        mobile_money_payment_initiation:
+          invalid_phone: "This phone number does not seem to be compatible with mobile money. Please try again with another one."
+          success: "Payment request sent. Please follow the instructions you receive on your phone to complete the payment. Once you're done, refresh the page to verify the contribution has been processed successfully"
+          error: "Something went wrong with the payment server and you will not be charged - %{error_code} - #{error_message}"
+        mobile_money_payment_confirmation:
+          success: "Mobile Payment confirmed. Your contribution has been processed successfully."
+          error: "The transaction has been refused and you will not be charged - %{error_code} - #{error_message}"
+    users:
+      completeness_progress: "Musabwe  <a href='%{link}'>kuzuza Umwirondoro wanyu</a> Kugirango dukomezanye munabona byinshi byiza"
+      update:
+        success: "Amakuru watanze cg wahinduye yabitswe neza !"
+      contributions:
+        request_refund:
+          refunded: "Ubusabe bwo kwishyurwa bwakozwe neza. ikipe yacu iraza kubandikira mu minsi micye mu minsi yakazi."
+          insufficient_credits: "Nta musanzu uhagije mufite kugirango musabe kwishyurwa."
+    channels_subscribers:
+      created: 'ubu muri gukurikira %{channel}'
+      deleted: 'nti mukiri gukurikira %{channel}'
+    companies:
+      contacts:
+        create:
+          success: 'Murakoze ku bana natwe! turasubira mugihe gito.'

@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              not_found: "Cet email n esxiste pas dans notre base. Re-essayez ou inscrivez-vous."
+              taken: "Cet Email est déjà pris. Si il est le vôtre, Connectez-vous"
+              invalid: "Email invalide"
+            password:
+              too_short: "Votre mot de passe est trop court"
+              confirmation: "La confrmation de votre mot de passe a échoué"

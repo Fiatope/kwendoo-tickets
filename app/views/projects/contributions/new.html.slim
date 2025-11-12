@@ -1,0 +1,116 @@
+- content_for :title, t('projects.contributions.new.title', name: @project.name)
+.new-contribution-page
+  = simple_form_for @contribution, url: project_contributions_path(@project), html: { id: 'form-contribution' } do |form|
+    = hero_header_tag @project , class: "filter-black #{@bg_sm}" do
+      .row
+        .large-10.columns.large-centered
+          .name
+            - if @project.matches.active.any?
+              - matchers = @project.matches.active.map { |m| m.user.display_name }.uniq.to_sentence
+              h3 = t('.contribution_with_matches', project_name: @project.name, matchers: matchers).html_safe
+              / h3 = t('.contribute', project_name: @project.name).html_safe
+            - else
+              / h3 = t('.contribute', project_name: @project.name).html_safe
+
+    .row.value-wrapper
+      .large-10.columns.large-centered
+        .strong [style="font-size:18px; font-weight: 800;text-align: center"]
+          | Choisisez le type de ticket que vous souhaitez obtenir et insérer le nom et l'email du ou des participant(s)
+        br
+        br
+
+        .row.panel-tickets-head
+          .large-2.small-2.columns
+            label[style="text-transform:uppercase;font-size:0.75rem;color:silver;"] = "# Billets"
+          .large-6.small-6.columns
+            label[style="text-transform:uppercase;font-size:0.75rem;color:silver;"] = "Catégorie de billets"
+          .large-4.small-4.columns
+            label[style="text-transform:uppercase;font-size:0.75rem;color:silver;"] = "Prix (#{@project.currency})"
+        - i=0
+        - @reward_categories.each do |reward_category|
+          - if @ticket_categories_orders.key? reward_category.id
+            div class="panel panel-success"
+              div class="panel-heading" role="tab" id="heading#{reward_category.id}" data-toggle="collapse" data-target="#collapse#{reward_category.id}" aria-expanded="false" aria-controls="collapse#{reward_category.id}"
+                h5 class="panel-title"
+                  = "+ #{reward_category.name}"
+              div id="collapse#{reward_category.id}" class="panel-collapse collapse" aria-labelledby="heading#{reward_category.id}" aria-expanded="false" style="height: 0px;"
+                div class="panel-body"
+                  - @ticket_categories_orders[reward_category.id].each do |ticket_categories_order|
+                    .row.user-ticket[data-tickets="0" data-couple="#{ticket_categories_order.reward.couple? ? 2 : 1}"]
+                      = form.simple_fields_for :ticket_categories_orders, ticket_categories_order do |ff|
+                        = render 'ticket_categories_order_fields', f: ff
+                        .form-group[style="display:none;"]
+                          = hidden_field_tag "user_tickets[#{i}][id][]", ff.object.reward.id, disabled: true
+                          .large-6.small-12.columns
+                            = text_field_tag "user_tickets[#{i}][name][]", nil, placeholder: "Nom #", class: 'form-control', disabled: true, required: true
+                          .large-6.small-12.columns
+                            = email_field_tag "user_tickets[#{i}][email][]", nil, placeholder: "Email #", class: 'form-control', disabled: true
+                        - if ff.object.reward.promotions.any?
+                          - ff.object.reward.promotions.each do |promotion|
+                            = hidden_field_tag "user_tickets[#{i}][promotion_id][]", promotion.id, disabled: true
+                            = hidden_field_tag "user_tickets[#{i}][code][]", promotion.code, disabled: true
+                          .large-12.small-12.columns
+                            = text_field_tag "promotions[#{i}]", nil, placeholder: "Code promo #", class: 'form-control'
+                    - i=i+1
+        /= link_to_add_association "Add", form, :ticket_categories_orders
+        .clearfix
+        .row[style="margin-bottom:5rem;"]
+          .large-2.small-2.columns
+          .large-6.small-6.columns
+          .large-4.small-4.columns
+            label[style="text-transform:uppercase;font-size:0.75rem;color:silver;"] = "Prix total (#{@project.currency})"
+            span#total_price_container[style="font-size:1.5rem;height:2.3rem;display:block;"] = "0"
+
+            - if @project.is_prebooked?
+              small[style="line-height:1;display:block;color:#aaa;"] = "The tickets will just be prebooked and you will need to pay at the event's door"
+
+
+        = form.input :value, as: :hidden, label: false, autocomplete: 'off', min: 500, max: 500000, data: { rewards: @rewards.map{|r| {id: r.id, minimum_value: r.minimum_value.to_i} }.to_json }, class: 'with-prefix with-postfix'
+
+        - if @project.sanitary_pass?
+          = label_tag "pass", "J'ai noté qu'un pass sanitaire est requis*", class: 'greengreen'
+
+        / = label_tag 'pass' do
+          = check_box_tag 'pass', '1', false, required: true
+          | J'ai noté qu'un pass sanitaire est requis*
+
+        / = label_tag 'condition' do
+          = check_box_tag 'condition', '1', false, required: true
+          | J'accepte les conditions générales de vente*
+
+        = form.button :submit, t('.submit'), data: { disable_with: t('words.sending') }
+
+/ 
+
+
+    / .row
+    /   .large-8.columns.large-centered
+    /     - if @project.rewards.present?
+    /       .subtitle
+    /         h4 = t('.subtitle')
+    /       .row
+    /         = form.association :reward_id, as: :radio_buttons, label: false, collection: @rewards do |builder|
+    /           - if builder.object.any?
+    /             - for reward in builder.object
+    /               .large-12.columns
+    /                 .reward-option.row[class="#{'selected' if form.object.reward_id == reward.id }"]
+    /                   .large-2.small-2.columns.radio
+    /                     = form.radio_button :reward_id, reward.id
+    /                   .large-10.small-10.columns
+    /                     = form.label "reward_id#{'_' if reward.id.present?}#{reward.id}" do
+    /                       .minimum-value
+    /                         = reward.minimum_value > 0 ? reward.display_minimum + ' ' : I18n.t('reward.dont_want')
+    /                       .title = reward.title
+    /                       p.description
+    /                         = h reward.description
+    /                       - if reward.sold_out?
+    /                         .sold-out
+    /                           = I18n.t('reward.sold_out')
+
+        / /= form.input :anonymous, as: :boolean, label: t('simple_form.labels.contribution.new.anonymous')
+        / .anonymous-warning.hide
+        /   .alert-box
+        /     /= render 'anonymous_warning'
+        / /= form.input :short_note, label: t('simple_form.labels.contribution.new.short_note')
+        / .text-center
+        /   = form.button :submit, t('.submit'), data: { disable_with: t('words.sending') }

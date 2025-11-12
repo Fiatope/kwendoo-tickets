@@ -1,0 +1,38 @@
+- contribution = @notification.contribution
+|Salut! #{contribution.user.name}!
+br
+br
+|Malheureusement, l'agaseke #{link_to(contribution.project.name, "#{Configuration[:base_url]}/projects/#{contribution.project.to_param}")}N'a pas atteint son objectif et ne sera pas financé sur  #{Configuration[:company_name]}.
+br
+br
+|Nous avons vu que vous avez commencé votre processus de cotisation il ya quelques jours. Si vous n'avez <strong> pas </ strong> terminé le processus de transaction, S'il vous plaît ignorer ce courriel
+br
+br
+| Si vous avez terminé votre transaction mais n'avez pas reçu d'e-mail de confirmation de contribution, vous devriez en recevoir un en quelques jours.
+br
+
+br
+|Lorsque nous aurons reçu confirmation de votre contribution, vous recevrez des crédits d'un montant de #{contribution.display_value} qui peut être utilisé pour tout agaseke sur la contribution.
+br
+br
+|Si vous préférez, vous pouvez demander un remboursement de votre contribution en cliquant sur #{link_to("ici", "#{Configuration[:base_url]}/users/#{contribution.user.to_param}#credits")}.
+|  Si vous avez des problèmes avec ce processus, envoyez un courriel #{mail_to Configuration[:email_payments]} Avec le sujet "Problème avec remboursement"
+br
+br
+|Lors de la demande de remboursement d'un paiement effectué avec une carte de crédit, veuillez garder à l'esprit, comme indiqué dans notre #{link_to 'CGU', "#{Configuration[:base_url]}/terms"}, Le montant sera annulé dans la déclaration suivante de facturation de la carte. 
+Si la contribution a été effectuée par e-check, veuillez envoyer un courriel à#{mail_to Configuration[:email_payments]}.
+br
+br
+|Si vous, pour quelque raison que ce soit, vous souhaitez contacter #{contribution.project.user.display_name}, Veuillez les envoyer par courriel à #{mail_to contribution.project.user.email}.
+br
+br
+|Si vous avez d'autres questions, veuillez consulter notre #{link_to 'FAQ', "#{Configuration[:base_url]}/faq"}.
+
+br
+|Clé de contribution: 
+strong #{contribution.key}
+br
+br
+|Bien à vous,
+br
+|L'equipe  #{Configuration[:company_name]}

@@ -1,0 +1,7 @@
+rw:
+  users:
+    questions:
+      new:
+        title: 'Baza ikibazo kijyanye %{project_name}'
+        to: 'Kuri: %{user_name}'
+        send: 'Baza ikibazo'

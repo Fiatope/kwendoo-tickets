@@ -1,0 +1,8 @@
+rw:
+  images:
+    new:
+      title: 'shyiraho ifoto'
+      description: 'tereka ifoto hano cg kanda kugira ngo ihitemo imwe.'
+      insert: 'Shyiramo ifoto'
+      upload: 'tangira ushyiremo iyo ufite'
+      uploading: 'iri gushyirwaho...'

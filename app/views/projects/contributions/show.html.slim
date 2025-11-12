@@ -1,0 +1,167 @@
+- content_for :title, t('.title')
+- is_waiting_confirmation = @contribution.payment_method == 'balanced-bankaccount' && @contribution.waiting_confirmation?
+
+style[type="text/css" media="print"]
+  |
+    body > div:not(.contribution-page), header.hero, section.share, .bankaccount > .row > *:not(.print-target) {display:none;}
+    .bankaccount > .row {margin-top: 0;}
+    .contribution-page .bankaccount {padding:0;}
+    img {width: 300px;}
+
+.contribution-page[class="#{'waiting-bankaccount' if is_waiting_confirmation}"]
+  = hero_header_tag @project , class: "filter-black #{@bg_sm}" do
+    .row
+      .large-10.columns.large-centered
+        - if is_waiting_confirmation
+          h3 = t('.one_more_step')
+        - else
+          h3 = t('.thank_you', project_name: @project.name)
+          div.text-center
+            = link_to tickets_index_project_contribution_path(format: :pdf), target: :_blank, class: "btn btn-big", style: "font-size: 1.25rem;text-align:center;background:#31a574;color:white;" do
+              i.fa.fa-file-pdf-o
+              = " "
+              | Télécharger le(s) ticket(s)
+            - if @project.is_prebooked?
+              h4 = t('.prebooked')
+
+
+
+          /= render 'shared/payments/success/status'
+
+  - if is_waiting_confirmation
+    section.bankaccount
+      .row
+        .large-12.columns
+          h3 = t('.bankaccount.title')
+          ol
+            li = t('.bankaccount.steps.first')
+            li = t('.bankaccount.steps.second')
+            li = t('.bankaccount.steps.third')
+  - elsif @contribution.state == "confirmed" && !@contribution.project.is_prebooked?
+    
+
+
+    /Ajout du ticket
+
+  .row.print-target(style="margin-top:2em")
+    - @contribution.tickets.each do |ticket|
+      .ticket[style="position:relative;height:198px;margin-bottom:8px;width:100%;background:silver;border:1px solid #777;border-radius:4px;"]
+        div[style="position:absolute;top:1px;left:1px;height:194px;width:28px;background:#eee;border-right:silver"]
+          div[style="transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);font-size:11px;color:silver;"]
+        div[style="position:absolute;top:1px;left:30px;height:194px;width:500px;background:white;"]
+          div[style="height:145px;width:100%;background:#f7f7f7;margin-top:1px;"]
+            - if Rails.env.development?
+              = wicked_pdf_image_tag (@contribution.project.hero_image.present? ? @contribution.project.hero_image.url : "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png"), style: "height:150px;width:100%;"
+            - else 
+              = @contribution.project.hero_image.present? ? image_tag(@contribution.project.hero_image.url, style: "height:150px;width:100%;") : (wicked_pdf_image_tag "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png", style: "height:150px;width:100%;")
+          .row
+            div[style="position:absolute;left:0;width:125px;height:47px;background:white;padding:5px 6px;"]
+              div[style="font-size:11px;color:silver;"] = "COST: #{number_to_currency(ticket.ticket_categories_order.reward.minimum_value, unit: ('EUR' || @contribution.project.currency_sym), precision: 2)}"
+              - if @contribution.project.is_prebooked?
+                div[style="font-size:12.5px;font-weight:bold;color:#888;line-height:1;"] = "PAY AT THE DOOR"
+              - else
+                div[style="font-size:17px;font-weight:bold;color:#888;"] = "ADMIT ONE"
+            div[style="position:absolute;left:125px;width:125px;height:47px;background:white;padding:7px;"]
+              div[style="font-size:10px;color:silver;line-height:1;"] = @contribution.project.display_address_formated
+            div[style="position:absolute;left:250px;width:125px;height:47px;background:white;padding:2px 7px;"]
+              div[style="font-size:13px;letter-spacing:0.2px;font-weight:bold;color:#888;line-height:1.1;"]
+                small[style="font-size:8px;text-transform:uppercase;color:#ccc;font-weight:normal;"] = "Event Date"
+                br
+                = @contribution.project.start_date.strftime("%d %b").upcase
+                br
+                = @contribution.project.starts_at.try(:strftime, "%I:%M %p")
+            div[style="position:absolute;left:375px;width:125px;height:47px;background:white;padding:7px 3px;"]
+              div[style="font-size:12px;letter-spacing:0.2px;color:#888;line-height:1.1;font-style:italic;"]
+                = ticket.ticket_categories_order.reward.title
+        div[style="position:absolute;top:1px;left:530px;height:194px;width:167px;background:#f3f3f3;padding:60px 20px;"]
+          div[style="position:absolute;top:20px;left:-4px;line-height:1;text-align:center;"] = @contribution.project.name
+          div[style="border:1px solid #e1e1e1;height:130px;border-radius:5px;"]
+            div[style="margin:0.5rem;font-weight:bold;text-align:center;color:#31A574;"]
+              = wicked_pdf_image_tag(ticket.qr_code.url, style: "width: 90px; height: 90px;margin-bottom: 6px;") if ticket.qr_code.present? && ticket.qr_code.url.present?
+              = ticket.token
+  .row 
+    br
+    br
+
+
+  = render 'shared/payments/success/share', i18n_scope: 'projects.contributions.show', tweet_text: t('.twitter-text', value: @contribution.display_value, name: @project.name, project_url: project_url(@project))
+
+
+  section.bankaccount
+      .row(style="max-width:62.5em;padding:2.5em;border:1px solid #ddd;")
+        a.btn.btn-success.right[href="javascript:window.print()" style="margin-top:0.75em;background-color:#31a574;"]
+          i.fa.fa-print
+          = t('.receipt.print_cta')
+        p = t('.receipt.info')
+        .row.print-target
+          em.right
+            - if @contribution.confirmed_at 
+              = @contribution.confirmed_at.strftime("%d-%b-%Y %H:%M:%S")
+          = image_tag "tickets1.png", width: "400px"
+        .row.print-target(style="margin-top:2em")
+          .large-6.small-6.columns
+            p = t('.receipt.address_html', brand: Configuration[:company_name])
+          .large-6.small-6.columns
+            dl
+              - if current_user.display_name.present?
+                dt = t('.receipt.terms.display_name')
+                dd = current_user.display_name
+              - if current_user.email.present?
+                dt = t('.receipt.terms.email')
+                dd = current_user.email
+              - if address = [current_user.address_number, current_user.address_street, current_user.address_neighborhood].compact.join(" ") && address.present?
+                dt = t('.receipt.terms.address')
+                dd = address
+              - if current_user.address_city.present?
+                dt = t('.receipt.terms.address_city')
+                dd = current_user.address_city
+              - if current_user.address_state.present?
+                dt = t('.receipt.terms.address_state')
+                dd = current_user.address_state
+              - if current_user.address_zip_code.present?
+                dt = t('.receipt.terms.address_zip_code')
+                dd = current_user.address_zip_code
+          .large-12.columns
+            h3 = t('.receipt.heading') + " No. " + @contribution.receipt_number.to_s
+            p
+              - if @contribution.payment_method == "MasterCard Internet Gateway Service (MIGS)"
+                = t('.receipt.card_info', card_type: @contribution.card_type)
+              - elsif @contribution.payment_method == "Mobile Money"
+                = t('.receipt.mobile_money_info')
+              - if @contribution.card_last4
+                = t('.receipt.card_last4_info', last4: @contribution.card_last4)
+            dl
+                dt = t('.receipt.transaction_reference_label')
+                dd = @contribution.transaction_reference.to_s
+                dt = t('.receipt.confirmed_at_label')
+                - if @contribution.confirmed_at
+                  dd = @contribution.confirmed_at.strftime("%d-%b-%Y %H:%M:%S")
+            table.table
+              thead.bg-success
+                tr
+                  th = t('.receipt.table.project_heading')
+                  th = t('.receipt.table.code_heading')
+                  th = t('.receipt.table.description_heading')
+                  th = t('.receipt.table.unit_heading')
+                  th = t('.receipt.table.quantity_heading')
+                  th = t('.receipt.table.total_heading')
+              tbody
+                - @contribution.ticket_categories_orders.where("count > 0").each do |order|
+                  tr
+                    td = "#{@project.name}"
+                    td
+                      em = "#{order.reward.title}"
+                    td = "#{truncate((order.reward.description), length: 25)}"
+                    td.text-right = order.reward.minimum_value.to_s + " " + @project.currency
+                    td.text-right = "x #{order.count}"
+                    td.text-right = (order.reward.minimum_value * order.count).to_s + " " + @project.currency
+                tr
+                  td[colspan=4 style="background:#eee;border:none;"]
+                  td.text-right.table-active.bg-dark
+                    strong(style="font-size:120%;") = t('.receipt.table.total_caption')
+                  td.text-right
+                    strong(style="font-size:120%;") = "#{@contribution.display_value}" + "#{@contribution.currency}"
+  
+/.facebook-box
+  /.fb-like data-href="#{Configuration['facebook_url']}" data-width="224" data-height="40" data-header="false" data-show-border="false" data-colorscheme="dark" data-layout="standard" data-action="like" data-show-faces="true" data-send="true"
+

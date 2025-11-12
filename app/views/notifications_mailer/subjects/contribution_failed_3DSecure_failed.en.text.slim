@@ -1,0 +1,6 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Your payement to #{resource.project.name} could not be processed because of a 3D Secure authentication error

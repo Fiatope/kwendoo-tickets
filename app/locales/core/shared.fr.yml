@@ -1,0 +1,7 @@
+fr:
+  french: 'français'
+  english: 'anglais'
+
+  errors:
+    messages:
+      extension_white_list_error: "Voutre fichier doit avoir une extension jpg, jpeg, gif ou png"

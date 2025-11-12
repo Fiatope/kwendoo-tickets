@@ -1,0 +1,18 @@
+fr:
+  devise:
+    registrations:
+      new:
+        have_account_html: "Déjà Utilisateur? <strong>%{link}</strong>"
+        titles:
+          site: "S'inscrire"
+          header: 'Rejoindre Fiatope'
+        links:
+          login: "Se connecter <i class='icon-et-right-circled'></i>"
+        form:
+          labels:
+            show_password: 'Mot de passe visible'
+          hint:
+            password_length: '*minimum 6 caractères.'
+          inputs:
+            submit: 'Rejoindre Fiatope'
+            facebook: "S'inscire avec Facebook"

@@ -1,0 +1,12 @@
+rw:
+  activerecord:
+    models:
+      reward: 'Ticket Category'
+    attributes:
+      reward:
+        title: 'Kora umutwe mugufi wi shimwe ugaragaza neza icyo abaterankunga bazahabwa niba guha umusanzu.'
+        description: "Garagaza neza ishimwe uzaha abatera nkunga kuburyo byabakurura."
+        maximum_contributions: "Hagarika umubare w'amashimwe uzatanga hano."
+        minimum_value: "Umubare wayo umuterankunga agomba gutanga kugira ahabwe iki gihembo."
+        days_to_delivery: "Ikigereranyo ki minsi izashira kugira ngo umuterankunga abone ishimwe wa mugeneye nyuma yuko umushinga urangiye."
+        soon: 'Coming soon perk?'

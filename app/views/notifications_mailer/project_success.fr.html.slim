@@ -1,0 +1,23 @@
+- project = @notification.project
+|Chèr(e) #{project.user.name},
+br
+br
+|Félicitations pour votre collecte!
+|La cagnotte #{project.name} a atteint son objectif.
+br
+br
+
+|Repassez en revue les instructions suivantes à propos des prochaines étapes. Il y a deux choses que vous devriez faire: 
+br
+ol 
+  li téléchargez le rapport final de la cagnotte. Il contient les détails des contributions (nom, addresses, etc..). Vous le trouverez #{link_to "ici", project_url(project, anchor: "reports")}. Vous devez pour cela être connecté sur votre compte de porteur de cagnotte.
+  li Renseignez vos informations bancaires (IBAN, SWIFT) afin de pouvoir être payé de votre collecte.
+  li Contactez vos contributeurs pour les remercier.
+br
+|Pour toute question que vous auriez, envoyez-nous un email à:  #{mail_to Configuration[:email_contact]}
+// = link_to 'http://suport.neighbor.ly', 'http://suport.neighbor.ly'
+br
+br
+|Bien à vous,
+br
+|L'équipe #{Configuration[:company_name]}

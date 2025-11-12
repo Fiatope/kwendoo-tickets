@@ -1,0 +1,31 @@
+- project = @notification.project
+|Cher(e) #{project.user.name},
+br
+br
+|Félicitations pour votre collecte!
+br
+|Vous avez demandé le retrait des fonds de votre agaseke. 
+br
+|Nous allons traiter votre demande. Comptez 72 heures ouvrables pour que le paiement soit effectif sur le compte bancaire à créditer.
+br
+br
+|Voici le récapitulatif de votre agaseke:
+br
+|Total collecté: <strong> #{project.pledged} rwfs </strong>
+br
+|Nombre de participants: <strong> #{project.total_contributions} </strong>
+br
+|Frais Appliqués: <strong> #{Configuration[:platform_fee]}% </strong> 
+br
+|Montant qui sera versé: <strong> #{project.net_amount} rwfs </strong>
+br
+br
+|pensez a remercier vos contributeurs:
+br
+br
+|Nous vous remercions une fois de plus de votre confiance. Parlez de Kwendoo autour de vous! DEvenez FAn sur Facebook et suive-nous sur twitter.
+br
+|Bien à vous,
+br
+|L'équipe #{Configuration[:company_name]}
+

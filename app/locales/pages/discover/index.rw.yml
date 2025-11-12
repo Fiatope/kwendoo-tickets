@@ -1,0 +1,21 @@
+rw:
+  discover:
+    index:
+      title: 'Uduseke twiza wakwishimira'
+      subtitle: 'Umuyoboro wu duseke'
+      empty: 'Nta gaseke gahura nibyo mwasabye.'
+      tags: 'tags rusange: '
+      near: 'Agace'
+      category: 'Kategori/ikiciro'
+      filter: 'uko bihagaze'
+      showing_results_for: 'Ibyo mwasabye: '
+      states:
+        active: 'udukora'
+        recommended: 'Udukenewe'
+        expiring: 'Uturangira vuba aha'
+        recent: 'twavuba aha'
+        successful: 'utwa geze ku ntego'
+        soon: 'utwenda kugaragara' 
+        with_active_matches: 'Abondés'
+      localization: 'Umushinga uherereye'
+      channels: 'Twari duhari'

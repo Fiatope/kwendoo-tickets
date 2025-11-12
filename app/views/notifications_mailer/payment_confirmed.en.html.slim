@@ -1,0 +1,31 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Hello, #{resource.user.display_name}!
+br
+br
+|This confirms your ticket payment for #{link_to(resource.project.name, project_url(resource.project))}. Please keep this email as a receipt. Also, note that if you paid using a bank card, the charge will appear on your statement as Mangopay - Kwendoo.
+br
+|This ticket can only be scanned once, so it is your responsibility to protect it from unauthorized users.
+br
+br
+|Payment Amount:
+strong #{number_to_currency resource.value, unit: "EUR", precision: 0}
+br
+br
+|Payment Created at:
+strong #{l resource.created_at.to_date, format: :long}
+br
+br
+|Transaction Reference:
+strong #{resource.transaction_reference}
+br
+br
+|If you have any question, email us at #{mail_to Configuration[:email_contact]} or  access our #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Kindest regards,
+br
+|The #{Configuration[:company_name]} Team

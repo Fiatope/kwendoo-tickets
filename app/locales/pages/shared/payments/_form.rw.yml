@@ -1,0 +1,13 @@
+rw:
+  shared:
+    payments:
+      form:
+        title: 'Hitamo uburyo bwo kwishyura'
+        payment-method:
+          fees: 'Ikiguzi:'
+          balanced-creditcard:
+            title: 'Ikarita yo kubitsa no kubikuza'
+          balanced-bankaccount:
+            title: 'konti ya banki'
+          mangopay-creditcard:
+            title: 'ikarita yo kubitsa no kubikuza'

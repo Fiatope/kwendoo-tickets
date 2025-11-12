@@ -1,0 +1,8 @@
+<%= simple_form_for(MobileMoneyPaymentForm.new, url: mobile_money_payment_initiation_project_contribution_path) do |f| %>
+
+  <%= f.input :payingaccountidatsp, label: t('.payingaccountidatsp_label'), :placeholder => '07xxxxxxxx ' %>
+
+  <%= button_tag(type: 'submit', class: "button button--mastercard button-mobilemoney", style: "padding:0.8em;") do %>
+  <span><%= t('.pay_cta') %></span><%= image_tag "money.gif"  %>
+  <% end %>
+<% end %>

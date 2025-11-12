@@ -1,0 +1,7 @@
+fr:
+  markdown:
+    previewer:
+      show:
+        title: 'Prévisualisation'
+        nothing_to_preview: 'Rien à prévisualiser.'
+        close: "Fermer l'aperçu"

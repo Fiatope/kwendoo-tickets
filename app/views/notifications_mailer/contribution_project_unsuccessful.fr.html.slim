@@ -1,0 +1,33 @@
+- contribution = @notification.contribution
+|Cher(e), #{contribution.user.name}.
+br
+br
+|Nous sommes désolés de vous informer que le project #{link_to(contribution.project.name, "#{Configuration[:base_url]}/projects/#{contribution.project.to_param}")} n a pas atteint son objectof de financement et ne sera pas financé. En effet le porteur avait opté pour un mode de financement 'Tout ou Rien', ce qui exige que le financement n intervient que lorsuqe le montant récolté est supérieur ou égal à l objectif fixé. En tant que contributeur à ce projet, vous recevrez automatiquement #{contribution.display_value} en crédits  #{Configuration[:company_name]} afin de soutenir d autres projets.
+br
+br
+|Vous pouvez vous rendre ici #{link_to "explore more projects", "#{Configuration[:base_url]}/explore"}. D' autres projets pouraient vous intéresser:
+br
+br
+-contribution.user.recommended_projects.limit(3).each do |project|
+  |#{link_to(project.name, "#{Configuration[:base_url]}/projects/#{project.to_param}")}
+  br
+  |#{project.headline}
+  br
+  br
+|Si vous préférez, vous pouvez demander un remboursement en allant à #{link_to("here", "#{Configuration[:base_url]}/users/#{contribution.user.to_param}#credits")}. Vous devrez vous connecter à votre compte et demander un remboursement de vos crédits.
+br
+br
+|Si vous choisissez d être remboursé, n oubliez pas que conformément aux #{link_to(" #{Configuration[:company_name]} Terms & Conditions","#{Configuration[:base_url]}/terms")}, le remboursement ne concernera pas la commission induite par votre transaction. Si vous avez une quelconque question à ce sujet, envoyez un email à #{mail_to Configuration[:email_payments]} avec l objet "Remboursement de crédits".
+br
+br
+|Si pour une quelconque raison vous souhaitez contacter #{contribution.project.user.display_name}, envoyez un mail directement à #{mail_to contribution.project.user.email}. Pour toute autre question, consultez nos #{link_to('FAQ',"#{Configuration[:base_url]}/faq")} ou envoyez un mail à #{mail_to Configuration[:email_payments]}.
+br
+br
+|Merci,
+br
+|L equipe #{Configuration[:company_name]}
+br
+br
+br
+br
+|Clé de Retour: #{contribution.key}

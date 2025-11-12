@@ -1,0 +1,16 @@
+- user = @notification.user
+- recommended = Project.visible.with_state('online').recommended.limit(3)
+
+| hello
+- if user.name
+  | , #{user.name}!
+
+br/
+br/
+| Thank you for joining Kwendoo Tickets, the platform for your events ticekting
+br
+br
+| kindest regards,
+br
+| #{Configuration[:company_name]} Team
+

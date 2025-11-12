@@ -1,0 +1,12 @@
+en:
+  rewards:
+    index:
+      sold_out: 'Désolé, ce reward n est plus disponible!'
+      add: 'Ajouter un Reward'
+      estimated_deliver: "Estimation de Livraison: %{prevision}"
+      contributions_to_confirm:
+        one:  "1 contribution à temps pour confirmer."
+        other: "%{count} contributions à temps pour confirmer."
+      reward_title: "Pour %{minimum} et plus"
+      contact: 'Contact'
+      reward_deliver_time: "Estimation de Livraison: %{prevision}"

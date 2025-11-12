@@ -1,0 +1,5 @@
+rw:
+  will_paginate:
+    next: "Imbere »"
+    page_gap: "..."
+    previous: "« Inyuma"

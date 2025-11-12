@@ -1,0 +1,57 @@
+fr:
+  projects:
+    new:
+      not_mangopay_ready: 'Nous avons besoin des informations ci-dessous avant la création de votre évènement'
+      titles:
+        site: 'créer un évènement'
+        header: 'Evènement'
+        sub: ''
+        my_cagnotte: 'Evènement'
+        modify: "Modifier l'Evènement"
+        info_pro: 'Information générale'
+        det_info: 'informations_détaillées'
+        local: 'localisation'
+        communi: 'communication'
+        budget_plan: 'Budget et Planning'
+      joyride:
+        next: 'Next'
+        done: 'Done'
+        start:
+          title: 'Vous êtes à la phase de soumission.'
+          description: 'Les informations fournies ici peuvent être changées plus tard.'
+        category:
+          title: 'Choisissez une catégorie'
+          description: 'Quelle catégorie décrit le mieux votre évènement? Vous pourrez la changer plus tard.'
+        name:
+          title: "Nom de l'évènement"
+          description: 'Comment souhaitez-vous appeler votre évènement? un titre court et parlant est toujours mieux!'
+        campaign_type:
+          title: 'Type de financement'
+          description: "Quel modèle de financement choisissez-vous? <BR><STRONG>Tout Compte:</STRONG> Le projet est financé que l'objectif soit atteint ou pas. <BR><STRONG>Tout ou Rien:</STRONG> Vous devez avoir atteint votre objectif à la fin du projet pour recevoir les fonds."
+        goal:
+          title: "Montant visé 0 si pas d'objectif"
+          description: 'Combien devez-vous collecter pour réaliser votre projet? Veuillez entrer un nombre sans virgules.'
+        address:
+          title: 'Ville, Pays'
+          description: "Dans quelle ville aura lieu l'évènement? "
+        duration:
+          title: 'durée (en jours)'
+          description: 'le temps que votre évènement sera visible sur la plateforme'
+        headline:
+          title: "Nom du bénéficiaire des fonds"
+          description: 'Pour le retrait des fonds.'
+        about:
+          title: 'Détaillez les objectifs de votre évènement.'
+          description: "Ces détails serviront à ceux qui souhaiteront assister à l'évènement"
+        code_partenaire:
+          title: 'Code Partenaire'
+        organization_type:
+          title: "Type d'organisation"
+          description: "Veuillez choisir le type d'organisation qui recevra les fonds."
+        submit:
+          button: "Passer à l'étape suivante" 
+      accept_terms_html: 'En soumettant, vous acceptez les %{link}.'
+      tickets_categories_available: 'Catégories de billets disponibles'
+      tickets_available: 'Billets disponibles'
+      add_a_ticket_category: '+ Ajouter une catégorie de billets'
+      add_a_ticket: '+ Ajouter un billet'

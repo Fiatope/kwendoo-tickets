@@ -1,0 +1,12 @@
+fr:
+  rewards:
+    index:
+      sold_out: "Cette catégorie de bilelt n'est plus disponible!"
+      add: 'Ajouter un billet'
+      estimated_deliver: "Estimation de livraison: %{prevision}"
+      contributions_to_confirm:
+        one:  "1 contribution à temps pour être confirmée."
+        other: "%{count} contributions à temps pour être confirmées."
+      reward_title: "Pour %{minimum} et plus"
+      contact: 'Contact'
+      reward_deliver_time: "Estimation de Livraison: %{prevision}"

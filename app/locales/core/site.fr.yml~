@@ -1,0 +1,11 @@
+en:
+  facebook_locale: 'en_US'
+  site:
+    title: "donner à la diaspora les moyens d' agir"
+    meta_title:  "%{title} · %{company_name}"
+    description: "Crowdfunding pour Afrique"
+    keywords: "Diaspora, afrique, cagnotte, crowdfunding, projets, évènements, communautés "
+    email:
+      contact: 'contact@fiatope.com'
+    ograph:
+      description: "Fiatope c'est le meilleur moyen pour réaliser des projets d'envergure au sein de la diaspora."

@@ -1,0 +1,23 @@
+rw:
+  users:
+    edit:
+      tabs:
+        edit: "Ibinyerekeyeho"
+        my_campaigns: "Uduseke twanjye"
+        ive_contributed: "Uduseke nateye Inkunga"
+        credits: 'Amafaranga'
+        payments: 'Amakuru ajyanye no nubwishyu'
+        settings: 'Igenamiterere'
+        mangopay_authentications: 'Byemejwe na BK'
+      mangopay:
+        required: 'Bikenewe na Banki ya Kigali'
+        birthday: 'Igihe cya mavuko'
+        nationality: 'Ubwenegihugu'
+        residence_country: 'Igihugu atuyemo'
+        name: 'Amazina yuzuye '
+        address_city: 'Umujyi'
+        address_state: 'Igihugu'
+        address_street: 'Umuhanda'
+        address_zip_code: 'code yigihugu'
+        organization_name: 'Izina ry umushinga ukorera'
+        phone: 'nimero ya telefoni'

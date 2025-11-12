@@ -1,0 +1,10 @@
+rw:
+  projects:
+    contributions:
+      new:
+        title: "Tera inkunga aka gaseke"
+        subtitle: "Hitamo umubare wa mafaranga cyangwa uhitemo ishimwe uhabwa"
+        contribute: "Tera inkunga kuri  <strong>%{project_name}</strong>"
+        submit: 'Suzuma & Komeza'
+        not_mangopay_ready: 'Dukeneye amakuru ahagije kuri mwe kugira ngo mubashe gukora agaseke'
+        atleast: 'Musabwe gushyiramo amafaranga byibuze ari hejuru 3000 RWF'

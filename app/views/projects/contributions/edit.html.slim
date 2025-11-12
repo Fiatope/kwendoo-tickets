@@ -1,0 +1,111 @@
+- content_for :title, t('.title', project_name: @project.name)
+.create-contribution-page[data-thank-you-path=project_contribution_path(project_id: @project, id: @contribution.id)]
+  = hero_header_tag @project, class: "filter-black #{@bg_sm} edit-filter-black"  do
+    .row
+      .large-10.columns.large-centered
+        h3
+          = t('.you_are_contributing_to')
+          br/
+          strong = @project.name
+        form.total-value
+          .row
+            .large-5.columns.large-centered.small-centered
+              input[type='text' disabled=true value="#{t('.total')} #{number_to_currency(@contribution.value, unit: @contribution.project.currency)}" data-total-text=t('.total')]
+              - if @project.matches.active.any?
+                .to-be-matched-by
+                  = t('.to_be_matched_by')
+                  br/
+                  = @project.matches.active.map { |m| m.user.display_name }.uniq.to_sentence
+              .who-pay-fees.hidden
+                = check_box_tag 'pay_payment_fees', 1, false, disabled: 'disabled'
+                = label_tag 'pay_payment_fees', t('.i_want_pay_fees')
+                - if browser.device.mobile? || browser.device.tablet?
+                  = link_to '#', class: 'fees-info-button', data: { reveal_id: 'pay-fees-modal' } do
+                    i.icon-et-info-circled
+
+                  #pay-fees-modal.reveal-modal.small
+                    a.close-reveal-modal ×
+                    p = t('.tooltip-text', project_name: @project.name).html_safe
+                - else
+                  .custom-tooltip
+                    = link_to '#', class: 'fees-info-button' do
+                      i.icon-et-info-circled
+                    .tooltip-content.hide
+                      p = t('.tooltip-text', project_name: @project.name).html_safe
+
+  .row
+    section.content.large-8.medium-8.columns
+      table.table
+        thead
+          tr
+            th
+              |Type de ticket
+            th
+              |Nombre(s)
+            th
+              = "Prix du ticket"
+            th
+              = "Total"
+        tbody
+          = render @contribution.ticket_categories_orders.where("count > 0")
+          tr
+            th
+            th
+            th[style="text-align:right"]
+              = "Prix total"
+            th[style="text-align:right"]
+              = @contribution.value.to_s + " " + @project.currency
+
+      h5 = "Nous vous recommandons de protéger vos billets d'utilisateurs non autorisés"
+      .strong[style="font-size: 20px; font-weight: 800;"]
+        | Votre billet sera envoyé sur votre boite mail
+
+
+  
+  - if @contribution.value == 0
+    .row
+      section.content.large-12.medium-12.columns
+        = link_to t('.contribute'), issue_free_tickets_project_contribution_path(@project, @contribution), class: 'button'
+  - else
+    .row
+      section.content.large-8.medium-8
+        h4.title 
+          = t('.payment_form_title')
+          = " : "
+          = @project.currency.upcase
+
+        - if @project.currency.upcase == 'FCFA'
+          div.payments
+
+            - if ["Cameroon", "Cameroun", "Mali", "Côte d'Ivoire", "CI", "Sénégal", "Senegal"].include?(@project.country)
+              = render 'shared/payments/orange_money', resource: @contribution
+              = render 'shared/payments/touch', resource: @contribution
+            - elsif ['Bénin', 'Benin', 'Togo', 'Burkina', 'Burkina Faso'].include?(@project.country)
+              = render 'shared/payments/pay_plus_africa', resource: @contribution
+
+        - elsif @project.currency.upcase == 'EUR'
+            = render 'shared/payments/form', resource: @contribution
+
+  .row
+    aside.large-4.medium-4.columns
+      /.project-image
+        /= image_tag @project.display_image('project_thumb_large'), id: 'project_image', alt: @project.name
+        h5 = "#{@project.time_to_go[:time]} #{@project.time_to_go[:unit]} #{@project.remaining_text}"
+
+      - if @contribution.reward
+        .selected-reward
+          h4 = t('.reward.title')
+          .description
+            h5 = @contribution.reward.title
+            p = @contribution.reward.description
+      .faqs
+        = render 'faqs'
+
+javascript:
+  var started = 0;
+  window.onload = function(e){
+    if (started == 0) {
+      started = 1;
+      setTimeout(checkMobileMoneyPaymentSuccess("#{@contribution.id}"), 10000);
+    }
+  }

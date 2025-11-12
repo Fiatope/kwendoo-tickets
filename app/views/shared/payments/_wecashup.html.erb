@@ -1,0 +1,24 @@
+<form action="" method="POST">
+        <script async src="https://www.wecashup.cloud/demo/2-form/js/MobileMoney.js"
+        class="wecashup_button"
+        data-receiver-uid= <%= ENV["MERCHANT_UID"] %>
+        data-receiver-public-key=<%= ENV["MERCHANT_PUBLIC_KEY"] %>
+        data-transaction-receiver-total-amount="<%= @contribution.value_in_euros %>"
+        data-transaction-receiver-currency="EUR"
+        data-name="Kwendoo"
+        data-transaction-receiver-reference="<%= params["id"] %>"
+        data-transaction-sender-reference="<%= current_user.id %>"
+        data-style="1"
+        data-image="https://www.wecashup.cloud/live/2-form/img/home.png"
+        data-sender-phonenumber="+250"
+        data-cash="false"
+        data-telecom="true"
+        data-m-wallet="false"
+        data-split="true"
+        data-sender-lang="en">
+        </script>
+    </form>
+
+<p><%= t('.wecash')%></p>
+
+<%= link_to t('.revenir'), project_path(@project), style: "text-decoration: underline"  %>

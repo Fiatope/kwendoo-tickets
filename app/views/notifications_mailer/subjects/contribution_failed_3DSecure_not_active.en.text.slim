@@ -1,0 +1,6 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Your contribution to #{resource.project.name} failed because 3D Secure is not active

@@ -1,0 +1,11 @@
+fr:
+  projects:
+    contributions:
+      index:
+        empty: "Pas encore de participants"
+        load_more: "Voir plus"
+        anonymous: 'anonyme'
+      contribution:
+        anonymous_contribution: "Contributeur anonyme"
+        no_reward: "Ce contributeur n'a pas choisi de reward"
+        anonymous: 'anonyme'

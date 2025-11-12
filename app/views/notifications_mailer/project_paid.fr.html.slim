@@ -1,0 +1,23 @@
+- project = @notification.project
+- user = @notification.user
+|Cher(e), #{user.display_name}.
+br
+br
+| L'agaseke "
+= link_to(project.name, project_url(project))
+|" à laquelle vous avez particpé a été payée sur le compte bancaire de #{project.user.display_name}
+br
+br
+| Grâce à votre participation et celle des autres, <strong> #{project.pledged} € </strong> ont été collectés. 
+br
+br
+| Nous tenons à vous remercier pour votre confiance à Kwendoo, l'agaseke en ligne.
+br
+br
+|Nous vous invitons à parler de #{Configuration[:company_name]} autour de vous et à nous rejoindre sur #{link_to 'Facebook', Configuration[:facebook_url]}
+br
+br
+|Bien à vous,
+br
+br
+| L'équipe #{Configuration[:company_name]} 

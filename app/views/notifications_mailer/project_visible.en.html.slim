@@ -1,0 +1,37 @@
+- project = @notification.project
+|Dear,#{project.user.display_name}.
+br
+br
+|We thank you for your trust in Kwendoo Ticket.
+br
+br
+|Event #{@notification.project.name} is now online at www.kwendoo.rw. You can already send the following link to your customers 
+= link_to(project.name, project_url(project))
+br
+br
+|Here are some tips for getting your event succeded
+br
+
+    
+    br
+    strong Specify the venue and details of the event
+    br
+    br
+    strong Remind to buy tickets
+    br
+    | Sending reminders to maximaze the selling of tickets. 
+    br
+    br
+    strong I Share on social networks
+    br
+    | The social network buttons on your event page allow anyone to share the event  on Whatsapp,  Facebook and twitter.
+    br
+    br
+    strong Work on the look and feel of your event  page
+    br
+    | Add a profile picture on your event page and an exciting  video will make it more dynamic..
+    br
+    br
+|Now It's up to you! Good luck!     
+br
+|The Team at #{Configuration[:company_name]}

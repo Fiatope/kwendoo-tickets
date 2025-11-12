@@ -1,0 +1,35 @@
+= content_for :title, t('.title')
+
+- if request.xhr?
+  a.close-reveal-modal ×
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+
+
+.terms-page.static-page
+  .row
+    .text
+      h5 IL EST IMPORTANT DE LIRE ATTENTIVEMENT ET DE COMPRENDRE CES CONDITIONS GENERALES D'UTILISATION DU SITE. EN ACCEPTANT LES PRESENTES, VOUS VOUS ENGAGEZ A RESPECTER LES TERMES ET CONDITIONS CI-APRES. SI VOUS N'ETES PAS D'ACCORD AVEC CES TERMES ET CONDITIONS ET QUE VOUS NE VOULEZ PAS LES RESPECTER, VOUS NE DEVREZ PAS LES ACCEPTER ET NE POURREZ PAS, EN CONSEQUENCE, BENEFICIER DES SERVICES PROPOSES PAR LA SOCIETE SUR LE SITE.
+    .text
+      h4 Préambule
+      p L'Associaiton KWENDOO RWANDA, dont le décret de parution au Journal Officiel sera publié en janvier, et dont le le siège social est fixé au 110 rue Pierre Brossolette , 92320 (ci-après dénommée « l'Association ») édite et anime un site Internet sous la marque kwendoo.com, accessible sur le réseau internet à l’adresse https://www.kwendoo.com (ci-après dénommé « Kwendoo » ou « le Site »), ayant pour objet :
+      ol
+        li le développement des capacités socio-économiques de l’Afrique 
+        li la mobilisation de la diaspora africaine et plus généralement des communautés éclatées
+ 
+
+      p Les présentes Conditions Générales ont pour objet de définir les conditions et modalités de la mise à disposition de ces Services aux utilisateurs du Site. L’utilisation de kwendoo ou des services proposés sur kwendoo supposent l’acceptation pleine et entière des présentes Conditions Générales d’Utilisations par les Utilisateurs  y compris des stipulations de toutes notices applicables au site, incluant notamment : la charte de confidentialite, et les éléments fournis dans les FAQ. 
+
+
+
+

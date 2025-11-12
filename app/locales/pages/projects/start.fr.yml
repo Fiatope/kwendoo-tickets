@@ -1,0 +1,45 @@
+fr:
+  projects:
+    start:
+      title: "Créer votre campagne en trois étapes"
+      get-started: 'Démarrer'
+      steps:
+        first:
+          title: '1. Soumettre votre idée'
+          description: "Commencez par nous soumettre votre idée de projet. Nous allons l'étudier et vous faire une réponse."
+        second:
+          title: '2. Planifier votre campagne'
+          description: "Une campagne bien planifiée est déjà réussi à 30%. Organisez vos actions à l'avance  pour faire réussir votre campagne"
+        third:
+          title: '3. Lancer la Campagne '
+          description: "Une fois que nous approuvons votre projet, il devient visible sur le site. Vous êtes prêt à collecter des fonds."
+      who:
+        title: 'Qui peut soumettre un projet?'
+        local-governments: 'Organismes privés'
+        nonprofits: 'Associations'
+        neighborhood-organizations: 'Jeunes Entreprises'
+        description: "Aucune obligation d'être domicilié dans un pays quelconque n'est faite à la structure porteuse de projet. En revanche, nous travaillons avec un réseau de partenaires en Europe et en Afrique, afin de guarantir l'authenticité et le sérieux des structures qui soumettent des projets. les fonds sont collectables en Europe et en Afrique seulement."
+      work:
+        title: 'Une campagne réussie demande un minimum de travail.'
+        subtitle: "Voici ce dont vous aurez besoin:"
+        team:
+          title: 'De la Motivation'
+          description: "Afin d 'obtenir le meilleur résultat, il vous faudra être engagé et déterminé."
+        imagery:
+          title: 'De Belles Images'
+          description: 'Une image vaut plus que mille mots. Décidez vos futurs contributeurs avec des images qui captent leur attention.'
+        video:
+          title: 'Une Video Marquante'
+          description: "Une vidéo est un excellent moyen de présenter votre projet et d' éclairer vos futurs contributeurs sur vos intentions."
+        detailed:
+          title: 'Une Documentation Détaillée'
+          description: "Plus les contributeurs ont d'information sur votre projet et sur votre façon de dépenser les fonds récoltés et plus ils seront enclin à contribuer."
+        rewards:
+          title: 'Des Rewards attrayants'
+          description: 'Motivez vos contributeurs en leur offrant des rewards.'
+        engagement:
+          title: 'Un Engagement Continuel'
+          description: 'Restez connectés avec vos soutiens au cours de la campagne. Ceux qui vous ont soutenu vous aideront à engager de nouvelles contributions.'
+      inspiration:
+        title: "Vous avez besoin d'inspiration"
+        subtitle: 'Regarder des campagnes qui ont été financées avec succès:'

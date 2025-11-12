@@ -1,0 +1,6 @@
+rw:
+  reward:
+    dont_want: "Ndatanga gusa, Ntashimwe nkeneye."
+    limited: 'Yahagaritswe'
+    sold_out: 'Yaragurishijwe'
+    display_remaining: "Hasigaye %{remaining} kuri %{maximum} Isigaye"

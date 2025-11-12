@@ -1,0 +1,13 @@
+/usr/bin/ruby2.2 -r ./siteconf20190828-8144-iibick.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling rinku.c
+compiling autolink.c
+compiling buffer.c
+linking shared-object rinku.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 rinku.so ./.gem.20190828-8144-uh7kci

@@ -1,0 +1,11 @@
+- content_for :page_content do
+  - selected_r = @project.selected_rewards
+  .panel
+    = t('.link_reports')
+    = link_to t('.all_contributions'), reports_contribution_reports_for_project_owners_path(project_id: @project.id, format: :csv)
+
+
+- if request.xhr?
+  = yield :page_content
+- else
+  = render template: 'projects/show'

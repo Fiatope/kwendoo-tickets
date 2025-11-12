@@ -1,0 +1,8 @@
+rw:
+  users:
+    set_email:
+      update_email_title: 'Ongeramo aderesi ya email yawe'
+      site_title: 'Funguza konti ya kwendoo'
+      title: 'Musabwe gushyiramo aderesi ya email '
+      submit: 'Mukomeze'
+      create: 'Iyandikishe kuri kwendoo'

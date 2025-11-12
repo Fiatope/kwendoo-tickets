@@ -1,0 +1,30 @@
+- content_for :page_content do
+  = initjs_tag app_name: 'Neighborly', partial: true
+  .contributions-page[data-path=project_contributions_path(@project)]
+    - if current_user && (current_user.admin? || @project.user == current_user)
+      = link_to ticketing_database_project_path(@project, format: :csv), style: "border: 1px solid silver; padding: 0.5rem 1rem; margin: 0 0 1rem 0;display:inline-block;border-radius:1rem;" do
+        i.icon-et-database[style="margin-right:0.5rem;"]
+        = "Télécharger la base de données"
+    = render 'active_matches'
+    .row
+      .list
+        - if @project_tickets.any?
+          table
+            thead
+              tr
+                th = "Date d'achat"
+                th = "Participant"
+                th = "Catégorie de billets"
+                th = "Prix"
+                th = "Numéro du billet"
+            tbody
+              = render 'projects/tickets/ticket'
+        - else
+          p = t('.empty')
+
+   
+
+- if request.xhr?
+  = yield :page_content
+- else
+  = render template: 'projects/show'

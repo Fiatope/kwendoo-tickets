@@ -1,0 +1,30 @@
+/usr/bin/ruby2.2 -r ./siteconf20190828-8144-1v1jbkr.rb extconf.rb
+>>>>> Creating Makefile for ruby version 2.2.7 on i386-linux-gnu <<<<<
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling sparse.c
+compiling circarray.c
+compiling saj.c
+compiling object.c
+compiling scp.c
+compiling err.c
+compiling odd.c
+compiling hash.c
+compiling reader.c
+compiling hash_test.c
+compiling compat.c
+compiling dump.c
+compiling oj.c
+compiling cache8.c
+compiling resolve.c
+compiling fast.c
+compiling strict.c
+compiling parse.c
+compiling val_stack.c
+linking shared-object oj/oj.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 oj.so ./.gem.20190828-8144-1equoim/oj

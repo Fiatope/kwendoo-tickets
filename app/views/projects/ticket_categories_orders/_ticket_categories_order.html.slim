@@ -1,0 +1,17 @@
+| Veuillez choisir le nombre de billets
+tr
+  td
+    = ticket_categories_order.reward.title
+  td[style="text-align:right"]
+    = ticket_categories_order.count.to_s
+  td[style="text-align:right"]
+    - if ticket_categories_order.promotion.present?
+      = (ticket_categories_order.reward.minimum_value - (ticket_categories_order.reward.minimum_value * ticket_categories_order.promotion.discount / 100)).to_s + " " + @project.currency
+    - else
+      = ticket_categories_order.reward.minimum_value.to_s + " " + @project.currency
+  td[style="text-align:right"]
+    - if ticket_categories_order.promotion.present?
+      = ((ticket_categories_order.reward.minimum_value - (ticket_categories_order.reward.minimum_value * ticket_categories_order.promotion.discount / 100)) * ticket_categories_order.count).to_s + " " + @project.currency
+    - else
+      = (ticket_categories_order.reward.minimum_value * ticket_categories_order.count).to_s + " " + @project.currency
+

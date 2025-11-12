@@ -1,0 +1,98 @@
+fr:
+  projects:
+    index:
+      title: "Billeterie en ligne Kwendoo"
+      subtitle: ""
+      get-started: 'Créer'
+      recommended: 'Recommended'
+      public_c: "Découvres des Evènements"
+
+      parts:
+        first:
+          titla: "Vos billets en ligne pour tous les évènements"
+          titlb: " "
+          create_c: "Créer un Evènement"
+        second:
+          title: "Facile à utiliser"
+          titla: "1.Selectionner"
+          titladesc: "Choisir l'évènement à organiser."
+          titlb: "2.Payer"
+          titlbdesc: " Payer vos billets carte bleu ou mobile money."
+          titlc: "4. Partager"
+          titlcdesc: "Partagez l'évènement avec famille et amis."
+          titld: "3. Collecter"
+          titlddesc: "Téléchargez vos billets sur votre smartphone."
+          getstarted: "Get Started"
+          knowmuch: "Learn More"
+        third:
+          title: "POURQUOI CHOISIR KWENDOO TICKETS?"
+          titla: "Sûr"
+          titladesc: "Les informations qui circulent sur le site sont sécurisées via HTTPS"
+          titlb: "Partage facile"
+          titlbdesc: "Vous partagez facilement l'évènement à la famille et aux amis."
+          titlc: "Paiement aisé"
+          titlcdesc: "Vous payez aisément vos billets par carte bleue ou virement bancaire."
+          titld: "Collecte"
+          titlddesc: "Vous téléchargez en un clic vos billets sur votre smartphone "
+        fourth:
+          title: "LES EVENEMENTS PUBLICS"
+          discover: "Découvrir d'autres évènements publics"
+          titlepartners: "NOS PARTENAIRES."
+          press: ""
+      steps:
+        first:
+          title: "1. Je crée un évènement et invite à participer"
+          description: "j'invite à participer"
+        second:
+          title: "2. Je collecte"
+          description: "je communique sur l'évènement"
+        third:
+          title: '3. Je retire les fonds'
+          description: "je réalise la cause"
+      who:
+        title: 'Qui peut créer un évènement?'
+        Association: 'Une association'
+        Communities: 'Une communauté'
+        People: 'Un particulier'
+        button1: 'Associations'
+        button2: 'Je créée un évènement' 
+        button0: "Je créée un évènement"
+      type:
+        title: "Exemples d'occasion"
+        birthday: 'Anniversaire'
+        wedding: 'Mariage' 
+        project: 'associatif'
+        urgency: "humanitaire"
+        help:    "familial"
+        tontine: "voyage"
+      public:
+        title: "Evènements publics"
+        button1: 'Découvrir'
+      work:
+        title: "Pour réussir avec Kwendoo Tickets."
+        subtitle: " "
+        reason:
+          title: "J'explique les objectifs"
+          description: "objectif de ticket doit être clairement présenté à ma cible"
+        detailed:
+          title: "Je précise usage des fonds"
+          description: "J'éclaire mes contributeurs sur la façon et le timing avec lesquels les fonds vont être utilisés."
+        engagement:
+          title: 'Je relance mes contributeurs'
+          description: "Je reste connecté à mes contributeurs afin qu'ils m' aident à engager de nouveaux sponsors."
+        social:
+          title: 'Je partage sur facebook'
+        picture:
+          title: "J'agrémente la page de ticket"
+        widget:
+          title: "J'embarque un widget" 
+      actualités:
+        title: 'Notre actualité'
+        description: "kwendoo fête le retrait de sa 100 ième ticket - Merci de votre confiance renouvelée!"
+        subtitle: ""
+      payments:
+        title: 'Paiements et Sécurité'
+      partners:
+        title: 'Nos partenaires'
+      presentation:
+        title: 'Présentation'

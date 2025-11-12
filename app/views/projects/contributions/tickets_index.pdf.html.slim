@@ -1,0 +1,40 @@
+.row(style="background-color: white")
+  em.right
+    = @contribution.confirmed_at.try(:strftime, "%d-%b-%Y %H:%M:%S")
+  = wicked_pdf_image_tag "https://kwendoo.s3.amazonaws.com/assets/Logo-Kwendoo-Small-e3b314a09ea9d8de7340403428f5a785.png", height: "200px", width: "150px"
+.row.print-target(style="margin-top:2em")
+  - @contribution.tickets.each do |ticket|
+    .ticket[style="position:relative;height:198px;margin-bottom:8px;width:100%;background:silver;border:1px solid #777;border-radius:4px;"]
+      div[style="position:absolute;top:1px;left:1px;height:194px;width:28px;background:#eee;border-right:silver"]
+        div[style="transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);font-size:11px;color:silver;"]
+      div[style="position:absolute;top:1px;left:30px;height:194px;width:500px;background:white;"]
+        div[style="height:145px;width:100%;background:#f7f7f7;margin-top:1px;"]
+          - if Rails.env.development?
+            = wicked_pdf_image_tag (@contribution.project.hero_image.present? ? @contribution.project.hero_image.url : "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png"), style: "height:150px;width:100%;"
+          - else 
+            = @contribution.project.hero_image.present? ? image_tag(@contribution.project.hero_image.url, style: "height:150px;width:100%;") : (wicked_pdf_image_tag "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png", style: "height:150px;width:100%;")
+        .row
+          div[style="position:absolute;left:0;width:125px;height:47px;background:white;padding:5px 6px;"]
+            div[style="font-size:11px;color:silver;"] = "COST: #{number_to_currency(ticket.ticket_categories_order.reward.minimum_value, unit: ('EUR' || @contribution.project.currency_sym), precision: 2)}"
+            - if @contribution.project.is_prebooked?
+              div[style="font-size:12.5px;font-weight:bold;color:#888;line-height:1;"] = "PAY AT THE DOOR"
+            - else
+              div[style="font-size:17px;font-weight:bold;color:#888;"] = "ADMIT ONE"
+          div[style="position:absolute;left:125px;width:125px;height:47px;background:white;padding:7px;"]
+            div[style="font-size:10px;color:silver;line-height:1;"] = @contribution.project.display_address_formated
+          div[style="position:absolute;left:250px;width:125px;height:47px;background:white;padding:2px 7px;"]
+            div[style="font-size:13px;letter-spacing:0.2px;font-weight:bold;color:#888;line-height:1.1;"]
+              small[style="font-size:8px;text-transform:uppercase;color:#ccc;font-weight:normal;"] = "Event Date"
+              br
+              = @contribution.project.start_date.strftime("%d %b").upcase
+              br
+              = @contribution.project.starts_at.try(:strftime, "%I:%M %p")
+          div[style="position:absolute;left:375px;width:125px;height:47px;background:white;padding:7px 3px;"]
+            div[style="font-size:12px;letter-spacing:0.2px;color:#888;line-height:1.1;font-style:italic;"]
+              = ticket.ticket_categories_order.reward.title
+      div[style="position:absolute;top:1px;left:530px;height:194px;width:167px;background:#f3f3f3;padding:60px 20px;"]
+        div[style="position:absolute;top:20px;left:-4px;line-height:1;text-align:center;"] = @contribution.project.name
+        div[style="border:1px solid #e1e1e1;height:130px;border-radius:5px;"]
+          div[style="margin:0.5rem;font-weight:bold;text-align:center;color:#31A574;"]
+            = wicked_pdf_image_tag(ticket.qr_code.url, style: "width: 90px; height: 90px;margin-bottom: 6px;") if ticket.qr_code.present? && ticket.qr_code.url.present?
+            = ticket.token

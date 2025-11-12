@@ -1,0 +1,10 @@
+en:
+  projects:
+    contributions:
+      new:
+        title: "Get tickets for this Event"
+        subtitle: "Choose your ticket"
+        contribute: " "
+        submit: 'Review & Proceed'
+        not_mangopay_ready: 'We need more informations about you before to create a project'
+        atleast: 'pay the ticket'

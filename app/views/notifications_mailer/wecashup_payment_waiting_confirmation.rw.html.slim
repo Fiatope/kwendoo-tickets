@@ -1,0 +1,30 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Hello #{resource.user.display_name}!
+br
+br
+|Your #{resource.class.model_name.human} to #{link_to(resource.project.name, project_url(resource.project))} is currently being processed by our Payment intermediary partner.
+br
+br
+|#{resource.class.model_name.human} Amount:
+strong #{number_to_currency resource.value, unit: "RWF", precision: 0}
+br
+br
+|#{resource.class.model_name.human} Created at:
+strong #{l resource.created_at.to_date, format: :long}
+br
+br
+|Transaction reference:
+strong #{resource.key}
+br
+br
+|If you have any question, please email us at #{mail_to Configuration[:email_contact]} or access our #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Best Regards,
+br
+|The #{Configuration[:company_name]} Team
+

@@ -1,0 +1,6 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Inkunga yawe kuri #{resource.project.name}!

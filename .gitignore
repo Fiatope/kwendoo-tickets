@@ -1,0 +1,44 @@
+.bundle
+vendor/cache
+db/*.sqlite3
+log/
+log/*.log
+tmp/**/*
+tmp/restart.txt
+db/seeds/my-seeds-local.rb
+db/seeds/my-seeds-heroku.rb
+# Vim
+*.swp
+*.dump
+coverage
+*.tmproj
+.DS_Store
+public/uploads/*chromedriver.log
+public/uploads/
+chromedriver.log
+.use_capybara_webkit
+config/locales/.wti
+npm-debug.log
+.sass-cache
+Cookbooks
+.vagrant
+.project
+.secret.rvmrc
+spec/tmp/
+*.sublime-project
+*.sublime-workspace
+*.dot
+./log
+.ruby-version
+
+# Personal
+.rspec
+config/database.yml
+
+# Secrets
+.env
+.env.development
+.env.production
+
+
+todo.txt

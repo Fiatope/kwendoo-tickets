@@ -1,0 +1,38 @@
+- project = @notification.project
+br
+| Hari agaseke ka kozwe kuri #{Configuration[:company_name]}
+|  hamwe na #{link_to project.user.name, user_url(project.user)}.
+br
+| Email ya nyiri agaseke: #{mail_to project.user.email}
+br
+br
+| Ibi rebana n'agaseke:
+
+br
+b Uko kitwa:
+= " #{project.name}"
+br
+b Intego:
+= " #{project.display_goal}"
+br
+b Incamake:
+= " #{project.headline}"
+br
+b Icyiciro:
+br
+= project.category.to_s
+br
+b Umujyi/agace:
+br
+= project.location
+br
+b ubwoko bw'umushinga:
+br
+= project.display_organization_type
+br
+br
+= link_to "Reba agaseke kuri #{Configuration[:company_name]}", project_url(project)
+
+br
+br
+| Ubuyobozi bwa #{Configuration[:company_name]} 

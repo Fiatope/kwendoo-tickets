@@ -1,0 +1,30 @@
+- project = @notification.project
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Bwana/Madam #{resource.user.display_name},
+br
+br
+|Mwifuje gukora aga #{resource.class.model_name.human} kuri #{link_to(resource.project.name, project_url(resource.project))}.
+br
+br
+|Agashami gashinzwe ibyo kwishyura ka garagaje utubazo tumwe na tumwe:
+br
+|Kwishyura ukoresheje telephone yawe ntibyakunze.
+br
+br
+|Mutwihanganire kuri ako kabazo kandi turizera ko muri bushobore gutanga umusanzu wanyu nanone vuba aha.
+br
+br
+|Niba mufite ibindi bibazo mwatubaza, musabwe gusura ahari ibibazo byakunzwe kwibazwa #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Murakoze,
+br
+|Ubuyobozi bwa #{Configuration[:company_name]}
+
+
+
+

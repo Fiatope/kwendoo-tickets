@@ -1,0 +1,41 @@
+<%= content_for :title, t('.titles.site') %>
+
+<%= render 'layouts/header' %>
+
+<div class="background-img">
+	<div class="filter-hard-black flex-container">
+		<div class="bg-white">
+					<h2><%= t('.titles.header')%></h2>
+
+					<%= render 'devise/shared/omniauth' %>
+					<hr>
+             
+					<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+						<%= f.label :profile_type, t('.form.labels.type'), class: 'new_profile_type' %>
+						<%= f.hidden_field :newsletter, value: true %>
+						<%= f.input :profile_type, collection: {'Une personne'=> 'Personne', 'Une entreprise / organisation'=> 'Entreprise / Organisation'}, required: true, as: :radio_buttons, label: false %>
+						<div class="form-inputs">
+							<%= f.input :name,     as: :string, required: true, label: false %>
+							<%= f.input :email,    as: :email,  required: true, label: false %>
+							<%#= f.input :birthday, as: :string,  required: true, label: false, placeholder: 'Date de naissance' %>
+							<%= f.input :password, required: true, label: false %>
+							<%#= f.input :password,    as: :email,  required: true, label: false, placeholder: t('simple_form.placeholders.user.email_confirmation') %>
+							<%= f.input :cgu,             as: :boolean,  required: false, label: "En enregistrant vos informations, vous acceptez et donnez votre consentement à ce que les informations saisies soient utilisées dans le cadre de la demande de création ou de participation à un évènement et de la relation commerciale qui en découle.", label_html: { class: 'greengreen' } %>
+							<!-- <div class="text-right">
+							<%= t('.form.hint.password_length') %>
+							</div> -->
+						</div>
+
+						<div class="form-actions">
+							<%= f.submit t('.form.inputs.submit'), class: 'btn btn-block btn-medium-green' %>
+						</div>
+					<% end %>
+					<div class="label-center"> 
+					<%= link_to t('.have_account_html'), new_user_session_path, class: 'greengreen' %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

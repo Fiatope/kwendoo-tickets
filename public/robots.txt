@@ -1,0 +1,10 @@
+# See http://www.robotstxt.org/wc/norobots.html for documentation on how to use the robots.txt file
+#
+# To ban all spiders from the entire site uncomment the next two lines:
+User-Agent: *
+Disallow: /projects/
+Disallow: /neighbors/
+Allow: /proojects/acheter-une-voiture-doccasion
+Allow: /projects/levee-de-fonds-au-profit-de-lassociation-fondapam-au-congo
+Allow: /projects/lorenzo-lorenzino-laurenzaccio
+Allow: /projects/projects/musee-des-technologies-1

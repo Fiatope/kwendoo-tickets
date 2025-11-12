@@ -1,0 +1,29 @@
+- project = @notification.project
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Dear #{resource.user.display_name},
+br
+br
+|You wanted to make a #{resource.class.model_name.human} to #{link_to(resource.project.name, project_url(resource.project))}. 
+br
+br
+|We are sorry that the transaction was not successful. Our payment intermediary reported the following error:
+br
+|Your issuer has not activated the 3-D Secure verification required by #{Configuration[:company_name]}. Please request this option to your issuer and try again
+br
+br
+|Your credit card has not been charged.
+br
+br
+|We are sorry about this disagreement and we hope you will be able to complete your contribution as soon as possible.
+br
+br
+|For any other questions, send an email to #{mail_to Configuration[:email_contact]} or access our #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Kindest regards,
+br
+|The team #{Configuration[:company_name]}

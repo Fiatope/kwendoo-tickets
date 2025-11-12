@@ -1,0 +1,5 @@
+en:
+  projects:
+    faqs:
+      index:
+        empty: 'Pas encore de FAQs.'

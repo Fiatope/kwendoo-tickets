@@ -1,0 +1,4 @@
+/tmp
+/lib/gctools/*.bundle
+/lib/gctools/*.so
+/.bundle

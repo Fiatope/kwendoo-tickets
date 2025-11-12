@@ -1,0 +1,38 @@
+- project = @notification.project
+br
+| Un nouveau projet a été créé sur #{Configuration[:company_name]}
+|  by #{link_to project.user.name, user_url(project.user)}.
+br
+| Email du porteur de projet: #{mail_to project.user.email}
+br
+br
+| Détails du projet:
+
+br
+b Titre:
+= " #{project.name}"
+br
+b Objectif:
+= " #{project.display_goal}"
+br
+b Résumé du projet:
+= " #{project.headline}"
+br
+b Categorie:
+br
+= project.category.to_s
+br
+b Localisation:
+br
+= project.location
+br
+b Type de structure:
+br
+= project.display_organization_type
+br
+br
+= link_to "Visiter la page Projet ici #{Configuration[:company_name]}", project_url(project)
+
+br
+br
+| Equipe #{Configuration[:company_name]} 

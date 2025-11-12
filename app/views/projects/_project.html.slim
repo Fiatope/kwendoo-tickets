@@ -1,0 +1,80 @@
+- large = defined?(large) && large
+- if !defined?(:contribution)
+  - contribution = nil
+
+= cache [:project_box, project, project.progress, project.pledged, large, contribution, defined?(:columns), browser.device.mobile?, browser.ie?(8), project.remaining_days] do
+
+  .project-box[itemscope itemtype="http://schema.org/CreativeWork" class=project_box_classes(project, large, contribution, try(:columns))]
+    meta[ itemprop="dateCreated" content=project.created_at.to_date ]
+    - if project.soon?
+      - project_link = 'javascript:void(0)'
+    - else
+      - project_link = project_path(project)
+
+    = link_to project_link, target: (defined?(embed_link) ? :blank : '') do
+      - if project.expired?
+        .status-image
+          - if project.successful? && project.reached_goal?
+            = image_tag "successful.#{I18n.locale}.png"
+          - elsif project.successful? && !project.reached_goal?
+            = image_tag "successful_flex.#{I18n.locale}.png"
+          - elsif project.failed?
+            = image_tag "not_successful.#{I18n.locale}.png"
+      - elsif project.soon?
+        .status-image
+          = image_tag "coming_soon.#{I18n.locale}.png"
+
+      .row
+        .cover.small-12.columns
+          = image_tag project.display_image(large || contribution && !browser.device.mobile? ? 'project_thumb_large' : 'project_thumb'), itemprop: 'image'
+
+      - if contribution && !browser.device.mobile?
+        .back-informations.large-3.medium-3.columns.right
+          h5
+            - contribution.confirmed_at.present?
+              i.icon-et-calendar
+              = l contribution.confirmed_at.to_date, format: :long
+
+          - if contribution.display_value
+            h5
+              i.icon-et-heart
+              = contribution.display_value
+          - if contribution.reward
+            .reward
+              h5
+                i.icon-et-trophy
+                = t('rewards.index.reward_title', minimum: contribution.reward.display_minimum)
+              - description = contribution.reward.description.gsub(/"/,'&quot;')
+              p[title=description] = truncate(contribution.reward.description, length: 160)
+
+          .share.row
+            .large-6.columns
+              = link_to t('.share.facebook'), "http://www.facebook.com/sharer.php?s=100&p[title]=#{project.name}&p[summary]=#{project.headline}&p[url]=#{project_url(project)}&p[images[0]=#{project.display_image('project_thumb_facebook')}", class: 'button with-icon facebook', target: :blank
+            .large-6.columns
+              = link_to t('.share.twitter'), "https://twitter.com/intent/tweet?text=#{URI::encode(t('.share.twitter-text', name: project.name, hash_tag: project.hash_tag))}", class: 'button with-icon twitter', target: :blank
+
+      .content[class=project_content_classes(project, large, contribution)]
+        - if large || contribution && !browser.device.mobile?
+          h4.name = project.name
+
+        .category
+          span = project.category.to_s
+
+        - unless large || contribution && !browser.device.mobile?
+          h4.name = project.name
+
+        .location
+          i.icon-et-location
+          | &nbsp;
+          = project.location
+          br       
+          i.icon-et-calendar
+          | &nbsp;
+          = project.event_date
+          
+        - if (large || !browser.ie?(8) || contribution && !browser.device.mobile?)
+          .description.hide-for-small[itemprop='description']
+            span = truncate(project.headline, length: 140, separator: ' ')
+            a
+
+        = link_to t('.viewpro'), project_link, class:'btn btn-block btn-medium-green-carre'

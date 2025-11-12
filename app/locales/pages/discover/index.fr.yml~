@@ -1,0 +1,19 @@
+fr:
+  discover:
+    index:
+      title: 'Découvrez des projets originaux'
+      subtitle: 'Campagnes en ligne'
+      localisation: 'Les projets sur la carte'
+      empty: 'pas de projet correspondant à votre recherche.'
+      tags: 'Tags populaires: '
+      near: 'Localisation'
+      category: 'Catégorie'
+      filter: 'Statut'
+      showing_results_for: 'Résultats pour: '
+      filters:
+        recommended: 'Recommendé'
+        expiring: 'Proche de la fin'
+        recent: 'Récent'
+        successful: 'Réussi'
+        soon: 'Bientôt'
+      channels: 'Nous y étions'

@@ -1,0 +1,26 @@
+.row
+  .large-12.small-11.columns.centered
+
+    = form_for @invitation do |f|
+
+ 
+       /= f.label :Nom 
+       = f.hidden_field :name 
+ 
+       /= f.label :email 
+       = f.hidden_field :email
+
+       /= f.label :lien
+       = f.hidden_field :link   
+
+       /=f.label :objet
+       =f.hidden_field :subject
+
+       /= f.label :message   
+       = f.hidden_field :message 
+
+       = f.hidden_field :type, value: "invitation to contribute"
+
+       = f.button :"Mail", class: "button btn-block btn-medium-brown with-icon email"
+  
+       /= redirect_to 'http://rubyonrails.org' 

@@ -1,0 +1,19 @@
+fr:
+  devise:
+    sessions:
+      new:
+        no_account_html: "Pas encore inscrit sur Kwendoo? S'inscrire"
+        titles:
+          site: 'Se connecter'
+          header: 'Se connecter'
+        links:
+          register: "S'inscrire"
+          forgot_password: "Mot de passe oublié?"
+          new_user_confirmation: "Instructions de confirmation non reçues?"
+        form:
+          labels:
+            remember_me: 'Se souvenir de moi'
+          inputs:
+            submit: 'Se connecter'
+            facebook: 'Se connecter avec Facebook'
+

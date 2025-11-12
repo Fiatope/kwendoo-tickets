@@ -1,0 +1,19 @@
+en:
+  project:
+    display_status:
+      expired: 'expired'
+      failed: 'failes'
+      successful: 'successfull'
+      waiting_confirmation: 'waiting confirmation'
+      waiting_funds: 'waiting funds'
+      not_reached_goal: 'not reached goal'
+      draft: 'draft'
+    organization_type:
+      municipality: 'Individual'
+      neighborhood_organization: 'non-profit Organization'
+      registered_nonprofit: 'Association'
+      public_private_partnership: 'Private public partnership'
+      cid_bid: 'cid bid'
+      nonprofit_501c3: 'nonprofit_501c3'
+      other: 'other'
+      not_sure: 'Young company'

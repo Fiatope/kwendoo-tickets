@@ -1,0 +1,41 @@
+rw:
+  projects:
+    contributions:
+      show:
+        title: 'Murakoze'
+        thank_you: 'Murakoze! gutanga umusanzu wanyu nyiri aka gaseke arazakumenyeshwa.'
+        recommended_projects: 'Hari gigihe nutu duseke tundi mwadukunda:'
+        share: 'Mwakomeza no gufasha  %{project_owner_name} mubwira abandi ibijyanye numusanzu mwatanze!'
+        twitter-text: 'Natanze umusanzu wi %{value} kwa %{name} kuri @Neighborly: %{project_url}'
+        facebook: 'sangiza'
+        like_us: 'wakunda paji yacu ya facebook'
+        twitter: 'twita'
+        bankaccount:
+          title: 'Mwatanze umusanzu mukoresheje konti nshya ya bank. Musabwe gusuzuma konti yanyu kugira ngo mutange umusanzu.'
+          steps:
+            first: 'Turaza kubitsa kabiri (buri kubitsa tura turatanga munsi ya 850 Rwfs) kuri iyi konti. birakorwa hagati yu munsi ni biri.'
+            second: 'Muraza kwakira email ikubiyemo aho mwa kanda kugira mubashe gukoresha ayo mafaranga yashyizwe kuri konti. kugirango tumenye niba iyo konti ibaho'
+            third: 'konti yanyu imaze gusuzumwa, umusanzu wanyu urahita ujya ku gaseke wateye inkunga.'
+        receipt:
+          address_html: "tickets.kwendoo.rw ni serivise ya <br>Fiatope Digital Services<br>Ifite icyicaro k'umukindo Center etaje ya 3<br>Avenue 33, Gisozi, Kigali<br>Rwanda"
+          print_cta: " Sohora(bika) inyemezabwishyu"
+          heading: "Inyemezabwishyu yuko wateye inkuga"
+          info: "Inkunga yawe yemejwe! Murakoze ku bw'umusanzu wanyu. Musabwe kureba inyemezabwishyu yanyu iri hasi aha:"
+          info: "Umusanzu utanze wemejwe. Musabwe kureba inyemezabwishyu yanyu hano hakurikira:"
+          card_info: "Uyu musanzu watanzwe hakoreshejwe ikarita ya  %{card_type}"
+          card_last4_info: " irarangira mu %{last4}"
+          transaction_reference_label: "Transaction Reference"
+          confirmed_at_label: "Igihe byakorewe"
+          terms:
+            display_name: "Amazina y'uzuye"
+            address_city: "Umujyi"
+            address_state: "Agace"
+            address_zip_code: "Zipu kode"
+          table:
+            quantity_heading: Ingano"
+            code_heading: "Kode"
+            project_heading: "Agaseke"
+            description_heading: "Impamvu"
+            unit_heading: "Ikiguzi ku kintu kimwe"
+            total_heading: "Ayo utanze yose"
+            total_caption: "Igiteranyo"

@@ -1,0 +1,200 @@
+<%= content_for :title, t('.title') %>
+
+
+<div class="background-full text-center">
+	<div class="filter-black-title flex-container">
+		<div class="background-title flex-item">
+			 <h2>Ikora ite?</h2>
+		</div>
+	</div>
+</div>
+
+<div class="discover white text-center">
+	
+	<div class="howitworks">
+		<div class="discover-title">
+			Ikora ite?
+		</div>
+		<div class="container discover-item">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 yellowyellow">
+					<div class="discover-icon">
+						<%= image_tag	"circle.svg" %>
+					</div>
+					<div class="discover-title-item">	
+						1. Kora agaseke		
+					</div>
+					<div class="discover-description-item">
+						Kora Agaseke n'ubuntu kandi biroroshye
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 redred">
+					<div class="discover-icon">
+						<%= image_tag	"up-arrow.svg" %>
+					</div>
+					<div class="discover-title-item">
+						2.Sangiza
+					</div>
+					<div class="discover-description-item">		
+						Sangiza agaseke ku nshuti n'umuryango.
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 greengreen">
+					<div class="discover-icon">
+						<%= image_tag	"money.svg" %>
+					</div>
+					<div class="discover-title-item">
+						3. Kusanya
+					</div>
+					<div class="discover-description-item">
+						Kusanya umusanzu wose ukoresheje mobile money cg tigocash na airtel money.
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 purplepurple">
+					<div class="discover-icon">
+						<%= image_tag	"present.svg" %>
+					</div>
+					<div class="discover-title-item">
+						4. Koresha Inkunga
+					</div>
+					<div class="discover-description-item">
+						Koresha cyangwa wohereze inkunga ahariho hose mu Rwanda.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="see-more">
+			<%= link_to link_to t(".call_to_action", default: "Tangira"), main_app.new_project_path, class: 'btn-medium-black-border' %>
+			<%= link_to 'Reba Ingero', main_app.examples_path, class: 'btn-medium-black-border' %>
+		</div>
+	</div>
+
+	<div class="cost">
+		<div class="discover-title">
+			Umusanzu
+		</div>
+		<div class="container">
+			<div class="row cost">
+				<p>Umusanzu wa kwendoo ni <span> 6%</span> ku mafaranga ya kusanyijwe yose</p>
+				<p>Uyu musanzu utangwa ku musozo iyo nyiri agaseke atanze icyifuzo yuko ashaka inkunga yakusanyijwe.</p>
+			</div>
+		</div>
+	</div>
+
+<!-- 	<div class="who">
+		<div class="discover-title">
+			Ninde wemrewe gukora agaseke ?
+		</div>
+		<div class="container discover-item">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="discover-title-item">
+						Isyirahamwe
+					</div>
+				</div>
+				<div class="col-sm-6">	
+					<div class="discover-title-item">
+						Umuntu bwite
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<div class="occasion">
+		<div class="discover-title">
+			Ingero z'uduseke wakora
+		</div>
+		<div class="container discover-item">
+			<div class="row">
+				<div class="col-sm-2 purplepurple">
+					<div class="why-icon">
+						<%= image_tag	"ballon.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Igikorwa cy'ubumuntu
+					</div>
+				</div>
+				<div class="col-sm-2 yellowyellow">
+					<div class="why-icon">
+						<%= image_tag	"cake.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Isabukuru y'amavuko
+					</div>
+				</div>
+				<div class="col-sm-2 redred">
+					<div class="why-icon">
+						<%= image_tag	"summer.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Ingendo
+					</div>
+				</div>
+				<div class="col-sm-2 greengreen">
+					<div class="why-icon">
+						<%= image_tag	"associatif.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Ishyirahamwe
+					</div>
+				</div>
+				<div class="col-sm-2 purplepurple">
+					<div class="why-icon">
+						<%= image_tag	"mariage.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Ubukwe
+					</div>
+				</div>
+				<div class="col-sm-2 yellowyellow">
+					<div class="why-icon">
+						<%= image_tag	"fam.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Ubukwe
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="see-more">
+			<%= link_to 'Reba ingero', main_app.examples_path, class: 'btn-medium-black-border' %>
+		</div>
+	</div>
+
+	<div class="success">
+		<div class="container">
+			<div class="discover-title">
+				Kugera ku ntego y'agaseke
+			</div>
+			<div class="discover-title-item-black">
+				<p>Tuguherekeza tugufasha kugeza ugeze nkuntego y'agaseke. </p>
+				<p> Soma<span> Inama zacu</span> nibindi <span>bintu wakora </span> mu kuyoborwa</p>
+			</div>
+
+			<div class="see-more">
+				<%= link_to 'Nyobora', main_app.successful_path, class: 'btn-medium-black-border' %>
+				<%= link_to 'Ibibazo bi bazwa', main_app.faq_path, class: 'btn-medium-black-border' %>
+			</div>
+		</div>
+	</div>
+
+	<div class="start">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<%= link_to main_app.new_project_path do %>
+					<div class="discover-title-red">
+						WATANGIZA AGASEKE
+					</div>
+					<div class="discover-icon">
+						<%= image_tag	"rocket.svg" %>
+
+					</div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

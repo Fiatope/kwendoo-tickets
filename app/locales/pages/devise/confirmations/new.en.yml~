@@ -1,0 +1,15 @@
+en:
+  devise:
+    confirmations:
+      new:
+        no_account_html: "Besoin d un compte? <strong>%{link}</strong>"
+        titles:
+          site: 'Renvoyer les instructions'
+          header: 'Renvoyer les Instructions'
+        links:
+          register: "S inscrire <i class='icon-et-right-circled'></i>"
+        form:
+          labels:
+            email: 'Votre adresse email'
+          inputs:
+            submit: 'Renvoyer les instructions'

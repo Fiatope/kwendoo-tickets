@@ -1,0 +1,24 @@
+rw:
+  projects:
+    contributions:
+      edit:
+        title: 'Uri gutera inkunga %{project_name}'
+        you_are_contributing_to: 'Uri gutera inkunga'
+        total: 'Igiteranyo: '
+        i_want_pay_fees: "Ndaza kwimenyera ayo bankata"
+        payment:
+          title: 'Mukanya katarambiranye muraza kubasha guhitamo uburyo bwo kwishyura. turi gukora kugira ngo mubone aho mwishyurira.'
+        reward:
+          title: 'agafoto'
+        tooltip-text: "Murakoze gushyigikira  <strong>%{project_name}</strong>! Kugira ngo igikorwa cyo gutanga umusanzu kigende neza, turabasaba yuko mwakimenyera amafaranga banki yabakuraho yo kohereza.<br />"
+        payment-method:
+          fees: 'Fees:'
+          balanced-creditcard:
+            title: 'Ikarita yo kubitsa no kubikuza'
+          balanced-bankaccount:
+            title: 'konti ya banki'
+
+
+
+
+

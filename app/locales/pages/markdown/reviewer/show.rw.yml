@@ -1,0 +1,7 @@
+rw:
+  markdown:
+    previewer:
+      show:
+        title: 'Reba'
+        nothing_to_preview: 'Ntacyo kureba.'
+        close: 'kinga'

@@ -1,0 +1,20 @@
+- project = @notification.project
+|Hello #{project.user.display_name}.
+br
+br
+|You have requested for the payment of Agaseke #{project.name}.
+br
+|Here is its the recap.
+br
+|Amount collected: #{project.display_pledged}
+|Amount that will be paid to you : #{project.display_net_amount}
+|Applied fees : #{Configuration[:platform_fee_percentage% 0,%
+br
+|Your agaseke will be paid to your bank account within 5 working days. Should you not receive any payment after 8 days, please contact us.
+br
+br
+|We thank you for your trust.
+br
+|Talk about Kwendoo Rwana around you! Become a fan on Facebook and follow us on twweter
+br
+|The #{Configuration[:company_name]} team

@@ -1,0 +1,22 @@
+- content_for :title, t('.title')
+.admin
+  .row
+    section.content.large-12.columns
+      .filters
+        = simple_form_for @promotion, url: main_app.project_promotions_path(@project), html: { id: 'form-promotion' } do |form|
+          .row
+            .large-6.columns
+              = label_tag :title, t('.title')
+              = form.input :title, input_html: { class: 'input-medium' }, required: true, wrapper: false, label: false
+          .row
+            .large-6.columns
+              = label_tag :discount, t('.discount')
+              = form.input :discount, input_html: { class: 'input-medium' }, required: true, wrapper: false, label: false, as: 'integer'
+          .row
+            .large-6.columns
+              = label_tag :nbr_ticket, t('.nbr_ticket')
+              = form.input :nbr_ticket, input_html: { class: 'input-medium' }, wrapper: false, label: false, as: 'integer'
+          .row
+            .large-6.columns.text-right
+              br
+              = form.button :submit, t('.submit'), class: 'button'

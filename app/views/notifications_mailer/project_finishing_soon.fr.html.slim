@@ -1,0 +1,59 @@
+- project = @notification.project
+- confirmed_contributions = project.contributions.confirmed
+- canceled_contributions = project.contributions.canceled
+
+| Chèr(e),#{project.user.display_name},
+br
+br
+| Nous vous remercions une fois de plus de votre confiance à #{Configuration[:company_name]}.
+br
+br
+| Votre agaseke "#{@notification.project.name}" se termine dans 5 jours. 
+br
+br
+| Il est temps de relancer ceux des participants qui n'ont pas encore effectué leur contribution.
+br
+br
+| En attendant voici un tableau récapitulatif de vos contributions: 
+br
+table width="500" border="1" cellpadding="10" cellspacing="0" style='font-size: 13px;'
+  thead
+    tr
+      th width="100" Contributeur
+      th width="100" Email
+      th width="100" Montant
+  tbody
+    - confirmed_contributions.each do |contribution|
+      tr
+        td= contribution.user.display_name
+        td= contribution.user.email
+        td= contribution.display_value
+
+br
+| Les tentatives de contribution suivantes n'ont pas abouti. Nous en avons informé les personnes et leur avons donné la raison de l'échec. Invitez les à ré-essayer pour celles qui ne l'ont pas fait.
+br
+br
+table width="500" border="1" cellpadding="10" cellspacing="0" style='font-size: 13px;'
+  thead
+    tr
+      th width="100" Contributeur
+      th width="100" Email
+      th width="100" Montant
+  tbody
+    - canceled_contributions.each do |contribution|
+      tr
+        td= contribution.user.display_name
+        td= contribution.user.email
+        td= contribution.display_value
+
+br
+| N'hésitez pas à rallonger la durée de votre agaseke
+br
+| Nous vous sommes à votre disposition.
+br
+br
+| L' équipe #{Configuration[:company_name]}
+
+
+
+

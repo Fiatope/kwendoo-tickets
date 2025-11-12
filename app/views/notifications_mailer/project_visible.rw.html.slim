@@ -1,0 +1,42 @@
+- project = @notification.project
+|Bwana/Madam,#{project.user.display_name}.
+br
+br
+|Turagushima mu ikizere wagiriye #{Configuration[:company_name]}.
+br
+br
+|Agaseke #{@notification.project.name} ubu irikubarizwa kurubuga rwa www.kwendoo.rw. Ushobora gutangira koherereza iyi linki kubantu bagutera inkunga 
+= link_to(project.name, project_url(project))
+br
+br
+Hano hari imfashanyigisho zagufasha kugera ku ntego zawe:
+br
+
+    Strong Sobanura neza impamvu
+    br
+    | Ni ngombwa gusobanurira abashobora kugukusanyiriza impamvu nyamukuru y'agaseke kawe.
+    br
+    br
+    strong Garagaza uko uzakoresha amafaranga wakusanyije mu gaseke kawe
+    br
+    | kwerekana uburyo uzakoresha amafaranga wakusanyije ni ngombwa cyane.
+    br
+    br
+    strong Ibutsa abashobora kugukusanyiriza amafaranga
+    br
+    | Koherereza ubutumwa bwibutsa abantu ukeka ko bagukusanyiriza byongera amahirwe yo kugera ku ntego y'amafaranga ukusanya. 
+    br
+    br
+    strong Sakaza unasangize ku mbuga nkoranyamaga agaseke kawe
+    br
+    | Imbuga rusange ziri ziri kuri paji yawe y'agaseke nigufasha kuba agaseke kawe kasangizwa kuri cyangwa kagaragara kur Facebook na twitter.
+    br
+    br
+    strong Shyira imbaraga cyane uko paji yagaseke kawe igaragara
+    br
+    | Shyira ifoto kuri paje y'agaseke kawe kandi ishimishije, yakurura abantu cyangwa amashusho ateye ubwuzu..
+    br
+    br
+Ahasigaye nahawe!     
+br
+|Ubuyobozi bwa #{Configuration[:company_name]}

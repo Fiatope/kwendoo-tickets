@@ -1,0 +1,23 @@
+|Chèr(e) #{@contribution.user.display_name}!
+br
+br
+|Ce mail confirme le paiement de votre billet pour l'évenement #{link_to(@contribution.project.name, project_url(@contribution.project))}. Veuillez garder cet email comme reçu de votre paiement Mobile Money.
+br
+br
+- if @contribution.project.currency.upcase == 'FCFA'
+	|Montant du paiement : #{@contribution.value} FCFA.
+- elsif @contribution.project.currency.upcase == 'EUR'
+	|Montant du paiement : #{@contribution.value} EUR.
+br
+|paiement effectuée le : #{l @contribution.created_at.to_date, format: :long}
+br
+br
+|Référence du paiement : #{@contribution.key}
+br
+br
+|Pour toute question, écrivez nous #{mail_to Configuration[:email_contact]} ou accédez à nos #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Bien Cordialement,
+br
+|L'équipe Kwendoo Tickets

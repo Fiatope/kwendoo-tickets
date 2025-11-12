@@ -1,0 +1,10 @@
+rw:
+  shared:
+    payments:
+      wecashup:
+        wecash: "Umutekano w'amafaranga yanyu kuri telefoni urinzwe na Wecashup."
+        revenir: 'Subira ku gaseke'
+      mastercard:
+        pay_cta: "Ishyura ukoresheje VISA/Mastercard"
+        pay_cta_info_html: '<small><i class="fa fa-lock"></i> Ukimara gukanda  <strong>Pay</strong> Urerekezwa aho wakwishyurira hatekanye kuri serivisi ya Mastercard </small>'
+

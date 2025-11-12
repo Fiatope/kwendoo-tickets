@@ -1,0 +1,22 @@
+table
+  thead
+    tr
+      th= t('projects.promotions.index.title')
+      th= t('projects.promotions.index.code')
+      th= t('projects.promotions.index.discount')
+      th= t('projects.promotions.index.nbr_ticket')
+      th
+      th
+  tbody
+    - @promotions.each do |promotion|
+      tr id=promotion.id
+        td title=promotion.title
+          = promotion.title
+        td
+          = promotion.code
+        td
+          = "#{promotion.discount}%"
+        td
+          = promotion.nbr_ticket
+        td
+          = link_to t('projects.promotions.modify'), main_app.edit_project_promotion_path(promotion.project, promotion), class: 'button tiny'

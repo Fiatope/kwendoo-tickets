@@ -1,0 +1,9 @@
+en:
+  projects:
+    success:
+      titles:
+        site: 'Event successfully created!'
+        header: 'Event successfully created!'
+      text1: "congratulations for this step! your Event is online. You will receive an email with tips for a successful Event creation. if you wanted to make it public, send us a request.<br /><br />From your mailbox, send the following link to your clients:"  
+      text2: "<br /><br /> We invite you to complete the customization of your Event so as to make it user-friendly for your contributors."
+      continue: 'Access the Event'

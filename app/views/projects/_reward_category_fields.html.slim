@@ -1,0 +1,54 @@
+.nested-fields[style="background-color:#f2f2f2;padding:2rem;margin-bottom:1rem;-webkit-box-shadow: 0px 2px 2px 0px rgba(119,119,119,0.3);-moz-box-shadow: 0px 2px 2px 0px rgba(119,119,119,0.3);box-shadow: 0px 2px 2px 0px rgba(119,119,119,0.3);"]
+  .row
+    .small-12.columns
+      = f.input :name
+    .small-1.columns
+      = link_to_remove_association "X", f, class: "delete"
+  .row
+    br
+    h4 = t('projects.new.tickets_available')
+    = f.simple_fields_for :rewards do |ff|
+      = render 'reward_fields', f: ff
+    div
+      = link_to_add_association t('projects.new.add_a_ticket'), f, :rewards, style: "display:block;padding:1rem;text-align:center;border:1px solid silver;width:100%;margin:1rem 0;border-radius:3px;"
+
+
+/   .row
+/     .col-10.mx-auto
+/       #faqExample.accordion
+/         .card
+/           #headingOne.card-header.p-2
+/             h5.mb-0
+/               button.btn.btn-link aria-controls="collapseOne" aria-expanded="true" data-target="#collapseOne" data-toggle="collapse" type="button" 
+/                 = f.input :name
+/                 /| Q: How does this work?
+/           #collapseOne.collapse.show aria-labelledby="headingOne" data-parent="#faqExample" 
+/             .card-body
+/               b Answer:
+/               | It works using the Bootstrap 4 collapse component with cards to make a vertical accordion that expands and collapses as questions are toggled.
+/         .card
+/           #headingTwo.card-header.p-2
+/             h5.mb-0
+/               button.btn.btn-link.collapsed aria-controls="collapseTwo" aria-expanded="false" data-target="#collapseTwo" data-toggle="collapse" type="button" 
+/                 | Q: What is Bootstrap 4?
+/           #collapseTwo.collapse aria-labelledby="headingTwo" data-parent="#faqExample" 
+/             .card-body
+/               | Bootstrap is the most popular CSS framework in the world. The latest version released in 2018 is Bootstrap 4. Bootstrap can be used to quickly build responsive websites.
+/         .card
+/           #headingThree.card-header.p-2
+/             h5.mb-0
+/               button.btn.btn-link.collapsed aria-controls="collapseThree" aria-expanded="false" data-target="#collapseThree" data-toggle="collapse" type="button" 
+/                 | Q. What is another question?
+/           #collapseThree.collapse aria-labelledby="headingThree" data-parent="#faqExample" 
+/             .card-body
+/               | The answer to the question can go here.
+/         .card
+/           #headingThree.card-header.p-2
+/             h5.mb-0
+/               button.btn.btn-link.collapsed aria-controls="collapseThree" aria-expanded="false" data-target="#collapseThree" data-toggle="collapse" type="button" 
+/                 | Q. What is the next question?
+/           #collapseThree.collapse aria-labelledby="headingThree" data-parent="#faqExample" 
+/             .card-body
+/               | The answer to this question can go here. This FAQ example can contain all the Q/A that is needed.
+/   /! /row
+/ /! container

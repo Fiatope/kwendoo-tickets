@@ -1,0 +1,49 @@
+fr:
+  channels:
+    admin:
+      dashboard:
+        index:
+          title: 'Dashboard'
+          menu: 'Dashboard'
+          total_projects:
+            title: 'Total des projets'
+            hint: 'Nombre de projets sur la plate-forme'
+          total_subscribers:
+            title: 'Total des Abonnés'
+      management:
+        title: ""
+        total: 'Total'
+      filter:
+        title: 'Filter'
+        pg_search: 'Chercher'
+        submit: 'Filtre'
+        with_state: 'Par état'
+        order_table: 'Order table'
+        user_name_contains: 'User name'
+        between_created_at: 'créer entre'
+      followers:
+        title: 'Followers'
+        download: 'Télécharger le rapport de suivi'
+        menu: 'Followers'
+      profile:
+        menu: 'Edit channel informations'
+      projects:
+        index:
+          menu: 'Projects'
+          email: 'email'
+          name: 'Name'
+          category: 'Category'
+          user_id: 'User ID'
+          goal: 'Goal'
+          pledged: 'Pledged'
+          total_contributions: 'Contributions'
+          recommended: 'Conseillé?'
+          online_date: 'Date en ligne'
+          expires_at: 'Expiré au'
+          state: 'State'
+          launch: 'Launch!'
+          reject: 'Rejeter!'
+          send_to_draft: 'Send to DRAFT!'
+          order_asc: 'Goal asc'
+          order_desc: 'Goal desc'
+          order_created_at: 'Submission date'

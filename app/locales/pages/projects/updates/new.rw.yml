@@ -1,0 +1,10 @@
+rw:
+  projects:
+    updates:
+      new:
+        send: "ohereza ibishya"
+        comment: "interuro nshya"
+        exclusive: "Biragaragarira abaterankunga gusa only?"
+        title: "Umutwe w'ibishya"
+        warning: "Ibyahindutse bizajya bihita byoherezwa kuri email ya baterankunga. Turagusabye usuzume neza witonze mbere y uko ubyohereza."
+        created: 'Neza cyane ibyyo wahinduye byoherjwe neza'

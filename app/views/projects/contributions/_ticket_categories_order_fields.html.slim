@@ -1,0 +1,39 @@
+.nested-fields
+  .row
+    .large-2.small-3.columns
+      = f.input :count, as: :integer, required: true, label: false, autocomplete: 'off', min: 1, max: 50, class: 'prefix', input_html: { class: 'prefix', style: "line-height:1.2;font-size:1.2em;color:#777;", value: 0 }
+    .large-6.small-5.columns
+      div.with-prefix.with-postfix[style="display:block;line-height:1.25;padding:1.3rem 0;font-size:1em;color:#777;"]
+        - if f.object.reward.maximum_contributions.nil?
+          div[class="reward-container" data-remaining="99999999" style="margin-top:-0.9rem;margin-bottom:-0.25rem;"]
+            = f.object.reward.title + " - (#{f.object.reward.minimum_value} #{@project.currency})"
+            - if f.object.reward.couple?
+              span[style="color:#c13511;"] = t('projects.rewards.tickets.new.couple')
+            span[style="color:#c13511;"] = "#{t('projects.rewards.tickets.new.on_promotion') if f.object.reward.promote?}"
+          span.hidden-description.active[style="display:block;line-height:1.25;padding:0.5rem 0;font-size:1em;color:#777;cursor:pointer;font-size:0.9em;text-align:justify;"]
+            = f.object.reward.description
+        - elsif f.object.reward.remaining <= 0
+          div[class="reward-container" data-remaining="0" style="margin-top:-0.9rem;margin-bottom:-0.25rem;"]
+            = f.object.reward.title + " - (#{f.object.reward.minimum_value} #{@project.currency})"
+            - if f.object.reward.couple?
+              span[style="color:#c13511;"] = t('projects.rewards.tickets.new.couple')
+            span[style="color:#c13511;"] = "#{t('projects.rewards.tickets.new.on_promotion') if f.object.reward.promote?}"
+          span.hidden-description.active[style="display:block;line-height:1.25;padding:0.5rem 0;font-size:1em;color:#777;cursor:pointer;font-size:0.9em;text-align:justify;"]
+            = f.object.reward.description
+          / small = "Sold Out"
+        - else
+          div[class="reward-container" data-remaining=f.object.reward.remaining style="margin-top:-0.9rem;margin-bottom:-0.25rem;"]
+            = f.object.reward.title + " - (#{f.object.reward.minimum_value} #{@project.currency})"
+            - if f.object.reward.couple?
+              span[style="color:#c13511;"] = t('projects.rewards.tickets.new.couple')
+            span[style="color:#c13511;"] = "#{t('projects.rewards.tickets.new.on_promotion') if f.object.reward.promote?}"
+          span.hidden-description.active[style="display:block;line-height:1.25;padding:0.5rem 0;font-size:1em;color:#777;cursor:pointer;font-size:0.9em;text-align:justify;"]
+            = f.object.reward.description
+          / small = f.object.reward.remaining.to_s + " tickets remaining at this price"
+      = f.association :reward, as: :hidden
+    .large-3.small-4.columns
+      div.ticket_price[style="display:none"]
+        = f.object.reward.minimum_value
+      div.price-container[style="display:block;line-height:1.25;padding:1rem 0;font-size:1em;color:#777;"]
+        = "0"
+  /= link_to_remove_association :ticket_categories_orders, f

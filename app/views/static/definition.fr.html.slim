@@ -1,0 +1,42 @@
+= content_for :title, t('.title')
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+
+
+.examples-page
+  .row
+    .text
+     h2 Le principe
+     h4 L' agaseke en ligne est un système qui permet à plusieurs personnes de cotiser de l'argent sur Internet en utilisant sa carte bleue, sans de déplacer et dans un but déterminé.
+     br
+
+     h2 La possibilité de cotiser de n'importe où?
+     h4 Le premier avantage de l'agasekee en ligne est le fait de pouvoir cotiser de n'importe où. 
+     h4 Pas besoin de faire le tour des amis pour récupérer leur contribution
+     h4 Pas besoin d'avoir à récuperer les coordonnées bancaires de celui qui rassemble les fonds. Beaucoup de personnes n'aiment d'ailleurs pas rendre publique leurs coordonnées bancaires
+     h4 Pas besoin de faire de virement    
+     br
+
+    h2 La fin des avances
+    h4 Avec l'agaseke en ligne on évite de se fâcher parcequ'on a avancer les contributions des uns et des autres et que ces derniers traînent à rembourser
+    h4 Cela peut d'ailleurs être très gênant pour certains d'avoir à relancer pour récupérer leur dû
+    br
+
+    h2 La transparence absolue
+    h4 Il y a toujours la possibilité d'afficher sur la page web de l'agaseke le montant total collecté et le montant de la contribution de chacun, notamment dans le cas de collecte d'associations ou de communautés larges
+    h4 Lors d'une cotisation classique(envoi de chèque, par espèce, par virement...), il est difficile de détecter une manipulation aboutissant à une collecte dont le montant déclaré est inférieur au montant réellement cotisé.
+    br
+  
+    h2 L'instantanéïté
+    h4 Un dernier avantage de l'agaseke en ligne est que en quelques heures, on peut rassembler des fonds et agir en urgence si besoin  
+    br

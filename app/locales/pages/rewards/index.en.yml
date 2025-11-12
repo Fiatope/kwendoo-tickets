@@ -1,0 +1,12 @@
+en:
+  rewards:
+    index:
+      sold_out: 'Sorry, this ticket category is SOLD OUT!'
+      add: 'Add a ticket'
+      estimated_deliver: "Est. delivery: %{prevision}"
+      contributions_to_confirm:
+        one:  "1 contribution in time to confirm."
+        other: "%{count} contributions in time to confirm."
+      reward_title: " %{minimum}"
+      contact: 'Contact'
+      reward_deliver_time: ""

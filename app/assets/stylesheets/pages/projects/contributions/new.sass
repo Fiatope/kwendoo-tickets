@@ -1,0 +1,281 @@
+.new-contribution-page
+  padding-bottom: 40px
+  header.hero
+    min-height: emCalc(260px)
+  .share-white
+    .button
+      width: 100%
+      background: white
+      color: $primary-color
+      border-bottom-color: darken($border-color, 10%)
+      &:after
+        border-left-color: darken($border-color, 10%)
+      &.embed:after
+        @extend .icon-et-code
+
+  .panel-tickets-head
+    margin-bottom: 1.25em !important
+  .panel
+    padding: 0.55em 1.25em
+    border-left: 0.25em solid #ef4423
+    .panel-heading
+      cursor: pointer
+      background-color: transparent
+      border: none
+      h5
+        margin-bottom: 0
+    .panel-body
+      .contribution_form_ticket_categories_orders_count
+        margin-left: 10px
+    .hidden-description.active
+      width: 100px
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+  .panel
+    .panel-collapse
+      overflow-y: hidden
+      .reward-container
+        span
+          font-size: 0.9rem
+          line-height: 0.8rem
+          margin-left: 0.5rem
+          // vertical-align: middle
+
+  .name
+    text-align: center
+  .subtitle
+    text-align: center
+    margin-top: emCalc(35px)
+    margin-bottom: emCalc(35px)
+    h4
+      font-weight: 500
+  span.prefix, span.postfix
+    font-size: 200%
+    height: 100%
+    line-height: 170%
+    text-shadow: none
+
+  span.prefix
+    color: $primary-color
+  span.postfix
+    color: $secondary-color
+
+  #contribution_form_value
+    color: $secondary-color
+    font-weight: normal
+    font-size: 200%
+    height: 100%
+    height: +emCalc(28px)
+    padding: 0
+    text-align: center
+    margin-bottom: 0
+  .value-wrapper
+    margin-top: emCalc(35px)
+  .minimum-value
+    margin-top: +emCalc(10px)
+
+  .reward-option
+    border: 1px solid $border-color
+    +radius($input-radius)
+    background: white
+    color: $secondary-color
+    &.row
+      min-height: emCalc(85px)
+      margin-bottom: emCalc(20px)
+      margin-right: emCalc(0)
+      margin-left: 0
+    &.selected
+      border-color: $primary-color
+    .minimum-value
+      padding-top: emCalc(15px)
+      text-transform: uppercase
+      font-size: 140%
+    .title
+      font-weight: bold
+      font-size: 120%
+      padding-top: emCalc(15px)
+    .description
+      padding-bottom: emCalc(15px)
+      padding-top: emCalc(10px)
+    input[type="radio"]
+      position: absolute
+      display: block
+      top: 50%
+      left: 9%
+      margin-top: emCalc(-16px)
+
+  .contribution_form_anonymous
+    margin-bottom: emCalc(20px)
+    input
+      margin-bottom: emCalc(5px)
+
+  .radio
+    position: initial
+    display: block
+
+  .button
+    width: 100%
+
+  label
+    font-size: 0.9rem
+
+  label:last-of-type
+    margin-bottom: 2rem
+
+  input[type="checkbox"]
+    margin: 7px 10px 10px 10px
+    vertical-align: middle
+
+#contribution_form_currency
+  margin-bottom: 0
+
+/*Faq
+
+.faq-search-wrap
+  padding: 50px 0 60px
+
+  .form-group
+    .form-control, .dd-handle
+      border-top-right-radius: .25rem
+      border-bottom-right-radius: .25rem
+
+    .input-group-append
+      position: absolute
+      right: 0
+      top: 0
+      bottom: 0
+      z-index: 10
+      pointer-events: none
+
+      .input-group-text
+        background: transparent
+        border: none
+
+        .feather-icon > svg
+          height: 18px
+          width: 18px
+
+.bg-teal-light-3
+  background-color: #7fcdc1 !important
+
+.hk-row
+  display: -ms-flexbox
+  display: flex
+  -ms-flex-wrap: wrap
+  flex-wrap: wrap
+  margin-right: -10px
+  margin-left: -10px
+
+@media (min-width: 576px)
+  .mt-sm-60
+    margin-top: 60px !important
+
+.mt-30
+  margin-top: 30px !important
+
+.list-group-item.active
+  background-color: #00acf0
+  border-color: #00acf0
+
+.accordion .card .card-header
+  &.activestate
+    border-width: 1px
+
+  padding: 0
+  border-width: 0
+
+.card.card-lg
+  .card-header, .card-footer
+    padding: .9rem 1.5rem
+
+.accordion > .card .card-header
+  margin-bottom: -1px
+
+.card .card-header
+  background: transparent
+  border: none
+
+.accordion
+  &.accordion-type-2 .card .card-header > a.collapsed
+    color: #324148
+
+  .card:first-of-type .card-header:first-child > a
+    border-top-left-radius: calc(.25rem - 1px)
+    border-top-right-radius: calc(.25rem - 1px)
+
+  &.accordion-type-2 .card .card-header > a
+    background: transparent
+    color: #00acf0
+    padding-left: 50px
+
+  .card .card-header > a
+    &.collapsed
+      color: #324148
+      background: transparent
+
+    background: #00acf0
+    color: #fff
+    font-weight: 500
+    padding: .75rem 1.25rem
+    display: block
+    width: 100%
+    text-align: left
+    position: relative
+    -webkit-transition: all 0.2s ease-in-out
+    -moz-transition: all 0.2s ease-in-out
+    transition: all 0.2s ease-in-out
+
+a
+  text-decoration: none
+  color: #00acf0
+  -webkit-transition: color 0.2s ease
+  -moz-transition: color 0.2s ease
+  transition: color 0.2s ease
+
+.badge
+  &.badge-pill
+    border-radius: 50px
+
+  &.badge-light
+    background: #eaecec
+    color: #324148
+
+  font-weight: 500
+  border-radius: 4px
+  padding: 5px 7px
+  font-size: 72%
+  letter-spacing: 0.3px
+  vertical-align: middle
+  display: inline-block
+  text-align: center
+  text-transform: capitalize
+
+.ml-15
+  margin-left: 15px !important
+
+.accordion.accordion-type-2 .card .card-header > a
+  &.collapsed:after
+    content: "\f158"
+
+  &::after
+    display: inline-block
+    font: normal normal normal 14px/1 'Ionicons'
+    speak: none
+    text-transform: none
+    line-height: 1
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    text-rendering: auto
+    position: absolute
+    content: "\f176"
+    font-size: 21px
+    top: 15px
+    left: 20px
+
+.mr-15
+  margin-right: 15px !important
+
+input[type="text"].alert
+  border: 1px solid #ef4423

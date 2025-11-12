@@ -1,0 +1,200 @@
+<%= content_for :title, t('.title') %>
+
+
+<div class="background-full text-center">
+	<div class="filter-black-title flex-container">
+		<div class="background-title flex-item">
+			<!-- <h2>Comment ça marche ?</h2> -->
+		</div>
+	</div>
+</div>
+
+<div class="discover white text-center">
+	
+	<div class="howitworks">
+		<div class="discover-title">
+			Comment ça marche ?
+		</div>
+		<div class="container discover-item">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 yellowyellow">
+					<div class="discover-icon">
+						<%= image_tag	"circle.svg" %>
+					</div>
+					<div class="discover-title-item">	
+						1. Créez		
+					</div>
+					<div class="discover-description-item">
+						Créez gratuitement et facilement votre évènement.
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 redred">
+					<div class="discover-icon">
+						<%= image_tag	"up-arrow.svg" %>
+					</div>
+					<div class="discover-title-item">
+						2. Partagez			
+					</div>
+					<div class="discover-description-item">		
+						Partagez l'évènement avec vos amis, vos proches etc. 
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 greengreen">
+					<div class="discover-icon">
+						<%= image_tag	"money.svg" %>
+					</div>
+					<div class="discover-title-item">
+						3. Collectez 
+					</div>
+					<div class="discover-description-item">
+						Collectez l’argent des participants par carte bancaire ou mobile money. 
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-3 purplepurple">
+					<div class="discover-icon">
+						<%= image_tag	"present.svg" %>
+					</div>
+					<div class="discover-title-item">
+						4. Dépensez 
+					</div>
+					<div class="discover-description-item">
+						Dépensez ou transfèrez les fonds partout dans le monde. 
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="see-more">
+			<%= link_to link_to t(".call_to_action", default: "Commencer"), main_app.new_project_path, class: 'btn-medium-black-border' %>
+			<%= link_to 'Voir des exemples', main_app.examples_path, class: 'btn-medium-black-border' %>
+		</div>
+	</div>
+
+	<div class="cost">
+		<div class="discover-title">
+			Tarifs
+		</div>
+		<div class="container">
+			<div class="row cost">
+				<p>La commission Kwendoo Tickets est de <span>3,4% + 0,2€/billet</span> du montant collecté</p>
+				<p>Cette commission est prélevée à la fin de l'évènement au moment où l'organisateur fait sa demande de paiement.</p>
+			</div>
+		</div>
+	</div>
+
+<!-- 	<div class="who">
+		<div class="discover-title">
+			Qui peut créer une agaseke ?
+		</div>
+		<div class="container discover-item">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="discover-title-item">
+						Association
+					</div>
+				</div>
+				<div class="col-sm-6">	
+					<div class="discover-title-item">
+						Particulier
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<!-- <div class="occasion">
+		<div class="discover-title">
+			Exemples d'occasions
+		</div>
+		<div class="container discover-item">
+			<div class="row">
+				<div class="col-sm-2 purplepurple">
+					<div class="why-icon">
+						<%= image_tag	"ballon.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Humanitaire
+					</div>
+				</div>
+				<div class="col-sm-2 yellowyellow">
+					<div class="why-icon">
+						<%= image_tag	"cake.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Anniversaire
+					</div>
+				</div>
+				<div class="col-sm-2 redred">
+					<div class="why-icon">
+						<%= image_tag	"summer.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Voyage
+					</div>
+				</div>
+				<div class="col-sm-2 greengreen">
+					<div class="why-icon">
+						<%= image_tag	"associatif.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Associatif
+					</div>
+				</div>
+				<div class="col-sm-2 purplepurple">
+					<div class="why-icon">
+						<%= image_tag	"mariage.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Mariage
+					</div>
+				</div>
+				<div class="col-sm-2 yellowyellow">
+					<div class="why-icon">
+						<%= image_tag	"fam.svg" %>
+					</div>
+					<div class="discover-title-item">
+						Familiale
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="see-more">
+			<%= link_to 'Voir des exemples', main_app.examples_path, class: 'btn-medium-black-border' %>
+		</div>
+	</div> -->
+
+	<div class="success">
+		<div class="container">
+			<div class="discover-title">
+				Réussir son évènement
+			</div>
+			<div class="discover-title-item-black">
+				<p>Nous vous accompagnons dans la réussite de votre évènement. </p>
+				<p>Retrouvez nos <span>conseils</span> et <span>astuces </span> dans notre guide</p>
+			</div>
+
+			<div class="see-more">
+				<%= link_to 'Acceder au guide', main_app.successful_path, class: 'btn-medium-black-border' %>
+				<%= link_to 'Acceder au FAQ', main_app.faq_path, class: 'btn-medium-black-border' %>
+			</div>
+		</div>
+	</div>
+
+	<div class="start">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<%= link_to main_app.new_project_path do %>
+					<div class="discover-title-red">
+						LANCEZ-VOUS
+					</div>
+					<div class="discover-icon">
+						<%= image_tag	"rocket.svg" %>
+
+					</div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

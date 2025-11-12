@@ -1,0 +1,176 @@
+- content_for :title, @project.name
+= render partial: 'layouts/disqus_count'
+= render 'projects/meta_tags'
+.project-page
+  = render 'projects/header'
+  /= render 'projects/status_bar'
+
+
+  .row.padding-20
+    .col-md-5
+      = render 'projects/share'
+
+    .col-md-7
+      .row
+        - if user_signed_in? || current_user.try(:admin?)
+          /.col-md-5
+            = render 'invitations/form_email_contribute', :@invitation => Invitation.new(:email => current_user.email, :email => current_user.email, :subject => @project.name, :link => project_url(@project), :message => @project.short_url)
+          .col-md-7
+            - if @project.online? && !@project.expired?
+              = render 'projects/noscript'
+
+              - if @project.is_prebooked?
+                = link_to t('.contribute_prebooked'), new_project_contribution_url(@project), class: "btn btn-block btn-medium-green contribute"
+              - else
+                = link_to t('.contribute'), new_project_contribution_url(@project), class: "btn btn-block btn-medium-green contribute"
+
+              /- if current_user && (current_user.organization? || current_user.channel? || current_user.admin?)
+              /= link_to t('.create_match'), new_project_match_url(@project), class: "button with-icon create-match hide-for-small"
+            - else
+              .alert-box.secondary.status-description
+                = display_status(@project)
+        - else
+          .col-md-12
+            - if @project.online? && !@project.expired?
+              = render 'projects/noscript'
+
+              = link_to t('.contribute'), new_project_contribution_url(@project), class: "btn btn-block btn-medium-green contribute"
+
+              /- if current_user && (current_user.organization? || current_user.channel? || current_user.admin?)
+              /= link_to t('.create_match'), new_project_match_url(@project), class: "button with-icon create-match hide-for-small"
+            - else
+              .alert-box.secondary.status-description
+                = display_status(@project)
+
+  .row.padding-20
+    .status.col-md-12.text-center.padding-20.prog
+      /= @project.progress_bar
+
+      = @project.event_date
+      .pledged.hide-for-medium
+        | Organisateur:
+        |&nbsp;
+        = @project.headline
+      .pledged.hide-for-medium
+        /= @project.display_pledged if policy(@project).update?
+        = @project.currency
+
+        /small = t('.so_far').html_safe
+        /= @project.display_goal
+      .pledged.show-for-medium
+        = @project.display_pledged if policy(@project).update?
+
+  .row.page-main-content
+    .large-8.medium-8.columns.no-padding-for-small
+
+    .large-8.medium-8.columns.main
+      = render 'projects/draft_warning' if @project.draft?
+      = render 'projects/rejected_warning' if @project.rejected?
+      /= render 'projects/matches'
+      /= link_to t('.edit'), edit_project_path(@project), class: 'btn btn-block btn-medium-green-border' if policy(@project).update?
+      = render 'projects/tabs'
+
+      section.content
+        - if content_for? :page_content
+          = yield :page_content
+        - else
+          - unless content_for?(:page_invitations) || content_for?(:page_promotions)
+            - if @bg_sm
+              .video-container
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/tL3viT9kRh8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            = render template: 'projects/about', locals: { partial: true }
+
+        - if content_for? :page_invitations
+          h4 = t('projects.show.invitations')
+          section
+            = yield :page_invitations
+        - elsif content_for? :page_promotions
+          h4 = t('projects.show.promotions')
+          - if policy(@project).update?
+            p
+              i.fa.fa-plus[aria-hidden="true"]
+              |  
+              = link_to t('projects.promotions.add'), new_project_promotion_path(@project)
+          section
+            = yield :page_promotions
+        - else
+          - if !@tickets.nil?
+            - if !@tickets.empty?
+              h4 = "Billets"
+              section
+                = render 'projects/ticket'
+      - if @project.online? && !@project.expired?
+        / h4 = "Catégories de billets"
+        section.rewards[data-rewards-path=project_rewards_path(@project) data-can-update="#{policy(@project).update?}"]
+      - if @project.online? && !@project.expired?
+        = render 'projects/share'
+      /= render 'projects/author' unless browser.device.mobile?
+
+    .large-4.medium-4.columns
+      .subtitle
+        i.fa.fa-clock-o[aria-hidden="true"]
+        = remaining_days(@project)
+        br
+        - if policy(@project).update?
+          i.fa.fa-users[aria-hidden="true"]
+          = link_to pluralize(Ticket.list_of_tickets(@project).length, t('words.neighbor_singular'), t('words.neighbor_plural')), project_contributions_path(@project)
+
+      hr
+      .call-to-action
+        - if @project.online? && !@project.expired?
+          = render 'projects/noscript'
+
+          - if @project.is_prebooked?
+            = link_to t('.contribute_prebooked'), new_project_contribution_url(@project), class: "btn btn-block btn-medium-green contribute"
+          - else
+            = link_to t('.contribute'), new_project_contribution_url(@project), class: "btn btn-block btn-medium-green contribute"
+
+        /- else
+          .alert-box.secondary.status-description
+            = display_status(@project)
+
+        = link_to t('.edit'), edit_project_path(@project), class: 'btn btn-block btn-medium-green-border contribute' if policy(@project).update?
+        = link_to t('.invitations'), invitations_project_path(@project), class: 'btn btn-block btn-medium-green-border contribute' if policy(@project).update?
+        = link_to ('Gestion des promotions'), promotions_project_path(@project), class: 'btn btn-block btn-medium-green-border contribute' if policy(@project).update?
+
+        /= render 'projects/matches_aside' unless browser.device.mobile?
+
+
+        - if (@project.total_contributions >= 2)
+
+          - if !(@project.state == 'request_funds') && !(@project.state == 'draft') && !(@project.state == 'fraud_suspiscion')
+
+            = link_to t('.pay'), pay_project_path(@project), class: "button" if policy(@project).update?
+
+
+      - if @project.last_channel
+        section.channel
+          = link_to root_url(subdomain: @project.last_channel.permalink, protocol: :http) do
+            .row
+              .large-12.columns.large-centered
+                h5 = t('.in_partnership_with')
+                = image_tag @project.last_channel.image.large.url
+
+      - if @project.total_contributions_without_matches > 0
+        section.custom.neighbors-behind-this.hide-for-medium-down
+          /.title = t('.attendee_preview')
+          /.list
+          /  - for contribution in @project.contributions.available_to_display.includes(:user).where(matching_id: nil).order("RANDOM()").limit(15)
+          /    - if contribution.anonymous
+          /      = link_to image_tag('anonymous-user.png'), '#', title: t('.anonymous_contribution'), class: 'has-tip', data: { tooltip: '' }
+          /    - else
+          /      = link_to image_tag(contribution.user.display_image), user_path(contribution.user), title: contribution.user.display_name, class: 'has-tip', data: { tooltip: '' }
+          /.more
+          /  = link_to pluralize(@project.total_contributions, t('words.neighbor_singular'), t('words.neighbor_plural')), project_contributions_path(@project)
+
+
+      /- if policy(@project).update?
+      /  section.custom.total_contributed
+      /    .large-12.columns.large-centered
+      /      .title = t('.total_contributed')
+      /      h5.text-center = @project.display_pledged
+
+      /section.rewards[data-rewards-path=project_rewards_path(@project) data-can-update="#{policy(@project).update?}"]
+
+      = render 'projects/author'
+      /= render 'projects/matches_aside' unless browser.device.mobile?

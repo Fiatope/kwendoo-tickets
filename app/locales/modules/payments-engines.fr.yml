@@ -1,0 +1,10 @@
+fr:
+  payments:
+    common:
+      terms: "En achetant un billet, j'accepte les %{link}."
+      terms-link: "Condiitons d'Utilisation"
+      confirm: 'Confirmer le paiement'
+      proccessing: 'En Cours de traitement...'
+      error:
+        title: "Un problème est survenu."
+        name: 'Recharger la page et Ré-essayer.'

@@ -1,0 +1,11 @@
+fr:
+  projects:
+    project:
+      get_involved: 'Impliquez-vous!'
+      completed: 'Terminé'
+      viewpro: "Voir l'évènement"
+      soon: 'Bientôt'
+      share:
+        twitter-text: "Jettez un coup d'oeil à %{name} #%{hash_tag} auquel j'assisterai"
+        twitter: 'Tweetez'
+        facebook: 'Partagez'

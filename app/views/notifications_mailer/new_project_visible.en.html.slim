@@ -1,0 +1,18 @@
+- project = @notification.project
+- user = @notification.user
+|Dear, #{user.display_name}.
+br
+br
+| #{project.user.display_name} Has just started a new agaseke on #{Configuration[:company_name]} And we wanted to inform you! Take a look at it..
+br
+br
+
+table border="0" cellpadding="3" cellspacing="0" width="220" align="center"
+  tr
+    td width="220" valign="top" style="text-align: center;"
+      = link_to project.name, project_url(project), style: 'text-decoration: none; color: #333; font-size: 16px; text-align: center;'
+
+br
+|Kindest regards,
+br
+| The Team #{Configuration[:company_name]} 

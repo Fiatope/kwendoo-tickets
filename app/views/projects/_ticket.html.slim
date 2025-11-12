@@ -1,0 +1,21 @@
+table
+  thead
+    tr
+      th= t('projects.rewards.tickets.index.title')
+      th= t('projects.rewards.tickets.index.minimum_value')
+      th= t('projects.rewards.tickets.index.count')
+      th= t('projects.rewards.tickets.index.total')
+      th
+  tbody
+    - @tickets.each do |ticket|
+      tr id=ticket.id
+        td title=ticket.title
+          = ticket.title
+        td
+          = ticket.minimum_value
+        td
+          = ticket.count
+        td
+          = ticket.minimum_value * ticket.count
+        td[style="color:#c13511;"]
+          = t('projects.rewards.tickets.index.on_promotion') if ticket.promote?

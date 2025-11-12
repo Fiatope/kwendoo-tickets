@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      reward: 'Ticket Category'
+    attributes:
+      reward:
+        title: 'Create a short, catchy title that summarizes the ticket price differences.'
+        description: "Describe your ticket price category in a way that it will attract clients."
+        maximum_contributions: "Max number of tickets (optional)"
+        minimum_value: "Ticket Price (in EUR)"
+        days_to_delivery: "Remaing days left for the event to take place"
+        soon: 'Few seat left'
+        promote: 'Promote ?'
+        couple: 'Couple ?'
+      reward_category:
+        name: 'Name of this category'

@@ -1,0 +1,54 @@
+= content_for :title, t('.title')
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+
+
+#about-page
+  .row
+    h3.page-headline-center
+      | Avec Kwendoo, nous offrons les moyens d'agir à plusieurs                                                    
+  .row
+     .page-headline
+
+  .mission
+    .row
+      = image_tag "Logo-Kwendoo-Small.png"
+      br
+      h4
+        a href='http://www.kwendoo.com' Kwendoo 
+        | est un service d' agaseke en ligne qui aspire à renforcer la capacité d’action des <strong> communautés</strong> éclatées et tirer partie de la force <strong>solidaire</strong> pour agir. 
+        | Les bénéfices de kwendoo sont entièrement utilisés au développement de 
+        a href='https://www.fiatope.com' Fiatope. 
+        |une plateforme de financement participatif de l'entrepreneuriat africain.
+
+
+  .row
+    .page-headline
+      h3 Les fondateurs
+      p
+      h4  
+       | Passionnés de nouvelles technologies et d'économie digitale, nous sommes animés du souci de trouver des solutions digitales pour recréer le lien social entre des personnes issues d'une même communauté (familiale, amicale, villageaoise, professionnelle..) et dissémninés aux quatres coins du monde.
+
+  .row
+    .page-headline
+      h3 Fiatope
+      p
+      = image_tag "Logo-fiatope.png"
+      br
+      h4
+       a href='https://www.fiatope.com' Fiatope 
+       | est une association française de loi 1901, gérée en mode start-up, qui a pour objectif de contribuer à l'émergence de l'Afrique par la mobilisation de sa diaspora et de toutes les forces volontaires des pays du Nord..
+       | Fiatope c'est aussi le nom de la plateforme de financement participatif de l'entrepreneuriat africain éditée par l'Association. 
+       | Enfin, 
+       a href='http://www.kwendoo.com' Kwendoo  
+       | est un service édité par Fiatope. 

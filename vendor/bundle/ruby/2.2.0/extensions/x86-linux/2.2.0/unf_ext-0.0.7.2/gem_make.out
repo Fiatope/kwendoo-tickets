@@ -1,0 +1,12 @@
+/usr/bin/ruby2.2 -r ./siteconf20190828-8144-9zpwby.rb extconf.rb
+checking for main() in -lstdc++... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20190828-8144-qhsp1e

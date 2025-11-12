@@ -1,0 +1,11 @@
+fr:
+  users:
+    edit:
+      tabs:
+        edit: "Profil"
+        my_campaigns: "Mes Campagnes"
+        ive_contributed: "j'ai contribué à"
+        credits: 'Crédits'
+        payments: 'Informations de Paiement'
+        settings: 'Propriétés'
+        my_network: 'mon réseau'

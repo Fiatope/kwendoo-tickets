@@ -1,0 +1,9 @@
+/usr/bin/ruby2.2 -r ./siteconf20190828-8144-t7xl91.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+make "DESTDIR=" install

@@ -1,0 +1,16 @@
+fr:
+  activerecord:
+    models:
+      reward: 'Reward'
+    attributes:
+      reward:
+        title: 'Nom de ce billet.'
+        description: "Description de ce billet."
+        maximum_contributions: "Nombre maximum de billets"
+        minimum_value: "Prix du Billet."
+        days_to_delivery: " "
+        soon: ' '
+        promote: 'En promotion ?'
+        couple: 'Couple ?'
+      reward_category:
+        name: 'Nom de cette catégorie'

@@ -1,0 +1,12 @@
+fr:
+  users:
+    contributions:
+      index:
+        heading: Vos contributions
+        table:
+          code_heading: Référence
+          project_heading: Projet
+          value_heading: Montant
+          payment_method_heading: Méthode de paiement
+          card_type_heading: Type de carte
+          created_at_heading: Payé le

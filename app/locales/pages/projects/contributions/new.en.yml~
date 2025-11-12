@@ -1,0 +1,9 @@
+en:
+  projects:
+    contributions:
+      new:
+        title: "Contribuez à cette campagne"
+        minimum_value: 'Contribuez pour un minimum 10€'
+        subtitle: "Sélectionnez votre montant ou votre reward."
+        contribute: "Contribuez à <strong>%{project_name}</strong>"
+        submit: 'Confirmer'

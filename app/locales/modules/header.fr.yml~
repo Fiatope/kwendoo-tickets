@@ -1,0 +1,28 @@
+fr:
+  layouts:
+    header:
+      start_campaign: 'Démarrer une campagne'
+      start_project: 'Créer un Projet'
+      start_cagnotte: 'créer une cagnotte'
+      discover: 'Cagnottes '
+      how_it_work: 'comment ça marche'
+      more: 'En savoir plus'
+      about: 'Apprendre'
+      blog: 'Blog'
+      sign-out: 'Sortir'
+      sign-up: 'Inscription'
+      sign-in: 'Connexion'
+      my_projects: 'Mes cagnottes'
+      my_contributions: 'Mes contributions'
+      my_profile: 'Mon profil' 
+      settings: 'Mes Préférences'
+      public_c: 'Cagnottes publiques'
+      Blog: 'Blog'
+      profile: 'profil'
+      my_projects: 'mes cagnottes'
+      contribution: 'Mes contributions'
+      credits: 'Mes credits'
+      bank_details: 'Coordonnées bancaires'
+      settings: 'Mes configurations'
+      sign_out: 'Se déconnecter'
+      

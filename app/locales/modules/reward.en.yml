@@ -1,0 +1,6 @@
+en:
+  reward:
+    dont_want: ""
+    limited: 'Limited'
+    sold_out: 'Sold out'
+    display_remaining: "%{remaining} of %{maximum} Available"

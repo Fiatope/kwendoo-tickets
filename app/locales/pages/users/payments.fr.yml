@@ -1,0 +1,6 @@
+fr:
+  users:
+    payments:
+      advanced:
+        title: "Autorisation avancée"
+      submit: 'Sauvegarder le RIB'

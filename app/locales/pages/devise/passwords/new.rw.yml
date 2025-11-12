@@ -1,0 +1,15 @@
+rw:
+  devise:
+    passwords:
+      new:
+        no_account_html: "Ntakibazo!"
+        titles:
+          site: 'Mwaba mwibagiwe ijambobanga?'
+          header: 'Mwaba mwibagiwe ijambobanga?'
+        links:
+          register: "Kwiyandikisha"
+        form:
+          labels:
+            email: 'Andika email yawe aha'
+          inputs:
+            submit: 'kohererezwa amabwiriza'

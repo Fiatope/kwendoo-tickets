@@ -1,0 +1,89 @@
+- @title = t('.titles.site')
+
+.background-full.text-center
+  .filter-black-title.flex-container
+	  .background-title.flex-item
+		  h2 = t('.titles.my_cagnotte')
+
+.new-project-page[class="category-#{@project.category.to_s.parameterize}"]
+
+  - unless true || browser.device.mobile? || browser.device.tablet?
+    ol.joyride-list[data-joyride]
+      li data-id="joyride-start" data-text=t('.joyride.next') data-options='tipLocation: right; tip_animation: fade;'
+        h5 = t('.joyride.start.title')
+        p = t('.joyride.start.description')
+
+      - joyride = [{id: 'project_category_id',            name: :category},
+                   {id: 'project_name',                   name: :name},
+                   {id: 'project_goal',                   name: :goal},
+                   {id: 'project_duration',               name: :duration},
+                   {id: 'project_headline',               name: :headline},
+                   {id: 'project_about',                  name: :about},
+                   {id: 'project_location',               name: :location},
+                   {id: 'project_organization_type',      name: :organization_type}]
+
+      - for joy in joyride
+        li data-id=joy[:id] data-text=t('.joyride.next')
+          h5 = t(".joyride.#{joy[:name]}.title")
+          p = t(".joyride.#{joy[:name]}.description").html_safe
+
+  .row
+    .col-md-offset-1.col-md-10
+      .new-project-box
+        .row
+          .large-10.small-11.columns.large-centered.small-centered
+            = simple_form_for @project do |f|
+              = f.input :category_id, collection: Category.array, selected: @project.category_id, required: true
+              = f.input :name, as: :string, maxlength: 100
+
+              = f.input :country, collection: ["Andorra", "United Arab Emirates (the)", "Afghanistan", "Antigua and Barbuda", "Anguilla", "Albania", "Armenia", "Netherlands Antilles", "Angola", "Antarctica", "Argentina", "American Samoa", "Austria", "Australia", "Aruba", "Åland Islands", "Azerbaijan", "Bosnia and Herzegovina", "Barbados", "Bangladesh", "Belgium", "Burkina Faso", "Bulgaria", "Bahrain", "Burundi", "Benin", "Saint Barthélemy", "Bermuda", "Brunei Darussalam", "Bolivia (Plurinational State of)", "Bonaire, Sint Eustatius and Saba", "Brazil", "Bahamas (the)", "Bhutan", "Bouvet Island", "Botswana", "Belarus", "Belize", "Canada", "Cocos (Keeling) Islands (the)", "Congo (the Democratic Republic of the)", "Central African Republic (the)", "Congo (the)", "Switzerland", "Côte d'Ivoire", "Cook Islands (the)", "Chile", "Cameroon", "China", "Colombia", "Costa Rica", "Cuba", "Cabo Verde", "Curaçao", "Christmas Island", "Cyprus", "Czechia", "Germany", "Djibouti", "Denmark", "Dominica", "Dominican Republic (the)", "Algeria", "Ecuador", "Estonia", "Egypt", "Western Sahara", "Eritrea", "Spain", "Ethiopia", "Finland", "Fiji", "Falkland Islands (the) [Malvinas]", "Micronesia (Federated States of)", "Faroe Islands (the)", "France", "Gabon", "United Kingdom of Great Britain and Northern Ireland (the)", "Grenada", "Georgia", "French Guiana", "Guernsey", "Ghana", "Gibraltar", "Greenland", "Gambia (the)", "Guinea", "Guadeloupe", "Equatorial Guinea", "Greece", "South Georgia and the South Sandwich Islands", "Guatemala", "Guam", "Guinea-Bissau", "Guyana", "Hong Kong", "Heard Island and McDonald Islands", "Honduras", "Croatia", "Haiti", "Hungary", "Indonesia", "Ireland", "Israel", "Isle of Man", "India", "British Indian Ocean Territory (the)", "Iraq", "Iran (Islamic Republic of)", "Iceland", "Italy", "Jersey", "Jamaica", "Jordan", "Japan", "Kenya", "Kyrgyzstan", "Cambodia", "Kiribati", "Comoros (the)", "Saint Kitts and Nevis", "Korea (the Democratic People's Republic of)", "Korea (the Republic of)", "Kuwait", "Cayman Islands (the)", "Kazakhstan", "Lao People's Democratic Republic (the)", "Lebanon", "Saint Lucia", "Liechtenstein", "Sri Lanka", "Liberia", "Lesotho", "Lithuania", "Luxembourg", "Latvia", "Libya", "Morocco", "Monaco", "Moldova (the Republic of)", "Montenegro", "Saint Martin (French part)", "Madagascar", "Marshall Islands (the)", "North Macedonia", "Mali", "Myanmar", "Mongolia", "Macao", "Northern Mariana Islands (the)", "Martinique", "Mauritania", "Montserrat", "Malta", "Mauritius", "Maldives", "Malawi", "Mexico", "Malaysia", "Mozambique", "Namibia", "New Caledonia", "Niger (the)", "Norfolk Island", "Nigeria", "Nicaragua", "Netherlands (the)", "Norway", "Nepal", "Nauru", "Niue", "New Zealand", "Oman", "Panama", "Peru", "French Polynesia", "Papua New Guinea", "Philippines (the)", "Pakistan", "Poland", "Saint Pierre and Miquelon", "Pitcairn", "Puerto Rico", "Palestine, State of", "Portugal", "Palau", "Paraguay", "Qatar", "Réunion", "Romania", "Serbia", "Russian Federation (the)", "Rwanda", "Saudi Arabia", "Solomon Islands", "Seychelles", "Sudan (the)", "Sweden", "Singapore", "Saint Helena, Ascension and Tristan da Cunha", "Slovenia", "Svalbard and Jan Mayen", "Slovakia", "Sierra Leone", "San Marino", "Senegal", "Somalia", "Suriname", "South Sudan", "Sao Tome and Principe", "El Salvador", "Sint Maarten (Dutch part)", "Syrian Arab Republic (the)", "Eswatini", "Turks and Caicos Islands (the)", "Chad", "French Southern Territories (the)", "Togo", "Thailand", "Tajikistan", "Tokelau", "Timor-Leste", "Turkmenistan", "Tunisia", "Tonga", "Turkey", "Trinidad and Tobago", "Tuvalu", "Taiwan (Province of China)", "Tanzania, the United Republic of", "Ukraine", "Uganda", "United States Minor Outlying Islands (the)", "United States of America (the)", "Uruguay", "Uzbekistan", "Holy See (the)", "Saint Vincent and the Grenadines", "Venezuela (Bolivarian Republic of)", "Virgin Islands (British)", "Virgin Islands (U.S.)", "Viet Nam", "Vanuatu", "Wallis and Futuna", "Saint Lucia (specific)", "Samoa", "Kosovo", "Yemen", "Mayotte", "Yugoslavia", "South Africa", "Zambia", "Zimbabwe"].sort, prompt: "Sélectionner le pays", required: true
+
+              = f.input :currency, collection: available_currencies, prompt: "Sélectionner la devise du pays", selected: false, required: true
+
+              = f.input :is_prebooked, as: :select, label: "Prebooking", collection: [["Users pay online and can print their ticket", false], ["Users have to prebook and pay at the door", true]], include_blank: false
+
+              .input[class="#{'error' if @project.errors[:goal].present?}"]
+                  /= f.label :goal
+                  / .large-1.small-2.columns
+                  /   span.prefix rwfs
+                  /.large-12.small-12.columns
+                  = f.hidden_field :goal, value: 0, class: 'with-prefix with-postfix'
+                  /.large-1.small-2.columns
+                  /   span.postfix .00
+
+              -  if @project.errors[:goal].present?
+
+                  small.error = @project.errors[:goal].to_sentence
+
+              /= f.input :recommended, as: :boolean, value: true
+
+              /= f.datetime_select :online_days      
+              /= f.input :online_days, as: :integer
+              /= f.input :start_date, as: :string, input_html: { class: 'event-date-datepicker' }, required: true
+              = f.input :start_date, as: :date, html5: true
+              /= f.input :online_date, data-provide='datepicker'
+
+
+              /= f.input :street_address
+
+              = f.input :headline, as: :string, maxlength: 50
+
+              = f.input :about
+
+              .location.location-coordinates.pin-img[data-longitude=@project.longitude data-latitude=@project.latitude data-image-url=image_url('pin.png')]
+                = f.input :location, input_html: { class: 'search-cities-with-google', autocomplete: :off }
+                .map-canvas
+                = f.input :featured, :input_html => { :checked => true }
+ 
+
+              br
+              h3 = t('projects.new.tickets_categories_available')
+              = f.simple_fields_for :reward_categories do |ff|
+                = render 'reward_category_fields', f: ff
+              div
+                = link_to_add_association t('projects.new.add_a_ticket_category'), f, :reward_categories, style: "display:block;padding:1rem;text-align:center;border:1px solid silver;width:100%;margin:1rem 0;border-radius:3px;"
+
+              = f.input :sanitary_pass, as: :boolean, label: "Pass sanitaire requis ?"
+
+              p.terms = t('.accept_terms_html', link: link_to(t('words.terms'), terms_path, target: :blank))
+              = f.button :submit, class: 'btn btn-medium-green'

@@ -1,0 +1,10 @@
+rw:
+  payments:
+    common:
+      terms: 'Nki tera inkunga uyu mushinga, Nemeye yuko %{link}.'
+      terms-link: 'Amategeko na mabwiriza bikurikizwa'
+      confirm: 'Emeza ubwishyu'
+      proccessing: 'Biri gusuzumwa...'
+      error:
+        title: "Hagaragayemo akabazo..."
+        name: 'ongera ufungure paji ubundi wongere.'

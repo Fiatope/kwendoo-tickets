@@ -1,0 +1,29 @@
+<%= content_for :title, t('.titles.site') %>
+
+<%= flash_messages %>
+<%= render 'layouts/header' %>
+
+<div class="background-img">
+	<div class="filter-hard-black flex-container">
+		<div class="flex-item">
+			<div class="bg-white flex-container">
+				<div class="flex-item">
+					<h2><%= t('.titles.header')%></h2>
+					
+					<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put}) do |f| %>
+					<%= f.hidden_field :reset_password_token %>
+					<%= f.input :password, as: :password, placeholder: t('.form.labels.password'), class: [:login, :password], required: true, label_html: { class: 'hidden-label' } %>
+					<div class="text-right">
+          <%= t('.form.hint.password_length') %>
+          </div>
+					<%= f.input :password_confirmation, as: :password, placeholder: t('.form.labels.password_confirmation'), required: true, label_html: { class: 'hidden-label' } %>
+
+					<div class="form-actions">
+						<%= f.submit t('.form.inputs.submit'), class: 'btn btn-block btn-medium-green' %>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

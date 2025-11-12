@@ -1,0 +1,46 @@
+= content_for :title, t('.title')
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+
+
+#about-page
+  .row
+     .page-headline
+
+  .creation
+    .row
+      h5
+        p La création d'une cagnotte est <strong>gratuite</strong>.
+      h5
+        p Nous appliquons des frais de <strong>6%</strong> sur les fonds collectés. 
+        p La commission couvre les frais liés à la réception des paiements des contributeurs et au cantonnement sécurisé des fonds de la cagnotte. 
+        p La part de commission qui revient à Kwendoo est entièrement reversée au fonctionnement de l'Association <a href=="https://www.fiatope.com">Fiatope</a>. 
+      h5
+        p <strong>Un exemple</strong>
+        ol
+          li La cagnotte "construction d'un centre de santé à Bokin, Burkina" initiée par une association de solidarité internationale en France a récolté <strong>13000€</strong>. Elle a été financé par 44 contributeurs. 
+          li Le porteur de projet (l'association) disposera de (100%-3,6%)x13000€ = <strong>12610€</strong>.  
+
+  .calculateur 
+    .row
+     h5 
+       p Simulez les frais que vous aurez à payer
+ 
+
+
+
+       
+  .row
+
+
+

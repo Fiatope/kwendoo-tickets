@@ -1,0 +1,41 @@
+fr:
+  projects:
+    contributions:
+      show:
+        title: 'Merci'
+        thank_you: "Merci pour votre réservation!"
+        recommended_projects: ''
+        share: "Signalez sur facebook ou twitter que vous assisterez à cet évènement"
+        prebooked: "Votre ticket compte uniquement comme réservation, vous devrez payer à l'entrée"
+        twitter-text: 'Je viens de contribuer pour %{value} à %{name} sur @Kwendoo_: %{project_url}'
+        facebook: 'Partager'
+        twitter: 'Tweeter'
+        like_us: 'Likez Nous sur Facebook' 
+        bankaccount:
+          title: 'Vous avez conribué par le biais de votre compte bancaire. Veuillez vérifier votre compte pour terminer votre paiement.'
+          steps:
+            first: 'We will make two small deposits (each less than $1.00) to this account. Deposits may take 1-2 business days to appear.'
+            second: 'You will receive an email with a link to verify your account using the two deposit amounts.'
+            third: 'Once your account has been verified, your contribution will be processed and automatically reflected in the campaign you contributed to.'
+        receipt:
+          address_html: "tickets.kwendoo.com est un service de <br>Fiatope Digital Services<br><br>110 Rue Pierre Brossolette, 92320 Châtillon<br>France"
+          print_cta: " Imprimer le reçu"
+          heading: "Transaction de Paiement"
+          info: "Votre paiement est confirmé. Veuillez trouver votre reçu ci-dessous:"
+          card_info: "Cette contribution a été payée avec une carte de crédit %{card_type}"
+          card_last4_info: " se terminant par %{last4}"
+          transaction_reference_label: "Référence de la contribution"
+          confirmed_at_label: "Date de la transaction"
+          terms:
+            display_name: "Nom"
+            address_city: "Ville"
+            address_state: "Région"
+            address_zip_code: "Code Postal"
+          table:
+            quantity_heading: "Quantité"
+            code_heading: "Code"
+            project_heading: "Événement"
+            description_heading: "Description"
+            unit_heading: "Prix Unitaire"
+            total_heading: "Pix Total"
+            total_caption: "TOTAL"

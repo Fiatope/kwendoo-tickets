@@ -1,0 +1,20 @@
+- update = Update.find @notification.update_id
+br
+br
+|Bwana/Madam, #{@notification.user.display_name}, hari ikintu gishyizwe kigeze kuri #{update.project.name} kuri #{Configuration[:company_name]}!
+br
+br
+| Mwarebera  #{link_to "hano", project_url(update.project, anchor: "updates")}, ubundi ufashe gusakaza!
+br
+br
+hr
+br
+h2 #{link_to update.title, project_url(update.project, anchor: "updates")}
+= update.comment_html
+br
+br
+hr
+br
+| Mukomeze gukurikirana',
+br
+|Ubuyobozi bwa#{Configuration[:company_name]} 

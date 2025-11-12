@@ -1,0 +1,26 @@
+- project = @notification.project
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Dear #{resource.user.display_name},
+br
+br
+|You wished to make a #{resource.class.model_name.human} to #{link_to(resource.project.name, project_url(resource.project))}.
+br
+br
+|Our payment intermediary reported the following error:
+br
+|The mobile money payment did not take place.
+br
+br
+|We apologize for the inconvenience and hope that you will be able to make your contribution again as soon as possible.
+br
+br
+|For other questions, send an email to us #{mail_to Configuration[:email_contact]} access our  #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|kindest regards,
+br
+|The Team #{Configuration[:company_name]}

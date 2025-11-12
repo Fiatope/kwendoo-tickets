@@ -1,0 +1,28 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Chèr(e), #{resource.user.display_name}!
+br
+br
+|Votre contribution à #{link_to(resource.project.name, project_url(resource.project))} est en cours de traitement par notre partenaire. Vous recevrez un email dès que celle-ci aura été validée.
+br
+br
+|Montant de la #{resource.class.model_name.human}:
+strong #{number_to_currency resource.value, unit: "RWF", precision: 0}
+br
+|#{resource.class.model_name.human} effectuée le:
+strong #{l resource.created_at.to_date, format: :long}
+br
+br
+|Référence du paiement:
+strong #{resource.key}
+br
+br
+|Pour toute question, écrivez nous #{mail_to Configuration[:email_contact]} ou accédez à nos #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Bien à vous,
+br
+|L'équipe #{Configuration[:company_name]}

@@ -1,0 +1,18 @@
+rw:
+  devise:
+    registrations:
+      new:
+        have_account_html: "Mwaba mwariyandikishije? <strong>Kwinjira</strong>"
+        titles:
+          site: 'Kwiyandikisha'
+          header: 'Iyandikishe'
+        links:
+          login: "Kwinjira <i class='icon-et-right-circled'></i>"
+        form:
+          labels:
+            show_password: 'Kwerekana ijambobanga'
+          hint:
+            password_length: '*rigomba kugira hagati y inyuguti 6 byibuze.'
+          inputs:
+            submit: 'Iyandikishe'
+            facebook: 'iyandikishe ukoresheje facebook'

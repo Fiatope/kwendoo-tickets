@@ -1,0 +1,31 @@
+en:
+  projects:
+    pay:
+      so_far: '&nbsp; Collected on &nbsp; '
+      iban: ' By following this link'
+      cni: ' By following this other link'
+      subtitle:
+        all_or_none: "A project in the category  %{category_name}, Launched at %{city},by %{author}"
+        flexible: "Une agaseke dans la catégorieAn agaseke in the category <span data-tooltip class='has-tip' title='Every Dollar Counts! <br /><br />the aGaseke will be financed whether or not the objective is reached.'> /span> %{category_name} by %{author} launched at %{city}"
+      status-bar:
+        goal: 'Objectif: %{value}'
+        total_contributions: '%{value} contributeurs'
+        contribute: 'Get Tickets'
+      display_status:
+        flexible:
+          reached_goal: "L'agaseke a atteint son objectif"
+          not_reached_goal: "L'agaseke n'a pas atteint son objectif"
+          failed: "Cet agaseke n'a pas atteint son objectif"
+          successful: "Cet agaseke a atteint son objectif"
+          waiting_funds: "Cet agaseke  s'est terminée récemment."
+          Request_Funds: "L'agaseke sera payée à partir du %{date}"
+          draft: "Cet agaseke n'est pas ouverte à contribution."
+      contribute: 'Get Tickets'
+    shortheader:
+      subtitle:
+        all_or_none: "Un projet dans la catégorie %{category_name}, lancé à %{city}, par %{author}"
+        flexible: "Une agaseke dans la catégorie <span data-tooltip class='has-tip' title='Every Dollar Counts! <br /><br />In this type of campaign, the project is always funded"
+        so_far: '&nbsp; collectés sur &nbsp; '
+        reached_goal_small_separator_html: '&nbsp; / &nbsp; '
+        contribute: 'Get Tickets'
+      so_far: '&nbsp; collectés sur &nbsp; '

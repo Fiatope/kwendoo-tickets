@@ -1,0 +1,13 @@
+rw:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              not_found: "Iyo email ntiri muri sisitemu yacu. Musabwe kongera mukagerageza, cyangwa mwiyandikishe."
+              taken: "Email yarafashwe,ni muyikoreshe mwinjira"
+              invalid: "Email siyo"
+            password:
+              too_short: "Ijambobanga ryawe nirito cyane"
+              confirmation: "Ijambobanga ntirihura nibyemejwe"

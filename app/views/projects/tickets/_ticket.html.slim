@@ -1,0 +1,8 @@
+- if current_user && (current_user.admin? || @project.user == current_user)
+  - @project_tickets.each do |ticket|
+    tr
+      td = ticket.ticket_categories_order.present? ? ticket.contribution.created_at.strftime("%d-%m-%Y %H:%M") : ''
+      td = ticket.email
+      td = ticket.title
+      td = ticket.ticket_categories_order.present? ? ticket.ticket_categories_order.reward.minimum_value : ticket.reward.minimum_value
+      td = ticket.token

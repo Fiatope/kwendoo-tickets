@@ -1,0 +1,9 @@
+fr:
+  models:
+    ticket_for_project:
+      id: 'Id'
+      ticket_categories_order_id: 'Ticket categories order'
+      token: 'Token'
+      validity_ends_at: 'Validity ends'
+      under_name: 'Under name'
+      qr_code: 'Qr code'

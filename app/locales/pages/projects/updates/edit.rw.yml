@@ -1,0 +1,19 @@
+rw:
+  projects:
+    contributions:
+      edit:
+        title: 'Uteye inkunga kuri %{project_name}'
+        you_are_contributing_to: 'Uteye inkunga'
+        total: 'Igiteranyo: '
+        i_want_pay_fees: "Ntacyo bayakuraho kugirango nyahabwe"
+        payment:
+          title: "Musabwe guhitamo uburyo bwo kwishyurwa cg ohereza sheki kuwa teguye agaseke Or Mugihe aho kwishyurira hataraboneka"
+        reward:
+          title: 'Ishimwe ryawe wagenewe'
+        tooltip-text: "Murakoze gufasha <strong>%{project_name}</strong>!Murwego kugeza inkunga yawe, twabasabaga ko mwakwimenyera ayo bari bubakureho niba bishoboka.Ibi biratera tutagera ku ntego yacu kandi turabashimiye.<br /><strong>Ayo babakata ni 6%.</strong>"
+        payment-method:
+          fees: 'Umusanzu:'
+          balanced-creditcard:
+            title: 'Ikarita yo kubikuza'
+          balanced-bankaccount:
+            title: 'numero ya konti ya banki'

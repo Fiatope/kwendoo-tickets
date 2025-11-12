@@ -1,0 +1,6 @@
+rw:
+  projects:
+    updates:
+      update:
+        destroy: 'ukuramo impinduka'
+        created_at: 'byahinduwe tariki %{time}'

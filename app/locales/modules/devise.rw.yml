@@ -1,0 +1,60 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+rw:
+  devise:
+    confirmations:
+      confirm: "Murakoze kutugana. ubutumwa bwemeza konti yanyu yabohererejwe kuri email. Niba mutabwakiriye <a href='%{link}'>Mukande hano.</a>"
+      confirmed: "Konti yanyu yemejwe neza."
+      send_instructions: "Murakira mukanya kuri email amabwiriza ajyanye nuko mwakwemeza konti yanyu mu minota micye."
+      send_paranoid_instructions: "Niba email yawe iba mu bubiko bwacu, Muraza kwakira email ifite amabwiriza yuko mwakwemeza konti yanyu mu minota micye."
+    failure:
+      already_authenticated: "Mwamaze kwinjira muri konti yanyu."
+      inactive: "Konti yanyu ntiri gukora."
+      invalid: "email cyangwa pasiwadi ntibaho."
+      locked: "Konti yanyu irafunze."
+      last_attempt: "Musigaje kugerageza rimwe mbere yuko konti yanyu ifungwa."
+      not_found_in_database: "email cyangwa pasiwadi ntibaho."
+      timeout: "Mwongere mugerageze mwinjire kugira ngo mukomeze."
+      unauthenticated: "Musabwe kwinjira cyangwa mugafunguza konti"
+      unconfirmed: "Mugomba kwemeza email yanyu kugira ngo mubashe gukomeze."
+    mailer:
+      confirmation_instructions:
+        subject: "Amabwiriza yo kwemeza"
+      reset_password_instructions:
+        subject: "Amabwiriza yuko wahindura pasiwadi"
+      unlock_instructions:
+        subject: "Amabwiriza yo gufungura konti yafunzwe"
+    omniauth_callbacks:
+      failure: "Nti twabashije kubamenya guhera %{kind} kubera \"%{reason}\"."
+      success: "Mubashije kwinjira neza binyujijwe muri %{kind}."
+    passwords:
+      no_token: "Nti mwakoresha iyi paji mutahereye aho mushyiriramo password. Niba mwahereye aho mushyiriramo pasiwadi murebe ko linki mwakoresheje ariyo."
+      send_instructions: "Muraza kwakira email ikubiyemo uko mwahindura pasiwadi/ijambobanga mu minota micye."
+      send_paranoid_instructions: "Niba email yanyu tuyifite mu bubiko, muraza kwakira, muraza kwakira linki ya pasiwadi muri email yanyu mu minota micye."
+      updated: "Password yanyu yahinduwe neza. ubu wageze muri konti yawe."
+      updated_not_active: "Pasiwadi yanyu yahinduwe neza."
+    registrations:
+      destroyed: "Murabeho! konti yanyu yasheshwe. turizera kubabona ubutaha."
+      signed_up: "Murakaza neza kuri Kwendoo Rwanda! Musabwe kuzuza amakuru yose abareba kugira ngo ugire ibindi ukora!"
+      signed_up_but_inactive: "Mwiyandikishije neza cyane. Ariko, nti twatuma mwinjira kuko konti yanyu itarafungurwa irafunze."
+      signed_up_but_locked: "Mwiyandikishije neza cyane. Ariko, nti twatuma mwinjira kuko konti yanyu ifunze."
+      signed_up_but_unconfirmed: "Ubutumwa bukubiyemo linki yo kwemeza konti yoherejwe kuri email yanyu. Musabwe gukanda kuri linki kugira ngo konti yanyu ikore."
+      update_needs_confirmation: "Mwagize ibyo muhindura kuri konti yanyu neza, dukeneye gusuzuma email yanyu. Musabwe kureba email yanyu ubundi mukande kwemeza email kugira ngo murangize ibyo kwemeza konti."
+      updated: "Ibyo mwahinduye kuri konti yanyu byabitswe neza."
+    sessions:
+      signed_in: "Muraho!"
+      signed_in_custom: ' Muraho! musabwe<a href="%{link}">kuzuza amakuru dukeneye</a> kugira ngo dukomezanye, tunagira icyo tubagenera cyiza!'
+      signed_out: "Mwakoze kubana natwe. Tuzishimira mugarutse."
+    unlocks:
+      send_instructions: "muraza kwakira email ifite amabwiriza yuko mwa fungura konti yanyu yafunzwe mu minota micye."
+      send_paranoid_instructions: "Niba konti yawe ibaho, muraza kwakira email ifite amabwiriza yuko mwa fungura konti yanyu yafunzwe mu minota micye."
+      unlocked: "Konti yanyu yafunguwe. Murasabwa kwinjiramo kugira ngo mukomeze."
+  errors:
+    messages:
+      already_confirmed: "Mwamaze kwemeza email yanyu, Musabwe kwinjiramo"
+      confirmation_period_expired: "Bikenewe kwemezwa mugihe kinga na %{period}, Musabwe gusaba indi nshya"
+      expired: "yarengeje igihe, musabwe gusaba iyindi"
+      not_found: "Ntibyabashije kuboneka"
+      not_locked: "wNtabwo yavunzwe"
+      not_saved:
+        one: "ikosa rimwe riteye ibi %{resource} kuba byabikwa:"
+        other: "%{count} hari ikosa ribayeho ribujije ibi %{resource} bitumye bitabikwa:"

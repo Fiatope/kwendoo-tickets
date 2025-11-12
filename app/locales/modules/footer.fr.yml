@@ -1,0 +1,38 @@
+fr:
+  layouts:
+    footer:
+      quick_links: 'Bon à savoir'
+      more_quick_links: 'Encore plus...'
+      new: 'Créer un évènement'
+      about: 'A propos de nous'
+      discover: 'Evènements publics'
+      start_campaign: 'Créer un évènement'
+      how_it_works: 'Comment ça marche'
+      how_does_it_cost: 'Tarifs'
+      contact: 'Nous contacter'
+      faq: 'FAQ / Aide'
+      statistics: 'Statistiques'
+      examples: "Exemples d'évènements"
+      definition: "L'évènement en ligne"
+      legal: 'Notice légale et confidentialité'
+      terms: "CGU Kwendoo Tickets"
+      why_kwendoo: 'Pourquoi choisir Kwendoo Tickets'
+      successful: 'Réussir son évènement sur Kwendoo'
+      csr_partners: 'Entreprises devenez partenaires'
+      org_partners: 'Organisations devenez partenaires'
+      outlet: 'Plaquette Kwendoo'
+      opportunities: "Un monde d'opportunités"
+      sitemap: 'Plan du site'
+      jobs: 'Kwendoo Jobs'
+      link: 'CGU MangoPay'
+      ambassadors: 'Ambassadeurs'
+      values_ethics: 'Nos valeurs et notre éthique' 
+      kwendoo_origin: "D'où vient Kwendoo"
+      stay_in_touch: 'Suivez-nous'
+      built_with_love: ''
+      now_accepting_proposals: 'Propostions bienvenues à présent!'
+      now_accepting_proposals_text: "Vous êtes un groupe d'amis éparpillés en Europe et vous souhaitez faire une tontine. Vous organisez votre mariage et souhaitez faire participer votre tribu aux quatre coins du monde. Vous voulez vous mettre à plusieurs pour aider un proche... "
+      we_want_to_help: 'lancez-vous'
+      payment_sec: 'Paiement securisé par :'
+      payment_aut: 'Carte de paiement accepté:'
+      encrypt: 'Site securisé par chiffrement https :'

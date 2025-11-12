@@ -1,0 +1,39 @@
+fr:
+  static:
+    about:
+      title: 'A propos de Nous'
+    faq:
+      title: "Frequently Asked Questions"
+    privacy:
+      title: "Mentions légales et Confidentialité des données"
+    terms:
+      title: "Conditions d'Utilisation"
+    price:
+      title: "Tarifs" 
+    how_it_works:
+      title: 'Comment ça marche'
+    why_kwendoo:
+      title: 'Pourquoi Choisir Kwendoo Tickets'
+    values_ethics:
+      title: 'Valeurs et Ethique Kwendoo'
+    examples:
+      title: "Exemples d'Evènements"
+    kwendoo_origin:
+      title: 'Origine de Kwendoo' 
+    definition:
+      title: "Agaseke en ligne"
+    successful:
+      title: "Réussir un Evènement sur Kwendoo"
+    jobs:
+      title: 'Kwendoo recrute'
+    start_terms:
+      title: 'Termes'
+      explore_curious: "Juste un coup d'oeil!"
+      explore_projects: "Je souhaite découvrir les évènements."
+      submit: "Prochaine Etape!"
+      send_project: "Je voudrais créer un évènement."
+    base:
+      title: 'Page statique'
+  messages:
+     new:
+       title: 'Contactez Nous'

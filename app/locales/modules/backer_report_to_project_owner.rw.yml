@@ -1,0 +1,18 @@
+rw:
+  contribution_report_to_project_owner:
+    user_name: 'Umuterankunga'
+    value: "ingano y'umusanzu" 
+    minimum_value: "Ishimwe"
+    reward_description: "Imiterere y'ishimwe"
+    created_at: "Umusanzu watanzwe"
+    confirmed_at: "Umusanzu wemejwe"
+    service_fee: "Ikiguzi cya serivise"
+    user_email: 'Email'
+    payment_method: "umubryo bwo kwishyura"
+    address_street: 'Umuhanda'
+    address_neighborhood: 'Abaturanyi'
+    address_city: 'Umujyi'
+    address_state: 'agace'
+    address_zip_code: 'Zip Code'
+    anonymous: "utazwi"
+    short_note: 'Ubutumwa'

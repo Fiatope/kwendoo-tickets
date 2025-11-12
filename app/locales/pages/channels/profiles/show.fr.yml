@@ -1,0 +1,22 @@
+fr:
+  channels:
+    profiles:
+      show:
+        unfollow: 'Ne plus suivre'
+        follow: 'Nous Suivre'
+        submit: 'Soumettre Maintenant'
+        projects_we_support: 'Nos Evènements'
+        see_more: 'En savoir plus'
+        see_less: 'Voir moins'
+        submit_your_project:
+          title: 'Créer votre Evènement'
+          text: " "
+          button: 'Soumettre Maintenant'
+        about:
+          title: 'A propos de Nous'
+        connect:
+          title: 'Se connecter avec'
+          facebook: 'Facebook'
+          twitter: 'Twitter'
+          email: 'Email'
+          website: 'Website'

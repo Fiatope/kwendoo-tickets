@@ -1,0 +1,35 @@
+en:
+  projects:
+    espaceprojet:
+      title: 'Kwendoo Tickets | Online Ticketing'
+      recommended: 'Recommended'
+      near: 'Near end'
+      ending_soon: 'ending soon'
+      successful: 'Successful'
+      coming_soon: 'COming Soon'
+      join:
+        join_the_neighborhood: 'Join Kwendoo Tickets'
+        already_joined: 'Already joined? Sign In.'
+        sign_in: 'Sign In'
+      hero:
+        title: 'We enable joint action and impact <strong></strong>'
+        subtitle: "A world of opportuities opens up with Kwendoo Tickets. Join our newsletter to stay tuned\n"
+        email_placeholder: 'MY EMAIL'       
+        submit: 'Join the Newsletter'
+      how-it-works:
+        one:
+          headline:  'Agaseke'
+          text: ' Create an Agaseke to support your community. Ask your community to suppor you. Collect membership fees for your association.'
+          button: 'I enter the agaseke area'
+        two:
+          headline: 'Projects'
+          text: ' You have an original and ambitious project for your region or country of origin. You wiwh to participate to the emergence of such projects.'
+          button: 'I enter the projects area' 
+        three:
+          headline: 'Contributions'
+          text: 'Contribute to project you in care in'
+          button: 'I contribute'
+      start-one-en:
+        title: ' Have a project in need of funding?'
+        button: 'Start a campaign'
+

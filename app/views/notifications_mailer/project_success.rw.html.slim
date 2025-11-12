@@ -1,0 +1,20 @@
+- project = @notification.project
+|Muraho #{project.user.name},
+br
+br
+|Mbere na mbere, Turabifuriza kwishimira yuko umushinga wawe wageze ku mafaranga wiyemeje! Mwayagezeho ayo mwiyemeje.
+br
+br
+|Hakiri kare, musabwe kureba amabwiriza arebana nahakurikira hari ibintu bibiri by'ingenzi ugomba guhita ukora:
+br
+ol 
+  li Dawunilodinga raport yanyuma ifite amakuru ku baterankunga bawe (name, reward, address, etc.) kuri #{link_to "raporo", project_url(project, anchor: "project_reports")} y'umushinga wawe (urasabwa kubanza kunjira muri konti yawe ya kwendoo mbere na mbere).
+  li Vugisha abaterankunga bawe ku makuru ukeneye kuzuza ajyanye no gutanga ishimwe. Turi gukora kuri system ibasha cyangwa yemerera abagenerwabikorwa kugira ibyo bamenya jubaterankunga babo hagati inzira yoroshye yo gukora #{link_to "form ya google", "https://support.google.com/drive/answer/87809?hl=en"} or #{link_to "SurveyMonkey", "https://www.surveymonkey.com/"} ibaza ibi bazo ukeneye kubaza, nyuma uyoherze ku baterankunga bawe bose.
+br
+|Mubaye mufite ibindi bibazo mwibaza mwatwandikira kuri:  #{mail_to Configuration[:email_contact]}
+// = link_to 'http://suport.neighbor.ly', 'http://suport.neighbor.ly'
+br
+br
+|Murakoze,
+br
+|Ubuyobozi bwa #{Configuration[:company_name]} 

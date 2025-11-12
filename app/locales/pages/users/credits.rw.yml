@@ -1,0 +1,19 @@
+rw:
+  users:
+    credits:
+      back_date: "Itariki umusanzu watangiwe"
+      current_credits_html: "Umusanzu  ufite kugeza ubu ni <span class=\"current-credits\">%{credits}</span> Mu mafaranga."
+      important_html: "Muramutse mwifuje kubikuza umusanzu wanyu wakusanyijwe, wajya kuri konti yanyu cg mobile money cg tigocash na airtel money."
+      project: Umushinga
+      refund_expiration_date_html: "Itariki yanyuma yo gusaba kubikuza inkunga"
+      refunded: "Kubikuza inkunga byakozwe neza. Ikipe yacu irabamenyesha mu minsi ibiri yakazi."
+      insufficient_credits: "Nta musanzu uhagije ufite wokuba wabikuza."
+      refunds_title: "Umusanzu wabikuzwa"
+      request_refund: "Saba kubikuza"
+      requested_refund: "<wasabye kubikuza Inkunga"
+      status: Status
+      title: "Ayo ngejejemo"
+      value: Agaciro
+      modal:
+        title: "Murifuza guhamya igikorwa cyo kubikuza inkunga?"
+        confirm: "Ndashaka kwemeza ko nshaka Umusanzu wakusanyijwe"

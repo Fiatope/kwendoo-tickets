@@ -1,0 +1,147 @@
+rw:
+  simple_form:
+    "yes": 'yego'
+    "no": 'Hoya'
+    required:
+      text: 'Birakenewe'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Musabwe gusuzuma akabazo kabayeho:"
+    placeholders:
+      user:
+        name: 'amazina yose'
+        email: 'Email'
+        nonprofithauth: "Ndemeza yuko nahagararira asosiyasiyo"
+        password: 'Ijambobanga'
+        current_password: 'Ijambobanga usanzwe ukoresha'
+        bio: 'Byibuze inyuti zitarenze 140 ...'
+        facebook_url: 'http://facebook.com/'
+        other_url: 'http://www.'
+        linkedin_url: 'http://linkedin.com/in/'
+        twitter_url: 'http://twitter.com/'
+      channel:
+        facebook: 'http://facebook.com/'
+        twitter: 'http://twitter.com/'
+        website: 'http://www.'
+    labels:
+      company_contact:
+        first_name: 'Izina'
+        last_name: "Izina ry'ikinyarwanda"
+        company_name: "Izina rya kompanyi ukorera"
+        company_website: 'urubuga rwa kompanyi'
+        email: 'Email Address'
+        phone: 'Phone (Muramutse mufuza ko twabahamagara)'
+        message: "Ikindi mwakwifuza kumenya by'umwihariko?"
+      channel:
+        how_it_works: 'abo turibo'
+        submit_your_project_text: 'mukomeze aha kurikiye'
+        start_hero_image: 'ifoto ijya hejuru'
+        start_content:
+          start_primary_content: 'Primary Content'
+          start_secondary_content: 'Secondary Content'
+      user:
+        bio: 'vuga kubuzima gato'
+        nonprofitauth: "Ndemeza ntashidikanya ko mpagarariye ikigo"
+        password: 'Ijambobanga rishya'
+        newsletter: 'Kohererezwa amakuru ya Kwendoo Rwanda'
+        new_project: 'Email me when new projects are added to Kwendoo Rwanda'
+        profile_type: "Ngaragaza nka"
+        phone_number: "numero ya telefoni"
+        address: "Umujyi, agace"
+        address_street: "aderesi y'umuhanda"
+        address_neighborhood: "izina ry'ikigo"
+        address_zip_code: "Zip code"
+        other_url: "Urubuga rw'ikigo"
+        update_address: "Guhindura aderesi yanjye."
+        trythis: "yego nibi"
+      project:
+        name: "izina ry'agaseke"
+        campaign_type: "ubwoko bw'umushinga"
+        category_id: "icyiciro"
+        category: "icyiciro"
+        organization_type: "Ubwoko bw'ikigo cyabagenerwa bikorwa"
+        location: "Umusanzu uzakoreshwa he?"
+        permalink: "icyerkezo waha abaterankunga bawe - kigomba kubanzirizwa na tickets.kwendoo.rw/projects/"
+        goal: "Amafaranga w'umva yageraho  - 0 niba ntayazwi uzi wateganyije"
+        currency: "amafaranga"
+        recommended: "ntimwerekane amafaranga amaze gukusanywa"
+        headline: "Izina ry'umugenerwabikorwa"
+        headline_cagnotte: "Agaseke mu magambo macye"
+        headline_cotisation: 'Inkunga mu magambo macye'
+        about: "ubusobanuro bwimbitse bugaragaza impamvu zikusanyirizwa ry'agaseke kawe"
+        about_cagnotte: "ubusobanuro bwimbitse bugaragaza impamvu zikusanyirizwa ry'agaseke kawe"
+        about_cotisation: "ubusobanuro bwimbitse bugaragaza ikusanywa"
+        cagnotte: "vuga muri macye agaseke kawe" 
+        cotisation: "ubusobanuro bwimbitse bugaragaza impamvu zikusanyirizwa ry'agaseke kawe"
+        about: "ubusobanuro bwimbitse bugaragaza impamvu zikusanyirizwa ry'agaseke kawe"
+        expires_at: "Igihe kazamara"
+        online_days: "igihe kazamara (mu minsi)"
+        video_url: "amashusho videwo"
+        uploaded_image: "ikrango cy'umushinga"
+        hero_image: "Ifoto yajya ku mutwe wa gaseke"
+        site: "Website"
+        terms: "Amabwiriza"
+        admin_fields: "Amakuru y'ingenzi"
+        hash_tag: "Hashtag"
+        communication: "Amakuru"
+        foundation_widget: "koresha widget nshya y'umushinga?"
+        address_neighborhood: "Izina ry'ikigo"
+        address: "Intara/umujyi,umurenge"
+        address_city: "umujyi"
+        address_state: "umurenge"
+        budget: "ubusobanuro bwimbitse ku ngengo y'imari"
+        tag_list: "akajambo wakwifashisha ushaka agaseke kawe"
+        street_address: "aderesi y'umuhanda"
+        code_partenaire: "Partner code"
+        anonymous: "ushaka ko inkunga yawe itamenyekana/itamennywa na rubanda"
+        short_note: "Mwasiga ubutumwa"
+        anonimity: "Kutamenyekana"
+        new:
+          category_id: "kategori/ikiciro"
+      contribution:
+        new:
+          anonymous: "Hitamo niba: Hitamo kutagaragaza y'uko watanze inkunga. Ntibijye ahagaragara"
+          short_note: "Hitamo niba: Ongeraho ubutumwa buto. Ibi biraza kugaragara ni zina ryawe ku gace ka baterankunga"
+    hints:
+      project:
+        edit:
+          video_url_edit: "Shyira hano linki ya videwo y'umushinga wawe ya Vimeo cyangwa Youtube ."
+          about: "Tubwire ku mushinga wawe. ukora iki, kuki ukenewe, kuki abaterankunga bawitaho? ibyo byose naha wabishyira."
+          category: "Nikihe cyicikro/kategori igaragaza umushinga wawe?"
+          expires_at: "Iki gikorwa cyo gukusanya inkunga kizamara igihe kingana iki."
+          goal: "Umushinga wawe ufite intego ingani iki? Tekereza kuri Kwendoo Rwanda namafaranga y'umusanzu',. nta kitso, akamenyesho ka mafarangacg ibice."
+          first_contributions: "Kuba ufite abaterankunga byatuma ugera ku ntego y'umushinga. Wagaragaza inkunga wamaze guhabwa, cg inkunga uteganya. "
+          headline: "Mu nyuguti 130 cg macye, kora incamake y'umushinga. Icya tuma abaterankunga ba gufasha?"
+          name: "Garagaza neza intego. Mu magambo umunani 8 cg hasi yayo."
+          uploaded_image: "Koresha ifoto byibuze ingana 500x340 (.jpg or .png)."
+          hero_image: "koresha ifoto byibuze ingana 1600x600 (.jpg or .png)."
+          video_url: "shyiramo video y'umushinga wawe linki yayo Youtube cg Vimeo. Videwo yawe igomba kuba ngufiya kugira itarambirana kandi ikaba y'umvikanisha umushinga."
+          hash_tag: "A short hashtag that can be added to tweets and Facebook updates."
+          site: "Shyira linki y'umushinga wawe ku rubuga rwa internet niba hari urwo ufite."
+          foundation_widget: "niba ushaka gukoresha widget reba hano!"
+          campaign_type: "Byose cyangwa ntabyo: Tera inkunga aruko itariki y umushinga itararangira. <br> Buri faranga rira bara: komeza ukoreshe inkunga wahawe niyo uba utabonye ayo wateganyije."
+          budget: "Abaterankunga bumva neza umushinga iyo wateguwe neza. Garagaza neza uko amafaranga azakoreshwa."
+          permalink: "Ibi nibi garagazwa na sisitem. Wabihindura nyuma."
+          headlinet: "ibyagufasha"
+          address_neighborhood: "Niba ukorana n'undi mushinga bigaragze."
+          address_city: "Umujyi cyangwa agce umushinga uherereyemo."
+          address_state: "Musabwa ku garagaza aho umushinga wanyu uherereye."
+          tag_list: "kongeraho akajambo gato byungera amahirwe yuko umushinga wawe wagaragara vuba. akajambo keza wakoresha kakagombye kugira isano n impmvu ushaka gukora uwo mushinga. Urugero, niba umushinga wawe ari kubakira abantu batishoboye amazu, andika 'inzu z'abatishoboye' and 'abatishoboye'. tangira wandike inyuguti ncyeya uratangira kubona utujambo tugufi dusanzwe."
+      channel:
+        image: "koresha ifoto ifite byibuze urugero rwa 600x300 ifoto(.jpg or .png)."
+      organization:
+        image: "koresha ifoto ifite byibuze urugero rwa 300x150 ifoto(.jpg or .png)."
+      user:
+        uploaded_image: "koresha ifoto ifite byibuze urugero rwa 150x150 ifoto(.jpg or .png)."
+  helpers:
+    submit:
+      company_contact:
+        create: "Tuganire!"
+      user:
+        update: "kubika ibyo nahinduye"
+      project:
+        create: "Submit"
+        update: "Update Project"

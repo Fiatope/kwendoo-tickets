@@ -1,0 +1,21 @@
+- project = @notification.project
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Chèr(e) #{resource.user.display_name},
+br
+br
+|Vous avez récemment souhaité faire une #{resource.class.model_name.human} à la cagnotte <strong> #{link_to(resource.project.name, project_url(resource.project))} </strong> Cependant vous n'êtes pas allé au bout du processus de contribution.
+br
+br
+|Nous vous invitons à reprendre votre contribution afin d'aider le projet à se réaliser et ce en cliquant sur le lien ci-dessus.. 
+br
+br
+|Pour toute autre question, écrivez nous #{mail_to Configuration[:email_contact]} ou accédez à nos #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Bien à vous,
+br
+|L'équipe #{Configuration[:company_name]}

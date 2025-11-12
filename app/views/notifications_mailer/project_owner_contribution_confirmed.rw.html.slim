@@ -1,0 +1,30 @@
+- project = @notification.project
+- confirmed_contributions_today = project.contributions.confirmed_today
+
+|Inkuru nziza #{project.user.display_name}, #{confirmed_contributions_today.size} Abaterankunga bahaye agaseke #{@notification.project.name} uyu munsi angana na: #{number_to_currency(confirmed_contributions_today.map(&:value).sum, precision: 0)}
+br
+br
+table width="500" border="1" cellpadding="10" cellspacing="0" style='font-size: 13px;'
+  thead
+    tr
+      th width="100" Contributor
+      th width="100" Email
+      th width="100" Amount
+  tbody
+    - confirmed_contributions_today.each do |contribution|
+      tr
+        td= contribution.user.display_name
+        td= contribution.user.email
+        td= contribution.display_value
+
+br
+|Wabasha kureba abaterankunga bose hano: #{link_to project_contributions_url(project), project_contributions_url(project)}
+br
+br
+|Ushobora noherereza ibigezweho cg impinduka  abaterankunga bawe: #{link_to project_updates_url(project), project_updates_url(project)}
+
+br
+br
+|Murakoze,
+br
+|Ubuyobozi bwa #{Configuration[:company_name]} 

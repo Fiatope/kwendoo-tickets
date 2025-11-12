@@ -1,0 +1,27 @@
+fr:
+  layouts:
+    header:
+      start_campaign: 'Créer un évènement'
+      start_project: 'Créer un Evènement'
+      start_cagnotte: 'Créer un Evènement'
+      discover: 'evenements'
+      how_it_work: 'Comment ça marche'
+      more: 'En savoir plus'
+      about: 'Apprendre'
+      blog: 'Blog'
+      sign-out: 'Sortir'
+      sign-up: 'Inscription'
+      sign-in: 'Connexion'
+      my_projects: 'Mes Evènements'
+      my_contributions: 'Mes billets'
+      my_profile: 'Mon profil' 
+      settings: 'Mes Préférences'
+      public_c: 'Evènements publics'
+      Blog: 'Blog'
+      profile: 'profil'
+      contribution: 'Billet'
+      credits: 'Mes credits'
+      bank_details: 'Coordonnées bancaires'
+      settings: 'Mes configurations'
+      sign_out: 'Se déconnecter'
+      title: " " 

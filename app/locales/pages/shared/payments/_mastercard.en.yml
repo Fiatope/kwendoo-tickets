@@ -1,0 +1,9 @@
+en:
+  shared:
+    payments:
+      wecashup: 
+        wecash: 'Our mobile money payments are secured by Wecashup.'
+        revenir: 'Back to the project'
+      mastercard:
+        pay_cta: "Pay with VISA/Mastercard"
+        pay_cta_info_html: '<small><i class="fa fa-lock"></i> After you click on the <strong>Pay</strong> button, you will be redirected to the secure Mastercard payment server</small>'

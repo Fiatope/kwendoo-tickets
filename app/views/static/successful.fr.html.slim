@@ -1,0 +1,47 @@
+= content_for :title, t('.title')
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+
+
+.succesful-page.static-page
+  .row
+    .text
+     h5 En fonction de l'obectif, de l'ambition et de l'enjeu, réussir sa agaseke peut demander une préparation minutieuse
+ 
+     h4 Expliquer les objectifs
+     h6 Il est important pour vos contributeurs de comprendre clairement la cause pour laquelle ils sont emmenés à participer. Vous devez également indiquer les étapes après le financement de la agaseke.
+
+     h4 Préciser l'usage des fonds
+     h6 Dire de façon détaillée comment vous allez dépenser la collecte peut être primordial pour certains types d'agaseke (projet associatif, communautire;..). Ici, les deux règles sont transparence et cohérence. Le total des postes que vous détaillez doit correspondre au montant que vous souhaitez collecter. Solliciter la participation de votre entourage et/ou du public n'est pas anodin. ne l'oubliez pas.
+
+     h4 Relancer mes contributeurs
+     h6 Renvoyer des rappels à ceux qui n'ont pas encore contribué permet de maximiser sa collecte. Evidemment cela dépend de la nature de l'agaseke. Pour un mariage, il vaut mieux ne pas être trop insistant par exemple. 
+
+     h4 Partager sur facebook
+     h6 Les boutons de réseaux sociaux sur votre page d'agaseke kwendoo permettent à toute personne de partager l'agaseke sur facebook et twitter. Ne vous arrêtez pas à cela. Vous pourrez également tweeter ou écrire des posts facebook avec le lien vers votre campagne. Pour une agaseke à vocation publique, vous devez encourager vos soutiens et contributeurs à faire de même.
+  
+     h4 Agrémenter la page de l'agaseke
+     h6 Ajouter une ou plusieurs photos dans la description de votre agaseke la rendra plus dynamique (se rendre à la page la agaske, cliquer sur modifier l'agaseke et insérer une image dans la description). Si vous disposez d'une vidéo fun, amusante ou émouvante, insérer son lien youtube ou viméo dans le formulaire de modification de votre agaseke. Notez que vous devrez être connecté à votre compte kwendoo pour effectuer toutes ces modifications.
+     h6 Pour des projets à financer par le public, une vidéo peut être un excellent moyen de présenter votre agaseke et de donner vie et réalité à votre projet. Celle-ci doit rester courte (moins de deux minutes) et frapper l'esprit.
+
+     h4 Embarquer un Widget
+     h6 Si l'évènement ou le projet pourlequel vous faites une agaseke dispose d'un site, Vous obtiendrez sur la page de votre agaseke, le code que vous devez copier-coller sur votre site pour que l'agaseke y soit accessible.
+
+     h4 Optimiser la durée de la collecte
+     h6 Pendant votre collecte, vous allez devoir fédérer une communauté de personnes autour de votre agaseke. Laissez vous le temps d’atteindre votre objectif, mais évitez de faire durer votre collecte trop longtemps. Il est important qu'elle reste dynamique et rythmée afin de stimuler les potentiels contributeurs!
+     h6 Ayez bien à l'esprit que Ce n’est pas parce qu’une collecte dure plus longtemps qu’elle a plus de chance de réussir. 
+     h6 En général, les collectes enregistrent des pics d'activité au début et à la fin de celles-ci. La durée d’une collecte sur Kwendoo est de 60 joours maximum.
+
+
+     h4 <a href='https://www.kwendoo.com/projects/new'>Lancez vous!</a>
+     

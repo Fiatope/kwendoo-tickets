@@ -1,0 +1,16 @@
+- user = @notification.user
+|Chèr(e), #{user.name}!
+br
+br
+|Nous vous remercions de votre confiance à #{Configuration[:company_name]}.
+br
+br
+|L'agaseke #{@notification.project.name} sera active dans quelques instants et vous en serez notifié par email. Vous pouvez d'ores et déjà continuer de compléter les informations requises ici #{link_to "votre agaseke", project_url(@notification.project)}. Faites-le pour maximiser vos chances de réussir votre collecte. 
+br
+br
+|Suivez #{Configuration[:company_name]} sur #{link_to 'Facebook', Configuration[:facebook_url]} et sur #{link_to 'Twitter', "http://twitter.com/#{Configuration[:twitter_username]}" } pour rester à jours des dernières nouvelles. Pour toute question, envoyez nous un email à : #{mail_to Configuration[:email_contact]}
+br
+br
+|Bien à vous,
+br
+|L équipe #{Configuration[:company_name]}

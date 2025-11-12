@@ -1,0 +1,2 @@
+class QrCodeUploader < ImageUploader
+end

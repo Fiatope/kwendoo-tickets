@@ -1,0 +1,42 @@
+en:
+  projects:
+    contributions:
+      show:
+        title: 'Thank you'
+        thank_you: 'Thank you for your order!'
+        recommended_projects: 'You may like these others projects:'
+        prebooked: "Your tickets are just prebooked and you will need to pay at the event's door"
+        share: "You can share this event by telling others you're going!"
+        twitter-text: 'I just payed %{value} to %{name} on @Neighborly: %{project_url}'
+        facebook: 'Share'
+        twitter: 'Tweet'
+        like_us: 'Like us on Facebook' 
+        bankaccount:
+          title: 'You payed using a new bank account. Please verify your account to complete your payment.'
+          steps:
+            first: 'We will make two small deposits (each less than $1.00) to this account. Deposits may take 1-2 business days to appear.'
+            second: 'You will receive an email with a link to verify your account using the two deposit amounts.'
+            third: 'Once your account has been verified, your payment will be processed and automatically reflected in the event you payed to.'
+        receipt:
+          address_html: "tickets.kwendoo.rw is a service of <br>Fiatope Digital Services<br> 110 rue Pierre Brossolette<br> 92320, Chatillon<br>France"
+          print_cta: " Print Receipt"
+          heading: "Payment Transaction"
+          info: "Your Ticket payment was approved. Please find your payment receipt below:"
+          card_info: "This Payment was done  using a %{card_type} credit card"
+          mobile_money_info: "This contribution was paid using Mobile Money"
+          card_last4_info: " ending in %{last4}"
+          transaction_reference_label: "Ticket Reference"
+          confirmed_at_label: "Transaction Date"
+          terms:
+            display_name: "Full Name"
+            address_city: "City"
+            address_state: "State"
+            address_zip_code: "Zip Code"
+          table:
+            quantity_heading: "Quantity"
+            code_heading: "Ticket type"
+            project_heading: "Event"
+            description_heading: "Description"
+            unit_heading: "Unit Price"
+            total_heading: "Total Price"
+            total_caption: "Total"

@@ -1,0 +1,15 @@
+rw:
+  devise:
+    confirmations:
+      new:
+        no_account_html: "Waba ukeneye konti? Iyandikishe"
+        titles:
+          site: 'kongera kohereza amabwiriza yo kwemeza'
+          header: 'Kongera kohereza amabwiriza yo kwemeza'
+        links:
+          register: "Iyandikishe<i class='icon-et-right-circled'></i>"
+        form:
+          labels:
+            email: 'aderesi ya email yawe'
+          inputs:
+            submit: 'Kongera kohereza amabwiriza'

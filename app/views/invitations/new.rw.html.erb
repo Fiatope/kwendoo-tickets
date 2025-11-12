@@ -1,0 +1,17 @@
+	<%= content_for :title, t('.title') %>
+
+	<div class="background-full flex-container text-center">
+		<div class="background-title flex-item">
+			<h2>Ubutumwa ku baterankunga</h2>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="info text-center">
+		        Koresha uyu mwanya wohereza email ku bantu wifuza ko bagira uruhare mu kugutera inkunga ku gaseke...
+                        Turaguharira uhitemo ibijya mu butumwa. Gusa wibuke gushyiramo linki y'agaseke aha hakurikira.
+                        Abo woherereza linki nibo bari bubashe kuba bagera kuri paji iriho agaseke kawe.
+
+		</div>
+		<%= render 'form', :message => @message %>
+	</div>

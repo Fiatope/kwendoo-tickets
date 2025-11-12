@@ -1,0 +1,19 @@
+fr:
+  devise:
+    sessions:
+      new:
+        no_account_html: "Pas encore inscrit sur Kwendoo Tickets? S'inscrire"
+        titles:
+          site: 'Se connecter'
+          header: 'Se connecter'
+        links:
+          register: "S'inscrire"
+          forgot_password: "Mot de passe oublié?"
+          new_user_confirmation: "Confirmer mon email"
+        form:
+          labels:
+            remember_me: 'Se souvenir de moi'
+          inputs:
+            submit: 'Se connecter'
+            facebook: 'Facebook'
+            google: 'Google'

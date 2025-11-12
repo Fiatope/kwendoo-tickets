@@ -1,0 +1,8 @@
+rw:
+  projects:
+    contributions:
+      index:
+        empty: "Nta musanzu uratangwa. Mube aba mbere!"
+      contribution:
+        anonymous_contribution: "Umusanzu udashyirwa aha garagara"
+        no_reward: "Uyu muterankunga ntiyahisemo huhabwa ishimwe"

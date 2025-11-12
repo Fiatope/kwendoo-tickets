@@ -1,0 +1,16 @@
+rvm:
+  - 2.1.2
+
+cache: bundler
+before_script:
+  - 'git submodule init'
+  - 'git submodule update'
+  - 'cd spec/dummy/'
+  - 'cp .env.example ../../.env'
+  - './bin/bootstrap'
+  - 'bundle exec rake db:migrate'
+  - 'rm -rf spec/'
+  - 'cd ../../'
+
+script:
+  - 'bundle exec rspec'

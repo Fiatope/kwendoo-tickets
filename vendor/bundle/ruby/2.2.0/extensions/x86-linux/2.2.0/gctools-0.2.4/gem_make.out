@@ -1,0 +1,14 @@
+/usr/bin/ruby2.2 -r ./siteconf20190828-8144-rj6aks.rb extconf.rb
+checking for rb_gc_stat()... yes
+checking for rb_gc_latest_gc_info()... yes
+checking for RUBY_INTERNAL_EVENT_GC_END_MARK... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling oobgc.c
+linking shared-object gctools/oobgc.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 oobgc.so ./.gem.20190828-8144-1tx7p8c/gctools

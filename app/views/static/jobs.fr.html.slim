@@ -1,0 +1,48 @@
+= content_for :title, t('.title')
+
+- if request.xhr?
+  a.close-reveal-modal ×
+
+.start-page
+  header.hero[data-image-url="#{ (channel && channel.start_hero_image.present?) ? channel.start_hero_image_url(:blur) : image_path('start/hero.jpg')}"]
+    .row
+      .large-8.columns.large-centered.text-center
+        h2
+          - if channel
+            = channel.start.title
+            br/
+            = channel.start.subtitle
+          - else
+            = t('.title')
+
+
+#about-page
+  .row
+     .page-headline
+
+  .job-description
+    .row
+      h4
+        p Analyse et étude de marché 
+      h4
+        p Développement Ruby on Rails Front-End et Back-End.
+      h4
+        p Designer Web - Graphiste
+      h4
+        p Communication digitale et développement d'audience
+      h4
+        p Traduction Français/Anglais(américain)
+      h4
+        p Juridique
+      h4
+        p Gestion administrative et comptable
+  .row 
+    h4 
+      | Envoyez nous un mail à  
+      a href='mailto:contact@kwendoo.rw' contact@kwendoo.rw
+      |
+
+  .row
+
+
+

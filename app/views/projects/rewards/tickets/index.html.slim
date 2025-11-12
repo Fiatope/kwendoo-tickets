@@ -1,0 +1,75 @@
+- content_for :title, t('.title')
+.admin
+  .row
+    = render 'neighborly/admin/layouts/menu'
+    section.content.large-12.columns
+      .filters
+        = form_tag main_app.tickets_path, method: :get, class: 'form-horizontal' do |f|
+          .row
+            .large-3.columns
+              = label_tag :by_user_id, t('.user_id')
+              = text_field_tag :by_user_id, params[:by_user_id], class: 'input-small'
+            .large-3.columns
+              = label_tag :between_values, t('.between_values')
+              = text_field_tag 'between_values[start_at]', (params[:between_values][:start_at] if params[:between_values].present?), class: 'input-small'
+              | &nbsp;
+              | &nbsp;
+              = text_field_tag 'between_values[ends_at]', (params[:between_values][:ends_at] if params[:between_values].present?), class: 'input-small'
+            .large-3.columns
+              = label_tag :with_state, t('.by_state')
+              = select_tag :with_state, options_for_select(Contribution.state_names, params[:with_state]), include_blank: true
+            .large-3.columns
+              = label_tag :by_key, t('.key')
+              = text_field_tag :by_key, params[:by_key]
+            .large-6.columns
+              = label_tag :project_name_contains, t('.project')
+              = text_field_tag :project_name_contains, params[:project_name_contains]
+            .large-6.columns
+              = label_tag :user_name_contains, t('.user')
+              = text_field_tag :user_name_contains, params[:user_name_contains], class: 'input-medium'
+            .large-6.columns
+              = label_tag :user_email_contains, t('.user_email')
+              = text_field_tag :user_email_contains, params[:user_email_contains], class: 'input-medium'
+            .large-6.columns.text-left
+              = check_box_tag :credits, :true, params[:credits]
+              = label_tag :credits, t('.credits')
+            .large-6.columns.text-right
+              = submit_tag t('.submit'), class: 'button'
+
+      .row
+        .large-6.columns.text-left
+          = paginate @tickets
+        .large-6.columns.text-right
+          / = pluralize_without_number collection.length, t('words.found_singular'), t('words.found_plural')
+          | &nbsp;
+          / strong= collection.length
+          | &nbsp;
+          / = pluralize_without_number(collection.length, t('words.ticket_singular'), t('words.ticket_plural')).downcase
+      - if @tickets.empty?
+        = t('.no_tickets')
+      - else
+        table
+          thead
+            tr
+              th= t('.title')
+              th= t('.minimum_value')
+              th= t('.count')
+              th= t('.total')
+              th
+              th
+          tbody
+            - @tickets.each do |ticket|
+              tr id=ticket.id
+                td title=ticket.title
+                  = ticket.title
+                td
+                  = ticket.minimum_value
+                td
+                  = ticket.count
+                td
+                  = ticket.minimum_value * ticket.count
+                td[style="color:#c13511;"]
+                  = t('.on_promotion') if ticket.promote?
+                td
+                  = link_to t('.free_ticket'), main_app.free_ticket_path(ticket), class: 'button tiny', target: :blank
+      /= paginate @tickets

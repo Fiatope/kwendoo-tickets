@@ -1,0 +1,7 @@
+<p>Muraho <%= @resource.email %>!</p>
+
+<p>Konti yanyu yafunzwe bitewe ni mpamvu nyinshi zo gushaka kwinjira muri konti.</p>
+
+<p>Mwwakanda hano kugira ngo mubashe kuyi fungura:</p>
+
+<p><%= link_to 'Gufungura konti yanjye', unlock_url(@resource, :unlock_token => @resource.unlock_token) %></p>

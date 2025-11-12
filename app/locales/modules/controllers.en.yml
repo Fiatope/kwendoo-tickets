@@ -1,0 +1,58 @@
+en:
+  controllers:
+    unauthorized: 'You are not authorized to access this page.'
+    unsubscribes:
+      create:
+        success: 'Your information has been updated!'
+    invitations:
+      create:
+        success: "Your invitation has been sent !"
+    projects:
+      contributions:
+        new:
+          no_reward: ""
+        create:
+          error: 'Oh noez! There was an error processing your contribution. Please try again.'
+        credits_checkout:
+          no_credits: "You don't have enough credits to help greenlight this project."
+          success: "You successfully contributed using credits."
+        pay:
+          credit_card_description: "Back project %{project_name} with %{value} (plus fees)"
+          echeck_description: "Back project %{project_name} with %{value} (plus fees)"
+          paypal_description: "Back project %{project_name} with %{value} (plus fees)"
+          no_credits: "You don't have enough credits to help greenlight this project."
+          success: "You successfully contributed. Thank you!"
+        orange_money_payment_confirmation:
+          success: "Orange Money Payment confirmed. Your ticket purchase has been processed successfully."
+          error: "The transaction has been refused and you will not be charged. (%{status})"
+
+        vpc_payment:
+          success: "You successfully ordered (%{amount} RWF). Thank you!"
+          error: "Oh noez! There was an error processing your order. Please try again (Error returned by Mastercard: %{error})"
+        mobile_money_payment_initiation:
+          invalid_phone: "This phone number does not seem to be compatible with mobile money. Please try again with another one."
+          success: "Payment request sent. Please follow the instructions you receive on your phone to complete the payment. Once you're done, refresh the page to verify the contribution has been processed successfully"
+          error: "Something went wrong with the payment server and you will not be charged - %{error_code} - %{error_message}"
+        mobile_money_payment_confirmation:
+          success: "Mobile Payment confirmed. Your contribution has been processed successfully."
+          error: "The transaction has been refused and you will not be charged - %{error_code} - %{error_message}"
+      matches:
+        vpc_payment:
+          success: "You successfully contributed %{amount} RWF. Thank you!"
+          error: "Oh noez! There was an error processing your contribution. Please try again (Error returned by Mastercard: %{error})"      
+    users:
+      invalid_information: Invalid user information
+      completeness_progress: 'Please <a href="%{link}">complete your profile</a> so we can talk you up, and give you full credit for being awesome!'
+      update:
+        success: 'Your information has been updated!'
+      contributions:
+        request_refund:
+          refunded: "Refund request successfully done. Our team will contact you within two business days."
+          insufficient_credits: "You don't have enough credits to request this refund."
+    channels_subscribers:
+      created: 'You are now following %{channel}'
+      deleted: 'You are no longer following %{channel}'
+    companies:
+      contacts:
+        create:
+          success: 'Thank you for your interest! We will be in touch soon.'

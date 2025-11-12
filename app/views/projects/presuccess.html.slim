@@ -1,0 +1,52 @@
+/- content_for :page_content do
+  /= initjs_tag app_name: 'Neighborly', partial: true if request.xhr?
+
+.background-full.text-center
+	.filter-black-title.flex-container
+	  .background-title.flex-item
+			h2 = t('.titles.my_cagnotte')
+
+
+.presuccess-project-page
+	.row
+	  .col-md-offset-1.col-md-10
+	    .new-project-box
+	      .row
+	        .large-10.small-11.columns.large-centered.small-centered
+					  = simple_form_for @project do |form|
+					      hr
+                                              .row
+                                                - if policy(@project).permitted_for?(:hero_image, :update)
+                                                  .col-md-12.image-uploader
+                                                    = form.input :hero_image, as: :file
+                                                    - if @project.hero_image.present?
+                                                      .image-preview
+                                                        = image_tag(@project.hero_image_url(:blur), size: '220')
+ 
+                                              hr
+					      .section-header =t('.communication')
+					      - if policy(@project).permitted_for?(:video_url, :update)
+					        = form.input :video_url, as: :string
+
+					      - if policy(@project).permitted_for?(:site, :update)
+					        = form.input :site
+					      - if policy(@project).permitted_for?(:site, :update)
+					        = form.input :hash_tag
+					      hr
+					      .section-header =t('.budget_et_planning')
+					      
+					      - if policy(@project).permitted_for?(:budget, :update)
+					        = form.input :budget
+					      /- if policy(@project).permitted_for?(:terms, :update)
+					      /  = form.input :terms
+					      hr
+
+					      = form.button :submit, class:'btn btn-block btn-medium-red'
+
+							/- if request.xhr?
+					  		/= yield :page_content
+							/- else
+					 		= render "Projects/success"
+
+
+

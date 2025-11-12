@@ -1,0 +1,20 @@
+fr:
+  project:
+    display_status:
+      expired: 'expiré'
+      failed: 'pas financé'
+      successful: 'financé'
+      waiting_confirmation: 'en attente de confirmation'
+      waiting_funds: 'en attente de fonds'
+      not_reached_goal: 'objectif pas atteint'
+      draft: 'En Revue'
+    organization_type:
+      municipality: 'Particulierr'
+      neighborhood_organization: 'Communauté'
+      registered_nonprofit: 'Association'
+      public_private_partnership: 'Partenariat public-privé'
+      cid_bid: 'cid bid'
+      nonprofit_501c3: 'nonprofit_501c3'
+      other: 'Autre'
+      not_sure: 'not sure'
+     

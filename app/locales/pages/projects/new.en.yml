@@ -1,0 +1,54 @@
+en:
+  projects:
+    new:
+      not_mangopay_ready: 'We need you to fill informations below before to let you create a project'
+      titles:
+        site: 'Submit your event'
+        header: 'List an event'
+        sub: 'Anyone can list an event for free. Get started today! '
+        my_cagnotte: 'My event'
+        modify: 'Modify my event'
+        info_pro: 'General Information'
+        det_info: 'informations détaillées'
+        local: 'localization'
+        communi: 'communication'
+        budget_plan: 'Budget et Planning'
+      joyride:
+        next: 'Next'
+        done: 'Done'
+        start:
+          title: 'You are submitting an event.'
+          description: 'Information provided here can be changed later.'
+        category:
+          title: 'Choose Category'
+          description: 'Which category best describes your event? You can change this later.'
+        name:
+          title: 'Event Name'
+          description: 'What would you like to call it? A short, catchy, shareable title works best!'
+        campaign_type:
+          title: 'Event Type'
+          description: 'What funding model would you like to use? <br /><br/> <strong>Every Dollar Counts:</strong> The project is funded whether or not the goal is reached. <br /> <strong>All or None:</strong> You must reach your goal by the end of your project to receive funds.'
+        goal:
+          title: 'Project Goal'
+          description: 'How much do you need to raise in order to complete your project? Please enter a number without commas.'
+        address:
+          title: 'City, Sector'
+          description: 'Where is your project based?'
+        headline:
+          title: 'Summary'
+          description: 'Describe your event in 140 characters.'
+        about:
+          title: 'The Story'
+          description: "Tell your clients about your event."
+        code_partenaire:
+          title: 'Partner code'
+        organization_type:
+          title: 'Organization Type'
+          description: 'Please select the type that best describes the entity who will receive funds raised.'
+        submit:
+          button: "move on to next step"
+      accept_terms_html: 'By submitting, you agree to the %{link}.'
+      tickets_categories_available: 'Tickets categories available'
+      tickets_available: 'Tickets available'
+      add_a_ticket_category: '+ Add a ticket category'
+      add_a_ticket: '+ Add a ticket'

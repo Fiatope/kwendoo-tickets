@@ -1,0 +1,12 @@
+rw:
+  rewards:
+    index:
+      sold_out: 'Mwihangane karagurishijwe!'
+      add: 'Ongeramo'
+      estimated_deliver: "Yoherejwe: %{prevision}"
+      contributions_to_confirm:
+        one:  "Inkunga itegereje igihe cyo kuyemeza."
+        other: "Inkunga %{count} zigeze igihe cyo kwemezwa."
+      reward_title: "ya %{minimum} nibindi"
+      contact: 'Contact'
+      reward_deliver_time: "yatanzwe: %{prevision}"

@@ -1,0 +1,17 @@
+	<%= content_for :title, t('.title') %>
+
+	<div class="background-full flex-container text-center">
+		<div class="background-title flex-item">
+			<h2>contactez les contributeurs</h2>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="info text-center">
+		        Utilisez ce formulaire pour envoyer un mail aux personnes que vous souhaitez inviter à participer à l'agaseke.
+                        Nous vous laissons choisir le contenu de votre email. Assurez vous que vous y incluez le lien de votre agaseke (ci-dessous).
+                        Seuls les personnes à qui vous envoyez le lien ont accès à votre page d'agasake.
+
+		</div>
+		<%= render 'form', :message => @message %>
+	</div>

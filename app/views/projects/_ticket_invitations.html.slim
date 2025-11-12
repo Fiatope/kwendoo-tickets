@@ -1,0 +1,19 @@
+table
+  thead
+    tr
+      th= t('projects.rewards.tickets.index.category')
+      th= t('projects.rewards.tickets.index.title')
+      th= t('projects.rewards.tickets.index.description')
+      th
+      th
+  tbody
+    - @tickets.each do |ticket|
+      tr id=ticket.id
+        td
+          = ticket.reward_category.name
+        td title=ticket.title
+          = ticket.title
+        td
+          = ticket.description
+        td
+          = link_to t('projects.rewards.tickets.index.free_ticket'), main_app.free_ticket_path(ticket), class: 'button tiny', target: :blank

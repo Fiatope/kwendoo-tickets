@@ -1,0 +1,9 @@
+fr:
+  projects:
+    success:
+      titles:
+        site: 'Evènement créé avec succès!'
+        header: 'Evènement créée avec succès!'
+      text1: "Félicitations pour cette étape! votre événement est en ligne. Vous recevrez un e-mail avec des conseils pour réussir la page de de votre événement. <br /><br /> Envoyez le lien suivant à vos clients via email:"  
+      text2: "<br /><br /> ou utilisez les boutons de partage de votre page d’évènement pour le diffuser sur les réseaux sociaux (Whatsapp, Facebook, Twitter). Nous vous invitons à compléter la personnalisation de votre événement afin de le rendre convivial pour vos participants"
+      continue: 'Accédez à votre évènement'

@@ -1,0 +1,6 @@
+en:
+  users:
+    payments:
+      advanced:
+        title: "Advanced authorization"
+      submit: 'Save informations'

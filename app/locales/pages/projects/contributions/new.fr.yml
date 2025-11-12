@@ -1,0 +1,10 @@
+fr:
+  projects:
+    contributions:
+      new:
+        title: "Contribuer à cette campagne"
+        subtitle: "Sélectionner votre montant."
+        contribute: "Contribuer à <strong>%{project_name}</strong>"
+        submit: 'Confirmer'
+        not_mangopay_ready: "Vous devez fournir plus d'informations avant de contribuer à un projet"
+        atleast: 'Contribuer un montant supérieur à 3000'

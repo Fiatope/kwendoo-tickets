@@ -1,0 +1,15 @@
+fr:
+  devise:
+    confirmations:
+      new:
+        no_account_html: "Besoin d'un compte? S'inscrire"
+        titles:
+          site: 'Confirmer mon Compte'
+          header: 'Confirmer mon Compte'
+        links:
+          register: "S'inscrire <i class='icon-et-right-circled'></i>"
+        form:
+          labels:
+            email: 'Votre adresse email'
+          inputs:
+            submit: 'Me renvoyer les instructions'

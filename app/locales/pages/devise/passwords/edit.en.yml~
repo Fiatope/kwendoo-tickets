@@ -1,0 +1,15 @@
+en:
+  devise:
+    passwords:
+      edit:
+        titles:
+          site: 'Configurer un Mot de Passe'
+          header: 'Réinitiliaser le Mot de Passe'
+        form:
+          hint:
+            password_length: '6 carctères minimum.'
+          labels:
+            password: 'Nouveau Mot de Passe'
+            password_confirmation: 'Entrer à nouveau le mot de Passe'
+          inputs:
+            submit: 'Sauvegarder et se connecter'

@@ -1,0 +1,17 @@
+- resource = @notification.contribution
+
+|Hello, #{resource.user.display_name}!
+br
+br
+|This confirms your attendance to #{@notification.contribution.project.name}.
+br
+br
+|Please find attached your tickets
+br
+br
+|If you have any other questions, please access our #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Kindest regards,
+br
+|The #{Configuration[:company_name]} Team

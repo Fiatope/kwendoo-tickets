@@ -1,0 +1,28 @@
+
+- project = @notification.project
+- canceled_contributions_today = project.contributions.canceled_today
+
+|Hello #{project.user.display_name}, the following contributions to Agaseke #{@notification.project.name} were not successful. The contributors have been informed and we've suggested them to try again.
+br
+br
+table width="500" border="1" cellpadding="10" cellspacing="0" style='font-size: 13px;'
+  thead
+    tr
+      th width="100" Contributeur
+      th width="100" Email
+      th width="100" Montant
+  tbody
+    - canceled_contributions_today.each do |contribution|
+      tr
+        td= contribution.user.display_name
+        td= contribution.user.email
+        td= contribution.display_value
+br
+br
+|The frequent reasons are linked to Mobile Money payment failing to get validated, credit card validity, 3D secure, bank authorization. 
+br
+br
+|Kind regards
+br
+br
+|The #{Configuration[:company_name]} team

@@ -1,0 +1,11 @@
+rw:
+  facebook_locale: 'en_US'
+  site:
+    title: "Gushyira hamwe"
+    meta_title:  "%{title} · %{company_name}"
+    description: "Agaseke"
+    keywords: "agaseke, aba ba mumahanga, imishinga, ibikorwa, abaaturage "
+    email:
+      contact: 'contact@kwendoo.rw'
+    ograph:
+      description: "Kwendo Rwanda yabageneye uburyo bwo kwitabira ibiroria niminsi mikuru, ibikorwa and imishinga ikenewe kuri mwebwe."

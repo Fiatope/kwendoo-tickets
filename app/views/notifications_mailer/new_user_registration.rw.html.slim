@@ -1,0 +1,16 @@
+- user = @notification.user
+- recommended = Project.visible.with_state('online').recommended.limit(3)
+
+| Muraho
+- if user.name
+  | , #{user.name}!
+
+br/
+br/
+| Murakoze kugana Kwendoo Rwanda, uburyo bworoshye bwo gushyira hamwe.
+br
+br
+| Murakoze,
+br
+| Ubuyobozi bwa #{Configuration[:company_name]}
+

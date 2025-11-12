@@ -1,0 +1,23 @@
+fr:
+  users:
+    edit:
+      tabs:
+        edit: "profil"
+        my_campaigns: "Mes évènements"
+        ive_contributed: "Mes billets"
+        credits: 'crédits'
+        payments: 'coordonnées bancaires'
+        settings: 'mes configurations'
+        mangopay_authentications: 'mon identité'
+      mangopay:
+        required: 'requis par Bank de Kigali' 
+        birthday: 'date de naissance'
+        nationality: 'nationalité'
+        residence_country: 'pays de résidence'
+        name: 'nom complet (prénom nom)'
+        address_city: 'ville'
+        address_state: 'pays'
+        address_street: 'rue et numéro'
+        address_zip_code: 'code postal'
+        organization_name: "nom de l'organisation"
+        phone: "portable"

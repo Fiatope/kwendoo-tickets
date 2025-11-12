@@ -1,0 +1,13 @@
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Projet: #{contribution.project.name}
+br
+|Clé: 
+strong #{resource.key}
+br
+|Créé le: #{resource.created_at}
+br
+|Confirmé le: #{resource.confirmed_at}

@@ -1,0 +1,15 @@
+tr
+  td = "KWENDOO-C#{contribution.id}"
+  td = link_to contribution.project.name, edit_project_contribution_path(project_id: contribution.project, id: contribution.id)
+  td = contribution.value.to_i.to_s + ' ' + contribution.currency
+  td = contribution.payment_method ? contribution.payment_method : '---'
+  td = contribution.card_type ? contribution.card_type : '---'
+  td
+    - if contribution.state == 'confirmed'
+      - if contribution.confirmed_at.present?
+        = contribution.confirmed_at.strftime("%d %B %Y - %H:%M")
+      - else
+        = '---'
+    - else
+      = '---'
+

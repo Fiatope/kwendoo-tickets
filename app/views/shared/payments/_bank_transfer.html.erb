@@ -1,0 +1,53 @@
+
+<!-- -------------- Modal bank  -------------------- -->
+
+<a data-target="#myModal" role="button" class="button button--mastercard button-transfer-bank" data-toggle="modal">Select your Bank</a>
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a href="https://www.bk.rw/" target="_blank">
+          <div class="row cardo">
+            <div class="col-sm-4">
+              <div class="card-imgo">
+                = image_tag("payments/bank-of-kigali.jpg", :class => "img-fluid")
+              </div>
+            </div>
+            <div class="col-sm-8">
+              p BK
+            </div>
+          </div>
+          </a>
+        <a href="https://rw.equitybankgroup.com/index.php/self-service/internet-banking" target="_blank">
+          <div class="row cardo">
+            <div class="col-sm-4">
+              <div class="card-imgo">
+                = image_tag("payments/iandm.png", :class => "img-fluid")
+              </div>
+            </div>
+            <div class="col-sm-8">
+              p I&M
+            </div>
+          </div>
+        </a>
+        <a href="#">
+          <div class="row cardo">
+            <div class="col-sm-4">
+              <div class="card-imgo">
+                = image_tag("payments/equity.jpg", :class => "img-fluid")
+              </div>
+            </div>
+            <div class="col-sm-8">
+              p EQUITY
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="modal-footer">
+        <button class="btn color-primary" data-dismiss="modal">CLOSE</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- -------------------- end modal ------------------------------------ -->

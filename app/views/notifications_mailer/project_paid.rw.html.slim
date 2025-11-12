@@ -1,0 +1,23 @@
+- project = @notification.project
+- user = @notification.user
+|Bwana/Madam, #{user.display_name}.
+br
+br
+| aAgaseke "
+= link_to(project.name, project_url(project))
+|" Mwateye inkunga kahawe amafaranga yako yashyizwe kuri konti ya #{project.user.display_name}
+br
+br
+| Biciye muruhare rwanyu nabandi, <strong> #{project.pledged} Rwfs </strong> yakusanyijwe. 
+br
+br
+| Twifuzaga kubashimira kuba mugirira kwendoo icyizere.
+br
+br
+|Turabasaba kuba mwakangurira ibya #{Configuration[:company_name]} abandi hirya no hino nabo batugane #{link_to 'Facebook', Configuration[:facebook_url]}
+br
+br
+|Murakoze,
+br
+br
+|Ubuyobozi bwa #{Configuration[:company_name]} 

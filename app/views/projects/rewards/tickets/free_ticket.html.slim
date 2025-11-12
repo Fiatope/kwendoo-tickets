@@ -1,0 +1,26 @@
+- content_for :title, t('.title')
+.admin
+  .row
+    section.content.large-12.columns
+      .filters
+        = form_tag main_app.free_ticket_index_path(@reward, format: :pdf), method: :get, class: 'form-horizontal' do |f|
+          - 2.times do |i|
+            .row
+              .large-6.columns
+                = label_tag :name, "#{t('.name')} #{i+1}"
+                - if params[:name]
+                  = text_field_tag 'free_tickets[name][]', params[:name][i], class: 'input-medium', required: true
+                - else
+                  = text_field_tag 'free_tickets[name][]', nil, class: 'input-medium', required: true
+            .row
+              .large-6.columns
+                = label_tag :email, "#{t('.email')} #{i+1}"
+                - if params[:email]
+                  = email_field_tag 'free_tickets[email][]', params[:email][i], class: 'input-medium'
+                - else
+                  = email_field_tag 'free_tickets[email][]', nil, class: 'input-medium'
+            - break unless @reward.couple?
+          .row
+            .large-6.columns.text-right
+              br
+              = submit_tag "#{t('.submit')} (#{@reward.reward_category.name} - #{@reward.title})", class: 'button'

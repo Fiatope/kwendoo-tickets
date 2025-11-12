@@ -1,0 +1,19 @@
+rw:
+  devise:
+    sessions:
+      new:
+        no_account_html: "Ntimuriyankisha kuri kwendoo Rwanda? <strong>Kwiyandikisha</strong>"
+        titles:
+          site: 'Kwinjira'
+          header: 'Kwinjira'
+        links:
+          register: "Mudusange <i class='icon-et-right-circled'></i>"
+          forgot_password: "Mwaba mwibagiwe ijambo banga ryanyu"
+          new_user_confirmation: "Mwaba mutamutakiriye amabwiriza yo kwemeza?"
+        form:
+          labels:
+            remember_me: 'Munyibuke'
+          inputs:
+            submit: 'Injira'
+            facebook: 'Kwinjira na Facebook'
+

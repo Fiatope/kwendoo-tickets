@@ -1,0 +1,29 @@
+- project = @notification.project
+- if @notification.contribution.present?
+  - resource = @notification.contribution
+- else
+  - resource = @notification.match
+
+|Dear #{resource.user.display_name},
+br
+br
+|You wanted to buy a ticket of #{link_to(resource.project.name, project_url(resource.project))} event. 
+br
+br
+|We are sorry that the transaction was not successful. Our payment intermediary reported the following error:
+br
+|You have not verified your payment via mobile phone. We secure the transactions via the mobile line you have declared to your Bank.Make sure you have your mobile phone with you and try again
+br
+br
+|Your credit card has not been charged.
+br
+br
+|We are sorry about this disagreement and we hope you will be able to complete your payement as soon as possible.
+br
+br
+|For any other questions, send an email to #{mail_to Configuration[:email_contact]} or access our #{link_to('FAQ', "#{Configuration[:base_url]}/faq")}.
+br
+br
+|Kindest regards,
+br
+|The team Kwendoo tickect

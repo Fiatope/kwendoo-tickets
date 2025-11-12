@@ -1,0 +1,20 @@
+	<%= content_for :title, t('.title') %>
+
+	<div class="background-full flex-container text-center">
+		<div class="background-title flex-item">
+			<h2>Nous contactez</h2>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="info text-center">
+                        Kwendoo Tickets est un produit édité par l'Association Fiatope enregistrée en France.</p>
+			Pour toute question, contactez nous par SMS ou Whatsapp, de 9h à 20h, du lundi au Samedi au +33 6 71 54 44 39. Nous vous répondrons dans l'heure;
+			Vous pouvez également nous envoyer un mail à 
+			<a href='mailto:contact@kwendoo.com'> contact@kwendoo.com </a>
+			ou laisser un message ci-dessous :
+
+
+		</div>
+		<%= render 'form', :message => @message %>
+	</div>

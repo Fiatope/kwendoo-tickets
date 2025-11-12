@@ -1,0 +1,19 @@
+en:
+  projects:
+    contributions:
+      edit:
+        title: 'Finalize your tickets order for %{project_name}'
+        you_are_contributing_to: 'Finalize your tickets order for '
+        total: 'Total: '
+        i_want_pay_fees: "I assume the transaction costs"
+        payment:
+          title: "Please select a payment method or send A check to the initiator of Event Or project as long as the payment interfaces Are not yet available"
+        reward:
+          title: 'Your Reward'
+        tooltip-text: "Thank you for supporting <strong>%{project_name}</strong>!In order to make the most of your contribution, we will be grateful if possible to assume the transaction costs.This makes a big difference for us and for achieving our goals and we will greatly appreciate it.<br /><strong>The transaction fee is of 5,5%.</strong>"
+        payment-method:
+          fees: 'Frais:'
+          balanced-creditcard:
+            title: 'Credit Card'
+          balanced-bankaccount:
+            title: 'Bank account'

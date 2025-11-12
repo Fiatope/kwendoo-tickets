@@ -1,0 +1,22 @@
+fr:
+  discover:
+    index:
+      title: 'Découvres Nos Evènements'
+      subtitle: ''
+      localisation: ''
+      empty: "pas d'évènement correspondant à votre recherche."
+      tags: 'Tags populaires:'
+      near: 'Localisation'
+      category: 'Catégorie'
+      state: 'Etat'
+      filter: 'Statut'
+      showing_results_for: 'Résultats pour: '
+      states:
+        active: 'Actif'
+        recommended: 'Recommendé'
+        expiring: 'Presque fini'
+        recent: 'Récent'
+        successful: 'Réussi'
+        soon: 'Bientôt'
+      localization: 'localisation des projets'
+      channels: 'Nous y étions'

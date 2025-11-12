@@ -1,0 +1,11 @@
+en:
+  projects:
+    project:
+      get_involved: 'Get Involved!'
+      completed: 'Completed'
+      viewpro: 'View the event'
+      soon: 'Coming Soon'
+      share:
+        twitter-text: "Check out the event %{name} #%{hash_tag} that I support on @kwendoo"
+        twitter: 'Tweet'
+        facebook: 'Share'

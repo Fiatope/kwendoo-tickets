@@ -1,0 +1,2 @@
+class TicketCategoriesOrderPolicy < ApplicationPolicy
+end

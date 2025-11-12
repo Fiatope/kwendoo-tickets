@@ -1,0 +1,92 @@
+fr:
+  projects:
+    promotions:
+      add: 'Nouveau code promo'
+      modify: 'Attribuer le code'
+      index:
+        title: 'Titre'
+        code: 'Code'
+        discount: 'Réduction'
+        nbr_ticket: 'Nombre de billets'
+      new:
+        title: 'Titre'
+        code: 'Code'
+        discount: 'Réduction (en pourcentage %)'
+        nbr_ticket: 'Nombre de billets'
+        submit: 'Générer un code'
+      edit:
+        title: 'Titre'
+        code: 'Code'
+        discount: 'Réduction (en pourcentage %)'
+        nbr_ticket: 'Nombre de billets'
+        submit: 'Attribuer le code'
+    status_bar:
+      goal: 'Goal: %{value}'
+      total_contributions: '%{value} Participants'
+      pay: 'Acheter des Billets'
+      contribuer: 'Acheter des Billets'
+    tabs:
+      about: 'A propos'
+      updates: 'Mises à jour'
+      faqs: 'FAQs'
+      comments: 'Comments'
+      participants: 'Participants'
+      contributions: 'Contributions'
+      budget: 'Budget'
+      terms: 'Termes et Conditions'
+      reports: 'Rapports'
+    show:
+      invitations: 'Générer un billet gratuit'
+      promotions: 'Générer un code promo'
+      so_far: '&nbsp; so far of &nbsp; '
+      anonymous_contribution: "Anonymous attendant"
+      contribute: 'Reserver ticket(s)'
+      contribute_prebooked: 'Billets en Pre-réservation'
+      neighbors_behind_this: 'In the event'
+      subtitle:
+        all_or_none: "Un évènement de %{category_name}, à %{city}, par %{author}"
+        flexible: "A <span data-tooltip class='has-tip' title='Every Dollar Counts! <br /><br />In this type of campaign, the project is funded whether or not the goal is reached.'>flexible</span> %{category_name} project by %{author} in %{city}"
+      status-bar:
+        goal: 'Goal: %{value}'
+        total_contributions: '%{value} participants'
+        pay: 'Payer'
+        contribuer: 'Payer'
+      display_status:
+        all_or_none:
+          reached_goal: "This project will be successful and funded on %{date}"
+          not_reached_goal: "This project will only be funded if at least %{goal} is pledged until %{date}"
+          failed: "This project didn't reach the goal of %{goal} until %{date} and wasn't funded"
+          successful: "This project was successful and was funded on %{date}"
+          waiting_funds: "Awaiting confirmation from payments to know if this project will be funded."
+          draft: "This project is in draft mode and is not open to Clients yet."
+        flexible:
+          reached_goal: "Event sold out or finished"
+          not_reached_goal: "Event sold out or finished"
+          failed: "This project was funded on %{date}"
+          successful: "This project was successful and was funded on %{date}"
+          waiting_funds: "This project recently closed and will be funded."
+          draft: "This project is in draft mode and is not open to Clients yet."
+      pay: 'Retirer les fonds'
+      edit: "Editer l'Evènement"
+      share:
+        title: 'Get your friends involved'
+      no-neighbors: "No Paricipants. Be the first!"
+      author:
+        about: 'About %{name}'
+      in_partnership_with: 'In Partnership With'
+    video_embed:
+      a_project_by_html: "A project by %{link} on"
+    share:
+      twitter-text: "Check out the project %{name} #%{hash_tag} on @Fiatop: %{project_url}"
+      twitter: 'Tweet'
+      contribute: 'Acheter les Billets'
+      contribute_edit: 'Billets en Pre-réservation'
+      facebook: 'Partager'
+      email: 'Email'
+      embed: 'Embed'
+    header:
+      subtitle:
+        reached_goal_small_separator_html: '&nbsp; / &nbsp; '
+        contribute: 'Acheter les Billets'
+        contribute_prebooked: 'Billets en Pre-réservation'
+      so-far: 'So Far'    

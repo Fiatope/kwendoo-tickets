@@ -1,0 +1,17 @@
+rw:
+  users:
+    settings:
+      change_password: "Hindura pasiwadi"
+      password_info: "Dukeneye pasiwadi usanzwe ukoresha kugira ngo twemeze guhindura."
+      save_password: 'Bika pasiwadi nshya'
+      communication_preferences: 'Guhitamo Amakuru'
+      update_communication_preferences: 'Hindura uko wakira amakuru'
+      unsubscribes:
+        title: 'Kumenyeshwa ibishya kuduseke'
+        updates: 'Ndifuza kwakira amakuru ajyanye nuduseke'
+        submit: 'Kubika Ibyo nahisemo'
+      kyc:
+        proof_type: 'Ubwoko bwa dokuma'
+        type:
+          identity_proof: "Gihamya y'indangamuntu"
+          address_proof: "Gihamya ya aderesi"
