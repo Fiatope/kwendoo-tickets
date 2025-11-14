@@ -1,6 +1,5 @@
 .bundle
 vendor/cache
-vendor
 db/*.sqlite3
 log/
 log/*.log
