@@ -28,6 +28,8 @@ class Contribution < ActiveRecord::Base
   validate :enough_tickets_remaining
   attr_accessor :custom_error
 
+  before_create :compute_cfa_value
+
   scope :available_to_count,   -> { with_states(['confirmed', 'requested_refund', 'refunded']) }
   scope :available_to_display, -> { with_states(['confirmed', 'requested_refund', 'refunded']) }
   scope :anonymous,            -> { where(anonymous: true) }
@@ -149,11 +151,11 @@ class Contribution < ActiveRecord::Base
   end
 
   def currency
-    if self.payment_method == "Orange Money" || self.payment_method == "Pay Plus Africa"
-      "XAF"
+    if self.payment_method == "Orange Money"
+      "EUR"
     else
       self.project.currency
-    end    
+    end
   end
 
   def as_json(options = {})
@@ -187,6 +189,17 @@ class Contribution < ActiveRecord::Base
       match.payment_service_fee / match.value * value
     else
       read_attribute(:payment_service_fee)
+    end
+  end
+
+  def compute_cfa_value
+    # Si le projet est déjà en FCFA/XAF/XOF, pas de conversion nécessaire
+    if self.project && ['FCFA', 'XAF', 'XOF'].include?(self.project.currency)
+      self.cfa_value = self.value.to_s.to_d
+    else
+      # Conversion EUR vers FCFA seulement si nécessaire
+      conversion_rate = ENV['CFA_CONVERSION_RATE'] || 656
+      self.cfa_value = self.value.to_s.to_d * conversion_rate.to_s.to_d
     end
   end
 

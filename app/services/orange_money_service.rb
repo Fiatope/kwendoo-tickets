@@ -86,30 +86,19 @@ class OrangeMoneyService < ApplicationService
       currency: @currency,
       order_id: "#{contribution.unique_identifier_for('orange_money')}",
       amount: contribution.cfa_value,
-      #amount: contribution.value.to_i,
       return_url: return_url,
       cancel_url: cancel_url,
       notif_url: notif_url,
       lang: (I18n.locale.to_s || "en"),
       reference: "ref KWENDOO #{rand(1..100000)}"
     }.to_json
-
-    puts "|||||||||||||||||||||||||||||||||||||"
-    puts uri.inspect
-    puts "|||||||||||||||||||||||||||||||||||||"
-    puts body_json.inspect
-    puts "|||||||||||||||||||||||||||||||||||||"
-
+    Rails.logger.debug('***' + uri.inspect)
+    Rails.logger.debug('***' + body_json.inspect)
     request.body = body_json
 
     response = http.request(request)
     response_json = JSON.parse(response.body)
-
-    puts "///////////////// response_json  ///////////////////"
-    puts response_json.inspect
-    puts "///////////////// response_json  ///////////////////"
-
-    #Rails.logger.debug('###' + response_json.inspect)
+    Rails.logger.debug('###' + response_json.inspect)
 
     contribution.orange_money_transactions.create!(
       order_id_string: "#{contribution.unique_identifier_for('orange_money')}",
