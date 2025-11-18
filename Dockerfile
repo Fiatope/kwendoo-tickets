@@ -23,15 +23,11 @@ RUN apt-get update -qq && \
 
 WORKDIR /app
 
-# Gems
-COPY Gemfile Gemfile.lock ./
-RUN bundle install --jobs 4 --retry 3
-
-# Code de l'application
+# Copier tout le code de l'application (y compris lib/neighborly-*)
 COPY . .
 
-# Précompilation des assets
-RUN bundle exec rake assets:precompile
+# Gems (les chemins relatifs dans le Gemfile fonctionnent maintenant)
+RUN bundle install --jobs 2 --retry 3
 
 # Commande de démarrage (Puma + config existante)
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
