@@ -19,6 +19,7 @@ RUN apt-get update -qq && \
       curl \
       tzdata \
       imagemagick \
+      git \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
