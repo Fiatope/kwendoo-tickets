@@ -18,7 +18,10 @@ environment ENV['RACK_ENV'] || 'development'
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+# Enable workers in production (Linux/Docker), skip on Windows
+if ENV['RACK_ENV'] == 'production' && !Gem.win_platform?
+  workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+end
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
@@ -27,7 +30,10 @@ workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 # you need to make sure to reconnect any threads in the `on_worker_boot`
 # block.
 #
-preload_app!
+# Preload app in production for Copy-on-Write memory savings
+if ENV['RACK_ENV'] == 'production' && !Gem.win_platform?
+  preload_app!
+end
 
 # The code in the `on_worker_boot` will be called if you are using
 # clustered mode by specifying a number of `workers`. After each worker
@@ -37,9 +43,6 @@ preload_app!
 # cannot share connections between processes.
 #
 on_worker_boot do
-  # Worker specific setup for Rails 4.1+
-  # See: https://devcenter.heroku.com/articles/
-  # deploying-rails-applications-with-the-puma-web-server#on-worker-boot
   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 end
 

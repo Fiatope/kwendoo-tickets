@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
                                             :reward_contact, :send_reward_email,
                                             :start]
 
-  before_action :has_mangopay_prerequisites, only: [:new, :create]
+  # before_action :has_mangopay_prerequisites, only: [:new, :create] # DISABLED — MangoPay deprecated
 
   respond_to :html, :csv
 
@@ -60,7 +60,11 @@ class ProjectsController < ApplicationController
     authorize @project
     @project.save!
 
-    NotificationsMailer.with(project: @project).project_successfuly_created.deliver_now
+    begin
+      NotificationsMailer.with(project: @project).project_successfuly_created.deliver_now
+    rescue => e
+      Rails.logger.warn "[Mailer] Failed to send project_successfuly_created email: #{e.class} #{e.message}"
+    end
 
     respond_with @project, location: success_project_path(@project)
   end
@@ -164,22 +168,17 @@ class ProjectsController < ApplicationController
     @project ||= Project.find_by_permalink!(params[:id])
   end
 
-  def has_mangopay_prerequisites
-    if user_signed_in?
-      if current_user.light_authentication_ready?
-        return true
-      else
-        flash.alert = t('projects.new.not_mangopay_ready')
-        redirect_to edit_user_path(current_user, redirect_url: new_project_path) and return false
-      end
-    else
-      redirect_to new_user_session_path
-    end
-  end
+  # DISABLED — MangoPay deprecated
+  # def has_mangopay_prerequisites
+  #   if user_signed_in?
+  #     if current_user.light_authentication_ready?
+  #       return true
+  #     else
+  #       flash.alert = t('projects.new.not_mangopay_ready')
+  #       redirect_to edit_user_path(current_user, redirect_url: new_project_path) and return false
+  #     end
+  #   else
+  #     redirect_to new_user_session_path
+  #   end
+  # end
 end
-
-
-  def exp
-    online_days && (event_date - online_date).to_i
-
-  end

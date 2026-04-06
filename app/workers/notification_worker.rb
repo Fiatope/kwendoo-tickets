@@ -5,7 +5,12 @@ class NotificationWorker
   def perform(notification_id)
     notification = Notification.find(notification_id)
 
-    NotificationsMailer.notify(notification).deliver
+    begin
+      NotificationsMailer.notify(notification).deliver
+    rescue => e
+      Rails.logger.error "[NotificationWorker] Email delivery failed for notification ##{notification_id}: #{e.message}"
+      raise e # Let Sidekiq retry handle it
+    end
     notification.update_attribute(:dismissed, true)
 
     if notification.template_name == "mobile_money_payment_confirmed"

@@ -27,34 +27,29 @@ class Message
   def deliver    
     return false unless valid?
 
-    # Pony.mail({
-    #   :from => %("#{name}" <#{email}>),
-    #   :to => "contact@kwendoo.rw", 
-    #   :reply_to => email,
-    #   :subject => subject,
-    #   :body => message,
-    #   :html_body => simple_format(message)
-    # })
-
-    Pony.mail({
-      :from => %("#{name}" <#{'contact@fiatope.com'}>),
-      :to => email,
-      :subject => subject,
-      :body => message,
-      :html_body => simple_format(message),
-      :via => :smtp,
-      :via_options => {
-        :address              => Configuration[:sendgrid_address],
-        :port                 => Configuration[:sendgrid_port],
-        :enable_starttls_auto => Configuration[:sendgrid_tls].downcase == 'true' ? true : false,
-        :user_name            => Configuration[:sendgrid_username],
-        :password             => Configuration[:sendgrid_password],
-        :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
-        :domain               => "fiatope.com", # the HELO domain provided by the client to the server
-        :arguments => ''
-      }
-    })
-
+    begin
+      Pony.mail({
+        :from => %("#{name}" <#{'contact@fiatope.com'}>),
+        :to => email,
+        :subject => subject,
+        :body => message,
+        :html_body => simple_format(message),
+        :via => :smtp,
+        :via_options => {
+          :address              => Configuration[:sendgrid_address],
+          :port                 => Configuration[:sendgrid_port],
+          :enable_starttls_auto => Configuration[:sendgrid_tls].downcase == 'true' ? true : false,
+          :user_name            => Configuration[:sendgrid_username],
+          :password             => Configuration[:sendgrid_password],
+          :authentication       => :plain, # :plain, :login, :cram_md5, no auth by default
+          :domain               => "fiatope.com", # the HELO domain provided by the client to the server
+          :arguments => ''
+        }
+      })
+    rescue => e
+      Rails.logger.error "[Message] Email delivery failed: #{e.class} #{e.message}"
+      return false
+    end
   end        
 
   def persisted?    

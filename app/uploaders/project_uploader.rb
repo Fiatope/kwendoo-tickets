@@ -1,4 +1,5 @@
 class ProjectUploader < ImageUploader
+  process :flatten_alpha
   process convert: :jpg
 
   version :project_thumb do
@@ -16,6 +17,16 @@ class ProjectUploader < ImageUploader
   #facebook requires a minimum thumb size
   version :project_thumb_facebook do
     process resize_to_fill: [512,400]
+  end
+
+  def flatten_alpha
+    manipulate! do |img|
+      img.combine_options do |c|
+        c.background "white"
+        c.flatten
+      end
+      img
+    end
   end
 
 end

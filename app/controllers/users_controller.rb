@@ -1,6 +1,6 @@
 # coding: utf-8
 class UsersController < ApplicationController
-  before_action :has_mangopay_prerequisites, only: [:payments, :update_bank_information, :mangopay_authentications, :mangopay_upload_kyc_files]
+  # before_action :has_mangopay_prerequisites, only: [:payments, :update_bank_information, :mangopay_authentications, :mangopay_upload_kyc_files] # DISABLED — MangoPay deprecated
   after_action :verify_authorized, except: :show
 
   inherit_resources
@@ -154,19 +154,11 @@ class UsersController < ApplicationController
       @bank_information.assign_attributes(bank_informations_permitted_params)
     end
 
-    puts "BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF "
-    puts @bank_information.inspect
-    puts "BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF BF "
-
     begin
       if @bank_information.save!
         flash.notice = t('controllers.users.update.success')
         if params[:project]
-          if @user.official_document.blank? || @user.official_document2.blank?
-            return redirect_to mangopay_authentications_user_path(current_user, project: params[:project])
-          else
-            return redirect_to pay_project_path(Project.find_by_permalink(params[:project]))
-          end
+          return redirect_to pay_project_path(Project.find_by_permalink(params[:project]))
         end
         return (redirect_to (if @user.projects.to_a.select {|p| p.funds_can_be_withdrawn? }.any?
           pay_project_path(@user.projects.to_a.select {|p| p.funds_can_be_withdrawn? }.last)
@@ -203,16 +195,17 @@ class UsersController < ApplicationController
       :ca_branch_code, :ca_bank_name, :other_account_number, :other_bic, :other_country, :owner_address, :owner_city, :owner_region, :owner_postal_code)
   end
 
-  def has_mangopay_prerequisites
-    if user_signed_in?
-      if current_user.light_authentication_ready?
-        return true
-      else
-        flash.alert = t('controllers.projects.contributions.new.not_mangopay_ready')
-        return redirect_to edit_user_path(current_user, redirect_url: params[:redirect_url])
-      end
-    else
-      redirect_to new_user_session_path
-    end
-  end
+  # DISABLED — MangoPay deprecated
+  # def has_mangopay_prerequisites
+  #   if user_signed_in?
+  #     if current_user.light_authentication_ready?
+  #       return true
+  #     else
+  #       flash.alert = t('controllers.projects.contributions.new.not_mangopay_ready')
+  #       return redirect_to edit_user_path(current_user, redirect_url: params[:redirect_url])
+  #     end
+  #   else
+  #     redirect_to new_user_session_path
+  #   end
+  # end
 end

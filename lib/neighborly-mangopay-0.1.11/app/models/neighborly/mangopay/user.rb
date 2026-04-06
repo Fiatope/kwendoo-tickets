@@ -10,7 +10,7 @@ module Neighborly::Mangopay::User
 
     accepts_nested_attributes_for :kycs, :reject_if => :all_blank, :allow_destroy => true
 
-    before_update :update_mangopay_user
+    # before_update :update_mangopay_user # DISABLED — MangoPay deprecated
 
     def registered_cards_with_currency(currency)
       registered_cards.where(currency: currency)
@@ -44,35 +44,19 @@ module Neighborly::Mangopay::User
       birthday.to_time.to_i
     end
 
+    # DISABLED — MangoPay deprecated
     def mangopay_contributor_key
-      return mangopay_contributor_by_type.key if mangopay_contributor_by_type.present?
-      @mangopay_contributor_key ||= Neighborly::Mangopay::Customer.new(self, {}).fetch['Id']
+      return mangopay_contributor_by_type.try(:key)
     end
 
     def refund_ready?
       return bank_information.present? && bank_information.key.present?
     end
 
+    # DISABLED — MangoPay deprecated
     def mangopay_document(kyc_object)
-      document = MangoPay::KycDocument.fetch(self.mangopay_contributor_key, kyc_object.document_key)
-      if document.nil?
-        begin
-          document = MangoPay::KycDocument.create(self.mangopay_contributor_key, {
-            Type: kyc_object.proof_type
-          })
-          kyc_object.document_key = document.Id
-          kyc_object.save
-          document
-        rescue MangoPay::ResponseError => ex
-          puts "==================================================="
-          puts "==== MANGOPAY SEARCH OF KYC DOC FOR #{self.mangopay_contributor_key} USER HAS FAILED==="
-          puts "============== SEE RESCUE FOR MORE INFO ==========="
-          puts "==================================================="
-          puts "==================================================="
-          puts ex.details
-        end
-      end
-      document
+      Rails.logger.warn "[MangoPay] mangopay_document called but MangoPay is deprecated — skipping"
+      nil
     end
 
     def document_types
@@ -87,103 +71,35 @@ module Neighborly::Mangopay::User
       document_types - kycs.pluck(:proof_type)
     end
 
+    # DISABLED — MangoPay deprecated
     def kycs_updatable_elements
-      res = []
-      kycs.each do |kyc|
-        begin
-          user_kyc_doc = MangoPay::KycDocument.fetch(self.mangopay_contributor.key, kyc.document_key)
-          if !user_kyc_doc.empty?
-            if user_kyc_doc['Status'] == 'CREATED'
-              res << kyc
-            end
-            puts "==================================================="
-            puts "===== MANGOPAY KYC DOC HAS STATUS CREATED ========="
-            puts "================ #{res} ========================="
-            puts "==================================================="
-            puts "==================================================="
-          end
-        rescue MangoPay::ResponseError => ex
-          puts "==================================================="
-          puts "===== MANGOPAY KYC DOC HAS STATUS HAS FAILED======="
-          puts "================ #{res} ========================="
-          puts "==================================================="
-          puts "==================================================="
-          puts ex.details
-        end
-      end
-      res
+      []
     end
 
+    # DISABLED — MangoPay deprecated
     def kycs_displayable_elements
-      res = []
-
-      kycs.each do |kyc|
-        begin
-          status = ::RecursiveOpenStruct.new(MangoPay::KycDocument.fetch(self.mangopay_contributor_by_type.key, kyc.document_key)).Status
-          if status != 'CREATED' && status != 'REFUSED'
-            res << kyc
-          end
-        rescue MangoPay::ResponseError => ex
-          puts ex.details
-          puts 'Error while fetching displayable documents'
-        end
-      end
-
-      res
+      []
     end
 
+    # DISABLED — MangoPay deprecated
     def kycs_validated_elements
-      res = []
-      kycs.each do |kyc|
-        begin
-          user_kyc_doc = MangoPay::KycDocument.fetch(self.mangopay_contributor_by_type.key, kyc.document_key)
-            if ! user_kyc_doc.empty?
-              if user_kyc_doc['Status'] == 'VALIDATED'
-                res << kyc
-              end
-            end
-          rescue MangoPay::ResponseError => ex
-            puts ex.details
-            puts 'Error while fetching validated documents'
-          end
-      end
-
-      res
+      []
     end
 
+    # DISABLED — MangoPay deprecated
     def kycs_articles_of_association_elements
-      res = []
-
-      kycs.each do |kyc|
-        begin
-          type = ::RecursiveOpenStruct.new(MangoPay::KycDocument.fetch(self.mangopay_contributor_by_type.key, kyc.document_key)).Type
-          res << kyc if type == 'ARTICLES_OF_ASSOCIATION'
-        rescue  MangoPay::ResponseError => ex
-          puts ex.details
-          puts 'Error while fetching documents articles of association'
-        end
-      end
-
-      res
+      []
     end
 
+    # DISABLED — MangoPay deprecated
     def kycs_registration_proof_elements
-      res = []
-      kycs.each do |kyc|
-        begin
-          type = ::RecursiveOpenStruct.new(MangoPay::KycDocument.fetch(self.mangopay_contributor_by_type.key, kyc.document_key)).Type
-          res << kyc if type == 'REGISTRATION_PROOF'
-        rescue MangoPay::ResponseError => ex
-          puts ex.details
-          puts 'Error while fetching documents registration proof'
-        end
-      end
-
-      res
+      []
     end
 
+    # DISABLED — MangoPay deprecated
     def update_mangopay_user
-      Neighborly::Mangopay::Customer.new(self, {}).update! if light_authentication_ready?
+      Rails.logger.warn "[MangoPay] update_mangopay_user called but MangoPay is deprecated — skipping"
+      true
     end
 
     def mangopay_contributor_by_type

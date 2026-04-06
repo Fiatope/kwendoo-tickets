@@ -4,26 +4,16 @@ module Neighborly::Mangopay::Project
     has_one :mangopay_wallet_handler, class_name: 'Neighborly::Mangopay::ProjectWalletHandler'
     has_many :orders, class_name: 'Neighborly::Mangopay::Order'
 
+    # DISABLED — MangoPay deprecated
     def find_or_create_wallet
-      if self.mangopay_wallet_handler.nil?
-        project_wallet = ::MangoPay::Wallet.create(
-          Owners:      [self.user.mangopay_contributor.key],
-          Description: self.name,
-          Currency:    self.currency.upcase
-        )
-        @project_wallet = self.create_mangopay_wallet_handler!(wallet_key: project_wallet['Id'])
-      else
-        @project_wallet = self.mangopay_wallet_handler
-      end
+      Rails.logger.warn "[MangoPay] find_or_create_wallet called but MangoPay is deprecated — skipping"
+      self.mangopay_wallet_handler
     end
 
+    # DISABLED — MangoPay deprecated
     def process_payout
-      begin
-        res = ::Neighborly::Mangopay::Payout.new(self).complete!
-        return 'Payout processed successfully'
-      rescue Exception => e
-        return e.message
-      end
+      Rails.logger.warn "[MangoPay] process_payout called but MangoPay is deprecated — skipping"
+      'MangoPay is deprecated — use Stripe for payouts'
     end
 
     def available_currencies
@@ -49,13 +39,9 @@ module Neighborly::Mangopay::Project
     end
   end
 
+  # DISABLED — MangoPay deprecated
   def create_wallet_if_not_exists!
-    return true if self.mangopay_wallet_handler.present?
-    project_wallet = ::MangoPay::Wallet.create(
-      Owners:      [::Neighborly::Mangopay::Customer.new(self.user, {}).fetch['Id']],
-      Description: self.name,
-      Currency:    self.currency.upcase
-    )
-    self.create_mangopay_wallet_handler!(wallet_key: project_wallet['Id'])
+    Rails.logger.warn "[MangoPay] create_wallet_if_not_exists! called but MangoPay is deprecated — skipping"
+    true
   end
 end

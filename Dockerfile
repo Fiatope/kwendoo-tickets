@@ -30,5 +30,10 @@ COPY . .
 # Gems (les chemins relatifs dans le Gemfile fonctionnent maintenant)
 RUN bundle install --jobs 2 --retry 3
 
+# Precompile assets (SECRET_KEY_BASE dummy pour la compilation uniquement)
+RUN SECRET_KEY_BASE=dummy_for_assets_precompile bundle exec rake assets:precompile 2>/dev/null || true
+
+EXPOSE 3000
+
 # Commande de démarrage (Puma + config existante)
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

@@ -8,7 +8,7 @@
 						
 					</div>
 					<div class="pay-icon">
-						<%= image_tag 'mangopay.png' %>
+						<%= image_tag 'buy ticket.png' %>
 					</div>
                                         <div class="pay-icon-small">
                                                 <%= image_tag 'arkea.png' %>
@@ -99,7 +99,7 @@
 						<ul>
 							<li><%= link_to t('.legal'), main_app.privacy_path%></li>
 							<li><%= link_to t('.CGU'), image_path('CGUKwendooTickets.pdf') %></li>
-							<li><%= link_to t('Mangopay CGU'), image_path('PSP_MANGOPAY_FR.pdf') %></li>
+							<%# li link_to t('Mangopay CGU'), image_path('PSP_MANGOPAY_FR.pdf') %> <%# DISABLED — MangoPay deprecated %>
 							<li><%= link_to t('.how_does_it_cost'), main_app.price_path %></li>
 							<li><%= link_to t('.sitemap'), main_app.sitemap_path %></li>
 						</ul>

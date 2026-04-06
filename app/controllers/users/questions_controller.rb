@@ -20,8 +20,11 @@ class Users::QuestionsController < ApplicationController
       return redirect_to new_user_session_path
     end
 
-    Users::QuestionsMailer.new(params[:question][:body], parent, project, current_user).deliver
-    #flash.notice = "#{parent.display_name} received your question and will be in touch shortly."
+    begin
+      Users::QuestionsMailer.new(params[:question][:body], parent, project, current_user).deliver
+    rescue => e
+      Rails.logger.warn "[Mailer] Failed to send question email: #{e.class} #{e.message}"
+    end
     flash.notice = "#{parent.display_name} a reçu votre question et va vous contacter."
     redirect_to project_path(project)
   end

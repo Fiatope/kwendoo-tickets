@@ -32,15 +32,19 @@ class Invitation
 
   def deliver    
     return false unless valid?
-    Pony.mail({
-      :from => %("#{name}" <#{email}>),
-      :to => recipients, 
-      :reply_to => email,
-      :subject => subject,
-      :body => message,
-      :html_body => simple_format(message)
-    })
-
+    begin
+      Pony.mail({
+        :from => %("#{name}" <#{email}>),
+        :to => recipients, 
+        :reply_to => email,
+        :subject => subject,
+        :body => message,
+        :html_body => simple_format(message)
+      })
+    rescue => e
+      Rails.logger.error "[Invitation] Email delivery failed: #{e.class} #{e.message}"
+      return false
+    end
   end        
 
   def persisted?    

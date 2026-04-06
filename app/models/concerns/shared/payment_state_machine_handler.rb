@@ -38,7 +38,7 @@ module Shared::PaymentStateMachineHandler
         }
       end
 
-      before_transition all => :refunded, :do => :mangopay_refund
+      # before_transition all => :refunded, :do => :mangopay_refund # DISABLED — MangoPay deprecated, Stripe handles refunds
 
       event :refund do
         transition [:requested_refund, :confirmed] => :refunded

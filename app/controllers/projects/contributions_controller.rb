@@ -2,7 +2,7 @@ class Projects::ContributionsController < ApplicationController
   after_action :verify_authorized, except: [:index, :tickets_show]
   inherit_resources
   # skip_before_action :set_persistent_warning
-  before_action :has_mangopay_prerequisites, only: [:edit]
+  # before_action :has_mangopay_prerequisites, only: [:edit] # DISABLED — MangoPay deprecated
   #before_action :has_mangopay_prerequisites, only: [:new, :create]
   skip_before_action :verify_authenticity_token, only: :orange_money_payment_confirmation
   skip_after_action :verify_authorized, only: [:cancel, :orange_money_payment_confirmation, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_initialization]
@@ -77,7 +77,11 @@ class Projects::ContributionsController < ApplicationController
 
       @contribution.notify_owner(:payment_confirmed)
       
-      NotificationsMailer.with(contribution: @contribution).payment_confirmed.deliver
+      begin
+        NotificationsMailer.with(contribution: @contribution).payment_confirmed.deliver
+      rescue => e
+        Rails.logger.warn "[Mailer] Failed to send payment_confirmed email: #{e.class} #{e.message}"
+      end
 
       redirect_to project_contribution_path(parent, resource)
     elsif @contribution.project.is_prebooked?
@@ -606,19 +610,19 @@ class Projects::ContributionsController < ApplicationController
 
   private
 
-  def has_mangopay_prerequisites
-    if user_signed_in?
-      if current_user.light_authentication_ready?
-        return true
-      else
-        flash.alert = t('projects.contributions.new.not_mangopay_ready')
-        redirect_to edit_user_path(current_user, redirect_url: new_project_contribution_path(parent.permalink)) and return false
-      end
-    else
-      # redirect_to new_user_session_path
-      redirect_to new_user_registration_path
-    end
-  end
+  # DISABLED — MangoPay deprecated
+  # def has_mangopay_prerequisites
+  #   if user_signed_in?
+  #     if current_user.light_authentication_ready?
+  #       return true
+  #     else
+  #       flash.alert = t('projects.contributions.new.not_mangopay_ready')
+  #       redirect_to edit_user_path(current_user, redirect_url: new_project_contribution_path(parent.permalink)) and return false
+  #     end
+  #   else
+  #     redirect_to new_user_registration_path
+  #   end
+  # end
 
 
   def register_with_migs_virtual_payment_client_service

@@ -1,5 +1,6 @@
 class OrganizationUploader < ImageUploader
 
+  process :flatten_alpha
   process convert: :jpg
   process quality: 100
 
@@ -9,6 +10,16 @@ class OrganizationUploader < ImageUploader
 
   version :large do
     process resize_and_pad: [300, 150]
+  end
+
+  def flatten_alpha
+    manipulate! do |img|
+      img.combine_options do |c|
+        c.background "white"
+        c.flatten
+      end
+      img
+    end
   end
 
 end
