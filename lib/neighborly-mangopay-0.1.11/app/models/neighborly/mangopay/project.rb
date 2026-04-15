@@ -30,6 +30,8 @@ module Neighborly::Mangopay::Project
           "£"
         elsif currency == 'CHF'
           "Fr" 
+        elsif ['XAF', 'FCFA', 'CFA', 'XOF'].include?(currency)
+          'FCFA'
         else
           "€"
         end

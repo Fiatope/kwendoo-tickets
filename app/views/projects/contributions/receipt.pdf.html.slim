@@ -2,9 +2,13 @@
   em.right
     = @contribution.confirmed_at.try(:strftime, "%d-%b-%Y %H:%M:%S")
   = wicked_pdf_image_tag "https://kwendoo.s3.amazonaws.com/assets/Logo-Kwendoo-Small-e3b314a09ea9d8de7340403428f5a785.png", height: "200px", width: "150px"
+- project = @contribution.project
+- project_location = [project.address_state, project.address_city, project.location].compact.join(" ").downcase
+- cameroon_event = project_location.include?("cameroon") || project_location.include?("yaounde")
+- receipt_address_key = cameroon_event ? '.receipt.address_cm_html' : '.receipt.address_html'
 .row.print-target(style="margin-top:2em")
   .large-6.small-6.columns
-    p = t('.receipt.address_html', brand: Configuration[:company_name])
+    p = t(receipt_address_key, brand: Configuration[:company_name])
   .large-6.small-6.columns
     dl
       - if @contribution.user.display_name.present?

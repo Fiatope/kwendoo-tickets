@@ -16,11 +16,16 @@ rw:
             first: 'Turaza kubitsa kabiri (buri kubitsa tura turatanga munsi ya 850 Rwfs) kuri iyi konti. birakorwa hagati yu munsi ni biri.'
             second: 'Muraza kwakira email ikubiyemo aho mwa kanda kugira mubashe gukoresha ayo mafaranga yashyizwe kuri konti. kugirango tumenye niba iyo konti ibaho'
             third: 'konti yanyu imaze gusuzumwa, umusanzu wanyu urahita ujya ku gaseke wateye inkunga.'
+        ticket:
+          cost_label: 'IGICIRO'
+          admit_one: 'ITIKE IMWE'
+          pay_at_the_door: "WISHYURA KU MURENGE"
+          event_date: "Itariki y'igitaramo"
         receipt:
           address_html: "tickets.kwendoo.rw ni serivise ya <br>Fiatope Digital Services<br>Ifite icyicaro k'umukindo Center etaje ya 3<br>Avenue 33, Gisozi, Kigali<br>Rwanda"
+          address_cm_html: "tickets.kwendoo.com ni serivise ya <br>Fiatope Digital Services<br><br>Shell Emana, Yaounde<br>Cameroun"
           print_cta: " Sohora(bika) inyemezabwishyu"
           heading: "Inyemezabwishyu yuko wateye inkuga"
-          info: "Inkunga yawe yemejwe! Murakoze ku bw'umusanzu wanyu. Musabwe kureba inyemezabwishyu yanyu iri hasi aha:"
           info: "Umusanzu utanze wemejwe. Musabwe kureba inyemezabwishyu yanyu hano hakurikira:"
           card_info: "Uyu musanzu watanzwe hakoreshejwe ikarita ya  %{card_type}"
           card_last4_info: " irarangira mu %{last4}"

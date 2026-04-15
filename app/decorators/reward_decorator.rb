@@ -12,7 +12,7 @@ class RewardDecorator < Draper::Decorator
   end
 
   def display_minimum
-    number_to_currency object.minimum_value, unit: ("EUR" || object.project.currency_sym), precision: 0
+    number_to_currency object.minimum_value, unit: (object.project.currency.presence || 'EUR'), precision: 0, format: '%n %u'
   end
 
   def display_description

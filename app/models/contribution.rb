@@ -151,11 +151,10 @@ class Contribution < ActiveRecord::Base
   end
 
   def currency
-    if self.payment_method == "Orange Money"
-      "EUR"
-    else
-      self.project.currency
-    end
+    project_currency = self.project.try(:currency).presence
+    return project_currency if project_currency.present?
+
+    self.payment_method == "Orange Money" ? "FCFA" : "EUR"
   end
 
   def as_json(options = {})

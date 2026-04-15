@@ -42,6 +42,11 @@ style[type="text/css" media="print"]
 
 
     /Ajout du ticket
+  - ticket_currency = @contribution.project.currency.presence || @contribution.currency.presence || 'EUR'
+  - ticket_cost_label = t('projects.contributions.show.ticket.cost_label')
+  - ticket_pay_at_door = t('projects.contributions.show.ticket.pay_at_the_door')
+  - ticket_admit_one = t('projects.contributions.show.ticket.admit_one')
+  - ticket_event_date = t('projects.contributions.show.ticket.event_date')
 
   .row.print-target(style="margin-top:2em")
     - @contribution.tickets.each do |ticket|
@@ -56,16 +61,16 @@ style[type="text/css" media="print"]
               = @contribution.project.hero_image.present? ? image_tag(@contribution.project.hero_image.url, style: "height:150px;width:100%;") : (wicked_pdf_image_tag "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png", style: "height:150px;width:100%;")
           .row
             div[style="position:absolute;left:0;width:125px;height:47px;background:white;padding:5px 6px;"]
-              div[style="font-size:11px;color:silver;"] = "COST: #{number_to_currency(ticket.ticket_categories_order.reward.minimum_value, unit: ('EUR' || @contribution.project.currency_sym), precision: 2)}"
+              div[style="font-size:11px;color:silver;"] = "#{ticket_cost_label}: #{number_to_currency(ticket.ticket_categories_order.reward.minimum_value, unit: ticket_currency, precision: 2, format: '%n %u')}"
               - if @contribution.project.is_prebooked?
-                div[style="font-size:12.5px;font-weight:bold;color:#888;line-height:1;"] = "PAY AT THE DOOR"
+                div[style="font-size:12.5px;font-weight:bold;color:#888;line-height:1;"] = ticket_pay_at_door
               - else
-                div[style="font-size:17px;font-weight:bold;color:#888;"] = "ADMIT ONE"
+                div[style="font-size:17px;font-weight:bold;color:#888;"] = ticket_admit_one
             div[style="position:absolute;left:125px;width:125px;height:47px;background:white;padding:7px;"]
               div[style="font-size:10px;color:silver;line-height:1;"] = @contribution.project.display_address_formated
             div[style="position:absolute;left:250px;width:125px;height:47px;background:white;padding:2px 7px;"]
               div[style="font-size:13px;letter-spacing:0.2px;font-weight:bold;color:#888;line-height:1.1;"]
-                small[style="font-size:8px;text-transform:uppercase;color:#ccc;font-weight:normal;"] = "Event Date"
+                small[style="font-size:8px;text-transform:uppercase;color:#ccc;font-weight:normal;"] = ticket_event_date
                 br
                 = @contribution.project.start_date.strftime("%d %b").upcase
                 br
@@ -98,9 +103,12 @@ style[type="text/css" media="print"]
             - if @contribution.confirmed_at 
               = @contribution.confirmed_at.strftime("%d-%b-%Y %H:%M:%S")
           = image_tag "tickets1.png", width: "400px"
+        - project_location = [@project.address_state, @project.address_city, @project.location].compact.join(" ").downcase
+        - cameroon_event = project_location.include?("cameroon") || project_location.include?("yaounde")
+        - receipt_address_key = cameroon_event ? '.receipt.address_cm_html' : '.receipt.address_html'
         .row.print-target(style="margin-top:2em")
           .large-6.small-6.columns
-            p = t('.receipt.address_html', brand: Configuration[:company_name])
+            p = t(receipt_address_key, brand: Configuration[:company_name])
           .large-6.small-6.columns
             dl
               - if current_user.display_name.present?
@@ -155,12 +163,14 @@ style[type="text/css" media="print"]
                     td.text-right = order.reward.minimum_value.to_s + " " + @project.currency
                     td.text-right = "x #{order.count}"
                     td.text-right = (order.reward.minimum_value * order.count).to_s + " " + @project.currency
+                - receipt_total = @contribution.ticket_categories_orders.where("count > 0").sum { |order| order.reward.minimum_value.to_d * order.count.to_i }
+                - receipt_currency = @project.currency.presence || @contribution.currency.presence || 'EUR'
                 tr
                   td[colspan=4 style="background:#eee;border:none;"]
                   td.text-right.table-active.bg-dark
                     strong(style="font-size:120%;") = t('.receipt.table.total_caption')
                   td.text-right
-                    strong(style="font-size:120%;") = "#{@contribution.display_value}" + "#{@contribution.currency}"
+                    strong(style="font-size:120%;") = "#{number_with_precision(receipt_total, precision: 2, strip_insignificant_zeros: true)} #{receipt_currency}"
   
 /.facebook-box
   /.fb-like data-href="#{Configuration['facebook_url']}" data-width="224" data-height="40" data-header="false" data-show-border="false" data-colorscheme="dark" data-layout="standard" data-action="like" data-show-faces="true" data-send="true"

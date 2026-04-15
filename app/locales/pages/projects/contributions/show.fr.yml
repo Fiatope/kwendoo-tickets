@@ -17,8 +17,14 @@ fr:
             first: 'We will make two small deposits (each less than $1.00) to this account. Deposits may take 1-2 business days to appear.'
             second: 'You will receive an email with a link to verify your account using the two deposit amounts.'
             third: 'Once your account has been verified, your contribution will be processed and automatically reflected in the campaign you contributed to.'
+        ticket:
+          cost_label: 'COÛT'
+          admit_one: 'ADMETTRE UNE PERSONNE'
+          pay_at_the_door: "PAYER À L'ENTRÉE"
+          event_date: "Date de l'événement"
         receipt:
           address_html: "tickets.kwendoo.com est un service de <br>Fiatope Digital Services<br><br>110 Rue Pierre Brossolette, 92320 Châtillon<br>France"
+          address_cm_html: "tickets.kwendoo.com est un service de <br>Fiatope Digital Services<br><br>Shell Emana, Yaoundé<br>Cameroun"
           print_cta: " Imprimer le reçu"
           heading: "Transaction de Paiement"
           info: "Votre paiement est confirmé. Veuillez trouver votre reçu ci-dessous:"

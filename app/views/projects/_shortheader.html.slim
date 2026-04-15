@@ -31,7 +31,7 @@
       .paltform_fee
           = t('words.fees_kwendoo').html_safe
           br
-          h4 = Configuration[:PLATFORM_FEE] + '%' + ' + ' +  Configuration[:PLATFORM_FIX_FEE] + ("EUR" || @project.currency_sym)
+          h4 = Configuration[:PLATFORM_FEE] + '%' + ' + ' +  Configuration[:PLATFORM_FIX_FEE] + (@project.currency.presence || @project.currency_sym)
       
           /= t('.%').html_safe
       br

@@ -66,14 +66,19 @@ class ApplicationController < ActionController::Base
   # end
 
   def set_locale
-    if current_user
-      current_user_locale = params[:locale] || I18n.default_locale
-      unless current_user.locale == current_user_locale
-        current_user.update_attribute(:locale, current_user_locale)
-      end
+    requested_locale = params[:locale].presence
+    fallback_locale = current_user.try(:locale).presence || I18n.default_locale
+    chosen_locale = (requested_locale || fallback_locale).to_s
+
+    unless I18n.available_locales.map(&:to_s).include?(chosen_locale)
+      chosen_locale = I18n.default_locale.to_s
     end
 
-    I18n.locale = params[:locale] || I18n.default_locale
+    if current_user && requested_locale.present? && current_user.locale != chosen_locale
+      current_user.update_attribute(:locale, chosen_locale)
+    end
+
+    I18n.locale = chosen_locale
   end
 
   def default_url_options(options={})
