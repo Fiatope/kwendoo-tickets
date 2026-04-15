@@ -19,6 +19,7 @@ RUN apt-get update -qq && \
       curl \
       tzdata \
       imagemagick \
+      wkhtmltopdf \
       git \
     && rm -rf /var/lib/apt/lists/*
 

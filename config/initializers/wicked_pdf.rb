@@ -1,11 +1,11 @@
-WickedPdf.config do |config|  
-  if Rails.env.production?
-    config.exe_path = Rails.root.to_s + "/bin/wkhtmltopdf"
-  elsif /darwin/ =~ RUBY_PLATFORM
-    config.exe_path = "/Users/alexandre/.rbenv/shims/wkhtmltopdf"
-  elsif /linux/ =~ RUBY_PLATFORM
-    config.exe_path = '/usr/bin/wkhtmltopdf'
-  else
-    raise "UnableToLocateWkhtmltopdf"
-  end
+WickedPdf.configure do |config|
+  candidates = [
+    ENV['WKHTMLTOPDF_PATH'],
+    Rails.root.join('bin', 'wkhtmltopdf').to_s,
+    '/usr/bin/wkhtmltopdf',
+    '/usr/local/bin/wkhtmltopdf'
+  ].compact.uniq
+
+  resolved_path = candidates.find { |path| File.exist?(path) && File.executable?(path) }
+  config.exe_path = resolved_path if resolved_path
 end
