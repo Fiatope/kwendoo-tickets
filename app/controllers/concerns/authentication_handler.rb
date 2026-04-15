@@ -11,34 +11,16 @@ module Concerns::AuthenticationHandler
 
     def base_domain_with_https_url_params
       if Rails.env.production? && !ENV['IS_STAGING']
-        { protocol: 'https', host: authentication_base_host }
+        { protocol: 'https', host: ::Configuration[:base_domain] }
       else
         {}
       end
     end
 
     private
-
-    # Keep auth traffic on the current production host unless the configured
-    # base domain clearly matches the current request host suffix.
-    def authentication_base_host
-      configured_base_domain = ::Configuration[:base_domain].to_s.strip
-
-      return request.host if configured_base_domain.blank?
-
-      if request.host == configured_base_domain || request.host.end_with?(".#{configured_base_domain}")
-        configured_base_domain
-      else
-        request.host
-      end
-    end
-
     def force_base_domain_with_ssl
       if Rails.env.production? && request.subdomain.present? && !ENV['IS_STAGING']
-        target_host = authentication_base_host
-        return if request.ssl? && request.host == target_host
-
-        redirect_to(protocol: 'https', host: target_host)
+        redirect_to(protocol: 'https', host: ::Configuration[:base_domain])
       end
     end
 
