@@ -5,7 +5,7 @@ head
   = stylesheet_link_tag "application"
   / = stylesheet_link_tag "//fonts.googleapis.com/css?family=Lato:300,400,700"
 
-  - ticket_currency = @contribution.project.currency.presence || @contribution.currency.presence || 'EUR'
+  - ticket_currency = @contribution.currency.presence || @contribution.project.currency.presence || 'EUR'
   - ticket_cost_label = I18n.t('projects.contributions.show.ticket.cost_label')
   - ticket_pay_at_door = I18n.t('projects.contributions.show.ticket.pay_at_the_door')
   - ticket_event_date = I18n.t('projects.contributions.show.ticket.event_date')

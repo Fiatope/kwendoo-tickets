@@ -151,6 +151,9 @@ class Contribution < ActiveRecord::Base
   end
 
   def currency
+    stored_currency = self[:currency].presence
+    return stored_currency if stored_currency.present?
+
     project_currency = self.project.try(:currency).presence
     return project_currency if project_currency.present?
 

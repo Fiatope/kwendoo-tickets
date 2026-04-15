@@ -1,5 +1,5 @@
 .payment
-  - payment_currency = resource.project.currency.presence || resource.try(:currency).presence || 'EUR'
+  - payment_currency = resource.try(:currency).presence || resource.project.currency.presence || 'EUR'
   /h3.title = t('.title')
 
   section.row.methods

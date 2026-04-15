@@ -22,15 +22,17 @@ module Neighborly::Mangopay::Project
 
     def currency_sym
       begin
-        if currency == 'USD'
+        current_currency = currency.to_s.upcase
+
+        if current_currency == 'USD'
           "$"
-        elsif currency == 'CAD'
+        elsif current_currency == 'CAD'
           "C$"
-        elsif currency == 'GBP'
+        elsif current_currency == 'GBP'
           "£"
-        elsif currency == 'CHF'
+        elsif current_currency == 'CHF'
           "Fr" 
-        elsif ['XAF', 'FCFA', 'CFA', 'XOF'].include?(currency)
+        elsif ['XAF', 'FCFA', 'CFA', 'XOF'].include?(current_currency)
           'FCFA'
         else
           "€"

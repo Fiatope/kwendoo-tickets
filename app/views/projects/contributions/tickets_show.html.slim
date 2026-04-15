@@ -42,7 +42,7 @@ style[type="text/css" media="print"]
 
 
     /Ajout du ticket
-  - ticket_currency = @contribution.project.currency.presence || @contribution.currency.presence || 'EUR'
+  - ticket_currency = @contribution.currency.presence || @contribution.project.currency.presence || 'EUR'
   - ticket_cost_label = t('projects.contributions.show.ticket.cost_label')
   - ticket_pay_at_door = t('projects.contributions.show.ticket.pay_at_the_door')
   - ticket_admit_one = t('projects.contributions.show.ticket.admit_one')
@@ -144,6 +144,7 @@ style[type="text/css" media="print"]
                 dt = t('.receipt.confirmed_at_label')
                 - if @contribution.confirmed_at
                   dd = @contribution.confirmed_at.strftime("%d-%b-%Y %H:%M:%S")
+            - receipt_currency = @contribution.currency.presence || @project.currency.presence || 'EUR'
             table.table
               thead.bg-success
                 tr
@@ -160,11 +161,10 @@ style[type="text/css" media="print"]
                     td
                       em = "#{order.reward.title}"
                     td = "#{truncate((order.reward.description), length: 25)}"
-                    td.text-right = order.reward.minimum_value.to_s + " " + @project.currency
+                    td.text-right = order.reward.minimum_value.to_s + " " + receipt_currency
                     td.text-right = "x #{order.count}"
-                    td.text-right = (order.reward.minimum_value * order.count).to_s + " " + @project.currency
+                    td.text-right = (order.reward.minimum_value * order.count).to_s + " " + receipt_currency
                 - receipt_total = @contribution.ticket_categories_orders.where("count > 0").sum { |order| order.reward.minimum_value.to_d * order.count.to_i }
-                - receipt_currency = @project.currency.presence || @contribution.currency.presence || 'EUR'
                 tr
                   td[colspan=4 style="background:#eee;border:none;"]
                   td.text-right.table-active.bg-dark
