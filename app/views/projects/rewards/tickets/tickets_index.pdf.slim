@@ -11,37 +11,36 @@ head
   - ticket_event_date = I18n.t('projects.contributions.show.ticket.event_date')
 
   - @tickets.each do |ticket|
-    .ticket[style="position:relative;height:198px;margin-bottom:8px;width:100%;background:white;border:1px solid #777;border-radius:4px;"]
-      div[style="position:absolute;top:1px;left:1px;height:194px;width:28px;background:#eee;border-right:silver"]
+    .ticket[style="position:relative;height:198px;width:700px;margin:0 auto 10px auto;background:#fff;border:1px solid #777;border-radius:4px;overflow:hidden;"]
+      div[style="position:absolute;top:0;left:0;height:198px;width:28px;background:#eee;border-right:1px solid silver;"]
         div[style="transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);font-size:11px;color:silver;"]
-      div[style="position:absolute;top:1px;left:30px;height:194px;width:500px;background:white;"]
-        div[style="height:145px;width:100%;background:#f7f7f7;margin-top:1px;"]
+      div[style="position:absolute;top:0;left:28px;height:198px;width:502px;background:#fff;"]
+        div[style="height:150px;width:100%;background:#f7f7f7;overflow:hidden;"]
           - if Rails.env.development?
             = wicked_pdf_image_tag (@reward.reward_category.project.hero_image.present? ? @reward.reward_category.project.hero_image.url : "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png"), style: "height:150px;width:100%;"
           - else 
             = @reward.reward_category.project.hero_image.present? ? image_tag(@reward.reward_category.project.hero_image.url, style: "height:150px;width:100%;") : (wicked_pdf_image_tag "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png", style: "height:150px;width:100%;")
-        .row
-          div[style="position:absolute;left:0;width:125px;height:47px;background:white;padding:5px 6px;"]
-            div[style="font-size:11px;color:silver;"] = "#{ticket_cost_label}: #{number_to_currency(@reward.minimum_value, unit: ticket_currency, precision: 2, format: '%n %u')}"
-            - if @reward.reward_category.project.is_prebooked?
-              div[style="font-size:12.5px;font-weight:bold;color:#888;line-height:1;"] = ticket_pay_at_door
-            - else
-              div[style="font-size:14px;font-weight:bold;color:#888;"] = ticket.name
-          div[style="position:absolute;left:125px;width:125px;height:47px;background:white;padding:7px;"]
-            div[style="font-size:10px;color:silver;line-height:1;"] = @reward.reward_category.project.display_address_formated
-          div[style="position:absolute;left:250px;width:125px;height:47px;background:white;padding:2px 7px;"]
-            div[style="font-size:13px;letter-spacing:0.2px;font-weight:bold;color:#888;line-height:1.1;"]
-              small[style="font-size:8px;text-transform:uppercase;color:#ccc;font-weight:normal;"] = ticket_event_date
-              br
-              = @reward.reward_category.project.start_date.strftime("%d %b").upcase
-              br
-              = @reward.reward_category.project.starts_at.try(:strftime, "%I:%M %p")
-          div[style="position:absolute;left:375px;width:125px;height:47px;background:white;padding:7px 3px;"]
-            div[style="font-size:12px;letter-spacing:0.2px;color:#888;line-height:1.1;font-style:italic;"]
-              = @reward.title
-      div[style="position:absolute;top:1px;left:530px;height:194px;width:167px;background:#f3f3f3;padding:60px 20px;"]
-        div[style="position:absolute;top:20px;left:-4px;line-height:1;text-align:center;"] = @reward.reward_category.project.name
-        div[style="border:1px solid #e1e1e1;height:130px;border-radius:5px;"]
+        div[style="position:absolute;top:150px;left:0;width:125px;height:48px;background:#fff;padding:5px 6px;"]
+          div[style="font-size:11px;color:silver;"] = "#{ticket_cost_label}: #{number_to_currency(@reward.minimum_value, unit: ticket_currency, precision: 2, format: '%n %u')}"
+          - if @reward.reward_category.project.is_prebooked?
+            div[style="font-size:12.5px;font-weight:bold;color:#888;line-height:1;"] = ticket_pay_at_door
+          - else
+            div[style="font-size:14px;font-weight:bold;color:#888;"] = ticket.name
+        div[style="position:absolute;top:150px;left:125px;width:125px;height:48px;background:#fff;padding:7px;"]
+          div[style="font-size:10px;color:silver;line-height:1;"] = @reward.reward_category.project.display_address_formated
+        div[style="position:absolute;top:150px;left:250px;width:125px;height:48px;background:#fff;padding:2px 7px;"]
+          div[style="font-size:13px;letter-spacing:0.2px;font-weight:bold;color:#888;line-height:1.1;"]
+            small[style="font-size:8px;text-transform:uppercase;color:#ccc;font-weight:normal;"] = ticket_event_date
+            br
+            = @reward.reward_category.project.start_date.strftime("%d %b").upcase
+            br
+            = @reward.reward_category.project.starts_at.try(:strftime, "%I:%M %p")
+        div[style="position:absolute;top:150px;left:375px;width:127px;height:48px;background:#fff;padding:7px 3px;"]
+          div[style="font-size:12px;letter-spacing:0.2px;color:#888;line-height:1.1;font-style:italic;"]
+            = @reward.title
+      div[style="position:absolute;top:0;left:530px;height:198px;width:170px;background:#f3f3f3;padding:56px 14px 8px 14px;"]
+        div[style="position:absolute;top:14px;left:0;width:170px;line-height:1.1;text-align:center;"] = @reward.reward_category.project.name
+        div[style="border:1px solid #e1e1e1;height:132px;border-radius:5px;background:#fff;"]
           div[style="margin:0.5rem;font-weight:bold;text-align:center;color:#31A574;"]
             = wicked_pdf_image_tag(ticket.qr_code.url, style: "width: 90px; height: 90px;margin-bottom: 6px;") if ticket.qr_code.present? && ticket.qr_code.url.present?
             = ticket.token
