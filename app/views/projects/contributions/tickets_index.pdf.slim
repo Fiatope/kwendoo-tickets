@@ -16,10 +16,19 @@ head
         div[style="transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);font-size:11px;color:silver;"]
       div[style="position:absolute;top:0;left:28px;height:198px;width:502px;background:#fff;"]
         div[style="height:150px;width:100%;background:#f7f7f7;overflow:hidden;"]
+          - reward_for_ticket = ticket.ticket_categories_order.try(:reward) || ticket.reward
+          - ticket_template_image = reward_for_ticket.try(:ticket_template_image)
+          - default_ticket_image = "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png"
           - if Rails.env.development?
-            = wicked_pdf_image_tag (@contribution.project.hero_image.present? ? @contribution.project.hero_image.url : "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png"), style: "height:150px;width:100%;"
-          - else 
-            = @contribution.project.hero_image.present? ? image_tag(@contribution.project.hero_image.url, style: "height:150px;width:100%;") : (wicked_pdf_image_tag "https://tickets.kwendoo.com/assets/ticketshd-0407c6c973ea01967cc2a6cc3643f9f69e630ebe4405d3a93bc55633561e6e4d.png", style: "height:150px;width:100%;")
+            - ticket_banner_url = ticket_template_image.present? ? ticket_template_image.url : (@contribution.project.hero_image.present? ? @contribution.project.hero_image.url : default_ticket_image)
+            = wicked_pdf_image_tag ticket_banner_url, style: "height:150px;width:100%;"
+          - else
+            - if ticket_template_image.present?
+              = image_tag(ticket_template_image.url, style: "height:150px;width:100%;")
+            - elsif @contribution.project.hero_image.present?
+              = image_tag(@contribution.project.hero_image.url, style: "height:150px;width:100%;")
+            - else
+              = wicked_pdf_image_tag default_ticket_image, style: "height:150px;width:100%;"
         div[style="position:absolute;top:150px;left:0;width:125px;height:48px;background:#fff;padding:5px 6px;"]
           div[style="font-size:11px;color:silver;"] = "#{ticket_cost_label}: #{number_to_currency(ticket.ticket_categories_order.reward.minimum_value, unit: ticket_currency, precision: 2, format: '%n %u')}"
           - if @contribution.project.is_prebooked?

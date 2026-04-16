@@ -80,7 +80,7 @@ class ProjectPolicy < ApplicationPolicy
       {
         project: record.attribute_names.map(&:to_sym) +
                  [:location, :tag_list, :currency, :start_date, :is_prebooked, :sanitary_pass,
-                  reward_categories_attributes: [ :id, :name, :_destroy, rewards_attributes: [ :id, :title, :maximum_contributions, :description, :minimum_value, :promote, :couple, :_destroy ] ]
+                  reward_categories_attributes: [ :id, :name, :_destroy, rewards_attributes: [ :id, :title, :maximum_contributions, :description, :minimum_value, :promote, :couple, :ticket_template_image, :_destroy ] ]
                  ] -
                  [
                    :online_date, :created_at, :updated_at, :about_html,
@@ -94,7 +94,7 @@ class ProjectPolicy < ApplicationPolicy
                   :terms,         :address_neighborhood, :location,
                   :address_city,  :address_state,        :hash_tag,
                   :site, :tag_list, :start_date, :is_prebooked, :sanitary_pass,
-                  reward_categories_attributes: [ :id, :name, :_destroy, rewards_attributes: [ :id, :title, :maximum_contributions, :description, :minimum_value, :promote, :couple, :_destroy ] ]
+                  reward_categories_attributes: [ :id, :name, :_destroy, rewards_attributes: [ :id, :title, :maximum_contributions, :description, :minimum_value, :promote, :couple, :ticket_template_image, :_destroy ] ]
                 ]
       }
 

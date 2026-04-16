@@ -13,7 +13,7 @@
 	    .new-project-box
 	      .row
 	        .large-10.small-11.columns.large-centered.small-centered
-					  = simple_form_for @project do |form|
+					  = simple_form_for @project, html: { multipart: true } do |form|
 					      - if current_user.admin
 					        .admin-fields
 					          .section-header =t('words.project_info')

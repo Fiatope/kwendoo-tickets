@@ -2,6 +2,8 @@
 class Reward < ActiveRecord::Base
   include RankedModel
 
+  mount_uploader :ticket_template_image, RewardTicketTemplateUploader, mount_on: :ticket_template_image
+
   belongs_to :reward_category
   has_many :ticket_categories_orders
   has_many :contributions, through: :ticket_categories_orders

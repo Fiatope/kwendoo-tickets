@@ -15,4 +15,9 @@
   .row
     .small-12.columns
       = f.input :description, label: "Description", input_html: { rows: 4 }
+    .small-12.columns
+      = f.input :ticket_template_image, as: :file, label: "Modele image du billet (optionnel)"
+      - if f.object.ticket_template_image.present?
+        .image-preview
+          = image_tag(f.object.ticket_template_image.url, style: 'max-width:220px;max-height:120px;')
     
