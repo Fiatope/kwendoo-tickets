@@ -1,0 +1,5 @@
+# Force LF line endings for shell scripts and container entrypoints
+# so they keep working inside Linux containers regardless of developer OS.
+bin/docker-entrypoint text eol=lf
+*.sh                  text eol=lf
+Dockerfile            text eol=lf

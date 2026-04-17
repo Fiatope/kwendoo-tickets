@@ -1,0 +1,15 @@
+#!/bin/sh
+# Executed at container startup, BEFORE the CMD (or the platform-provided start command).
+# Platforms like EasyPanel override CMD, but keep ENTRYPOINT — so putting migrations
+# here guarantees they run on every deploy, no matter the start command.
+
+set -e
+
+if [ "${RUN_DB_MIGRATIONS:-true}" = "true" ]; then
+  echo "[docker-entrypoint] Running: bundle exec rails db:migrate"
+  bundle exec rails db:migrate
+else
+  echo "[docker-entrypoint] RUN_DB_MIGRATIONS=${RUN_DB_MIGRATIONS} — skipping migrations"
+fi
+
+exec "$@"

@@ -28,6 +28,10 @@ WORKDIR /app
 # Copier tout le code de l'application (y compris lib/neighborly-*)
 COPY . .
 
+# Normaliser les fins de ligne + rendre executable l'entrypoint
+# (protection si le fichier a ete edite sous Windows avec CRLF)
+RUN sed -i 's/\r$//' bin/docker-entrypoint && chmod +x bin/docker-entrypoint
+
 # Gems (les chemins relatifs dans le Gemfile fonctionnent maintenant)
 RUN bundle install --jobs 2 --retry 3
 
@@ -36,5 +40,9 @@ RUN SECRET_KEY_BASE=dummy_for_assets_precompile bundle exec rake assets:precompi
 
 EXPOSE 3000
 
-# Demarrage: migration auto (bin/rails) puis Puma
-CMD ["sh", "-c", "if [ \"${RUN_DB_MIGRATIONS:-true}\" = \"true\" ]; then bundle exec ruby bin/rails db:migrate; fi; exec bundle exec puma -C config/puma.rb"]
+# ENTRYPOINT = toujours execute, meme si la plateforme de deploiement (EasyPanel etc.)
+#              override le CMD via une "Start Command" personnalisee. Les migrations
+#              tournent donc systematiquement avant le demarrage du process web.
+# CMD       = commande par defaut si aucune n'est fournie.
+ENTRYPOINT ["bin/docker-entrypoint"]
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
