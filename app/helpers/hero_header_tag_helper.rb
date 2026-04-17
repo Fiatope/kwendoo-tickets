@@ -1,21 +1,52 @@
 module HeroHeaderTagHelper
   # Hero banner at the top of project / event pages.
   #
-  # We use `background-size: contain` (NOT cover) so the user's uploaded image
-  # is ALWAYS shown in its entirety, without any crop. This is a deliberate UX
-  # choice: users were frustrated because `cover` was cutting parts of the image
-  # off whenever the container's aspect ratio did not match the uploaded image.
+  # Rendering strategy: "ambient background" (the same technique Spotify,
+  # Apple Music, YouTube and Eventbrite use on their hero images). Two copies
+  # of the uploaded image are stacked:
   #
-  # Trade-off: when the image ratio differs from the header's ratio, empty
-  # bands may appear on the sides (or top/bottom). We fill them with a neutral
-  # dark background (`#1a1a1a`) for a clean, letterboxed look.
+  #   1. BACKDROP — the image in `cover` mode, blurred and slightly darkened
+  #      and zoomed. Fills 100% of the header regardless of ratio, giving a
+  #      cinematic, visually coherent fill for the zones that a pure `contain`
+  #      layout would otherwise leave empty (the "ugly black bands" problem).
+  #   2. FOREGROUND — the same image in `contain` mode, centered, crisp.
+  #      Guarantees the whole uploaded image is always visible, never cropped,
+  #      regardless of its aspect ratio.
+  #
+  # A subtle bottom gradient keeps any foreground content legible. The backdrop
+  # is wrapped in `transform: scale(1.15)` because `filter: blur` bleeds
+  # transparent pixels at the edges otherwise.
+  #
+  # Net effect: no crop, no black letterbox, works for any uploaded ratio
+  # (portrait, square, ultra-wide, screenshot, poster, …).
   def hero_header_tag(object, options = {}, image = nil, &block)
     image ||= object.hero_image_url || '/assets/event-billetter.jpg'
-    content_tag :header, capture(&block),
-      class: [:hero, options[:class]],
-      style: "background-color: #1a1a1a; background-image: url(#{image}); " \
-             "background-repeat: no-repeat; background-position: center; " \
-             "background-size: contain;",
-      data: { 'image-url' => image_url(image) }
+    image_css = "url(#{image})"
+
+    content_tag :header,
+                class: [:hero, options[:class]],
+                style: "position: relative; overflow: hidden; " \
+                       "background-color: #1a1a1a; min-height: 60dvh;",
+                data: { 'image-url' => image_url(image) } do
+      safe_join([
+        content_tag(:div, '', class: 'hero-ambient', 'aria-hidden': true, style:
+          "position: absolute; inset: 0; z-index: 0; " \
+          "background-image: #{image_css}; " \
+          "background-position: center; background-size: cover; " \
+          "background-repeat: no-repeat; " \
+          "filter: blur(40px) brightness(0.65) saturate(1.1); " \
+          "transform: scale(1.15);"),
+        content_tag(:div, '', class: 'hero-foreground', 'aria-hidden': true, style:
+          "position: absolute; inset: 0; z-index: 1; " \
+          "background-image: #{image_css}; " \
+          "background-position: center; background-size: contain; " \
+          "background-repeat: no-repeat;"),
+        content_tag(:div, '', class: 'hero-gradient', 'aria-hidden': true, style:
+          "position: absolute; inset: 0; z-index: 2; pointer-events: none; " \
+          "background: linear-gradient(to bottom, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%);"),
+        content_tag(:div, capture(&block), class: 'hero-content', style:
+          "position: relative; z-index: 3;")
+      ])
+    end
   end
 end
