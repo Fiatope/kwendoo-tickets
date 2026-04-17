@@ -99,4 +99,13 @@ Neighborly::Application.configure do
   config.action_dispatch.default_headers = {
     'X-Frame-Options' => 'ALLOWALL'
   }
+
+  # Do not regenerate db/structure.sql after `rails db:migrate` runs on
+  # container boot. The dump requires `pg_dump` (not installed in the
+  # production image) and the file is a source artifact — it must be updated
+  # by developers locally, committed, and shipped with the build, not
+  # re-written on production boxes where it would be discarded on the next
+  # deploy anyway. Setting this to false makes db:migrate skip the
+  # automatic db:_dump step.
+  config.active_record.dump_schema_after_migration = false
 end
