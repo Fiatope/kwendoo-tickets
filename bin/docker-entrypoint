@@ -1,15 +1,30 @@
 #!/bin/sh
 # Executed at container startup, BEFORE the CMD (or the platform-provided start command).
-# Platforms like EasyPanel override CMD, but keep ENTRYPOINT — so putting migrations
+# Platforms like EasyPanel override CMD but keep ENTRYPOINT, so putting migrations
 # here guarantees they run on every deploy, no matter the start command.
-
-set -e
+#
+# FAIL-FAST POLICY: if migrations fail, we stop and DO NOT start the web process.
+# Booting the app against a stale/broken schema hides bugs and corrupts data.
+#
+# EMERGENCY OPT-OUT: if a migration failure is blocking the whole platform,
+# set the env var RUN_DB_MIGRATIONS=false on the deployment platform and redeploy.
+# This lets the web process boot so the site is back up, then investigate/fix offline.
 
 if [ "${RUN_DB_MIGRATIONS:-true}" = "true" ]; then
   echo "[docker-entrypoint] Running: bundle exec rails db:migrate"
-  bundle exec rails db:migrate
+  if ! bundle exec rails db:migrate; then
+    echo ""
+    echo "================================================================"
+    echo "[docker-entrypoint] FATAL: db:migrate failed. Not starting web."
+    echo "[docker-entrypoint] Emergency opt-out: set RUN_DB_MIGRATIONS=false"
+    echo "[docker-entrypoint] on the platform and redeploy to boot the site"
+    echo "[docker-entrypoint] WITHOUT running migrations, then fix offline."
+    echo "================================================================"
+    exit 1
+  fi
+  echo "[docker-entrypoint] Migrations OK."
 else
-  echo "[docker-entrypoint] RUN_DB_MIGRATIONS=${RUN_DB_MIGRATIONS} — skipping migrations"
+  echo "[docker-entrypoint] RUN_DB_MIGRATIONS=${RUN_DB_MIGRATIONS} - skipping migrations"
 fi
 
 exec "$@"
