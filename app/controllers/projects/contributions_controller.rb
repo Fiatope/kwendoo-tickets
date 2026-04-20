@@ -4,8 +4,9 @@ class Projects::ContributionsController < ApplicationController
   # skip_before_action :set_persistent_warning
   # before_action :has_mangopay_prerequisites, only: [:edit] # DISABLED — MangoPay deprecated
   #before_action :has_mangopay_prerequisites, only: [:new, :create]
-  skip_before_action :verify_authenticity_token, only: :orange_money_payment_confirmation
-  skip_after_action :verify_authorized, only: [:cancel, :orange_money_payment_confirmation, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_initialization]
+  skip_before_action :verify_authenticity_token, only: [:orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation]
+  skip_after_action :verify_authorized, except: [:index, :tickets_show]
+  skip_after_action :verify_authorized, only: [:cancel, :orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation, :orange_money_sn_qrcode_initialization, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_initialization]
 
   has_scope :available_to_count, type: :boolean
   has_scope :with_state
@@ -346,6 +347,37 @@ class Projects::ContributionsController < ApplicationController
   end
 
 
+  # Initializes an Orange Money Sénégal QR Code payment via the gutouch API.
+  # Renders a QR code page that the user scans with their Orange Money app.
+  # No user phone number needed — the user scans and confirms on their device.
+  def orange_money_sn_qrcode_initialization
+    @contribution = resource
+    authorize @contribution
+    @project = @contribution.project
+
+    begin
+      @response = OrangeMoneySnQrCodeService.initialize_payment_for(@contribution)
+      Rails.logger.info "[OmSnQrCode init] status=#{@response['status']} contrib=#{@contribution.id}"
+
+      if @response['status'] == 'INITIATED'
+        @qr_code_base64 = @response['qrCode']
+        @deep_link      = @response['deepLink'] || @response['OM'] || @response['MAXIT']
+        @validity_secs  = @response['validity'].to_i.nonzero? || 600
+        render 'projects/contributions/orange_money_sn_qrcode_initialization'
+      else
+        error_msg = @response['message'] || @response['detailMessage'] || @response['status']
+        Rails.logger.error "[OmSnQrCode init] non-INITIATED status=#{@response['status']} contrib=#{@contribution.id}: #{error_msg}"
+        redirect_to edit_project_contribution_path(@project, @contribution),
+                    alert: "Erreur Orange Money QR: #{error_msg}"
+      end
+    rescue => e
+      Rails.logger.error "[OmSnQrCode init] exception for contrib=#{@contribution.id}: #{e.class} #{e.message}"
+      redirect_to edit_project_contribution_path(@project, @contribution),
+                  alert: "Service Orange Money indisponible. Veuillez réessayer."
+    end
+  end
+
+
   def touch_payment_new
     @contribution = resource
     authorize @contribution
@@ -393,6 +425,65 @@ class Projects::ContributionsController < ApplicationController
       @response['message'] ||= @response['description']
       @response['status'] ||= @response['code']
       redirect_to touch_payment_new_project_contribution_path(@contribution.project, @contribution), notice: "Code: #{@response['status']} #{@response['message']}"
+    end
+  end
+
+
+  # Server-to-server webhook called by TouchPay when the QR code payment is
+  # confirmed (or failed) by the user in their Orange Money app.
+  # Same hardening principles as orange_money_payment_confirmation:
+  #   - no CSRF (skip_before_action above)
+  #   - no Pundit (skip_after_action above)
+  #   - 500 on save error triggers TouchPay retry
+  #   - idempotent on already-confirmed contributions
+  def orange_money_sn_qrcode_payment_confirmation
+    Rails.logger.info "[webhook OmSnQrCode] params=#{params.to_unsafe_h.except('qrCode').inspect}"
+
+    status         = params['status'] || params['Status']
+    id_from_client = params['idFromClient'] || params['id_from_client']
+    num_transaction= params['numTransaction'] || params['num_transaction']
+
+    unless status == 'SUCCESSFUL'
+      Rails.logger.warn "[webhook OmSnQrCode] non-SUCCESSFUL status=#{status.inspect}, ack and skip"
+      return render json: { success: true, note: 'non-successful status' }
+    end
+
+    tx = OrangeMoneySnQrCodeTransaction.find_by(id_from_client: id_from_client)
+    unless tx
+      Rails.logger.error "[webhook OmSnQrCode] no transaction for idFromClient=#{id_from_client.inspect}"
+      return render json: { success: false, error: 'transaction not found' }, status: :not_found
+    end
+
+    tx.update_columns(status: status, num_transaction: num_transaction) if num_transaction.present?
+
+    @contribution = Contribution.find_by(id: tx.contribution_id)
+    unless @contribution
+      Rails.logger.error "[webhook OmSnQrCode] no contribution id=#{tx.contribution_id}"
+      return render json: { success: false, error: 'contribution not found' }, status: :not_found
+    end
+
+    if @contribution.state == 'confirmed'
+      Rails.logger.info "[webhook OmSnQrCode] contribution #{@contribution.id} already confirmed, ack"
+      return render json: { success: true, note: 'already confirmed' }
+    end
+
+    begin
+      response_message = I18n.t('controllers.projects.contributions.orange_money_payment_confirmation.success')
+      @contribution.response_code      = status
+      @contribution.transaction_number = num_transaction
+      @contribution.response_message   = response_message
+      @contribution.payment_method     = 'Orange Money QR'
+      @contribution.state_event        = :confirm
+      @contribution.save!
+      @contribution.notify_owner(:orange_money_payment_confirmed)
+      Rails.logger.info "[webhook OmSnQrCode] contribution #{@contribution.id} confirmed (numTransaction=#{num_transaction})"
+      render json: { success: true }
+    rescue => e
+      Rails.logger.error(
+        "[webhook OmSnQrCode] confirm failed for contribution #{@contribution.id}: " \
+        "#{e.class} #{e.message}\n#{(e.backtrace || []).first(10).join("\n")}"
+      )
+      render json: { success: false, error: e.message }, status: :internal_server_error
     end
   end
 
@@ -652,6 +743,18 @@ class Projects::ContributionsController < ApplicationController
       contribution.transaction_number  = ppa_tx.invoice_number
       contribution.response_message  ||= t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.success')
       contribution.payment_method    ||= "Pay Plus Africa"
+      contribution.state_event = :confirm
+      contribution.save!
+      return true
+    end
+
+    qr_tx = contribution.orange_money_sn_qr_code_transactions.where.not(num_transaction: [nil, ""]).order(:id).last
+    if qr_tx
+      Rails.logger.info "[reconcile contrib=#{contribution.id}] OmSnQrCode numTransaction=#{qr_tx.num_transaction} → confirm"
+      contribution.response_code       = "SUCCESSFUL"
+      contribution.transaction_number  = qr_tx.num_transaction
+      contribution.response_message  ||= t('controllers.projects.contributions.orange_money_payment_confirmation.success')
+      contribution.payment_method    ||= "Orange Money QR"
       contribution.state_event = :confirm
       contribution.save!
       return true

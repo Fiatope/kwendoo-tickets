@@ -19,6 +19,7 @@ class Contribution < ActiveRecord::Base
   has_many :tickets, through: :ticket_categories_orders
   accepts_nested_attributes_for :ticket_categories_orders, allow_destroy: true
   has_many :orange_money_transactions
+  has_many :orange_money_sn_qr_code_transactions
   has_many :pay_plus_africa_transactions
 
   #validates_presence_of :project, :user, :value

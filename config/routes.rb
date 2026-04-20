@@ -154,6 +154,9 @@ Neighborly::Application.routes.draw do
   post 'webhooks/orange-money-payment-confirmations', to: 'projects/contributions#orange_money_payment_confirmation'
   get  'webhooks/orange-money-payment-confirmations', to: 'projects/contributions#orange_money_payment_confirmation'
 
+  post 'webhooks/orange-money-sn-qrcode-confirmations', to: 'projects/contributions#orange_money_sn_qrcode_payment_confirmation', as: :webhooks_orange_money_sn_qrcode_confirmations
+  get  'webhooks/orange-money-sn-qrcode-confirmations', to: 'projects/contributions#orange_money_sn_qrcode_payment_confirmation'
+
   post 'webhooks/pay-plus-africa-payment-confirmations', to: 'projects/contributions#pay_plus_africa_payment_confirmation'
   get  'webhooks/pay-plus-africa-payment-confirmations', to: 'projects/contributions#pay_plus_africa_payment_confirmation'
 
@@ -200,6 +203,7 @@ Neighborly::Application.routes.draw do
         get 'issue_free_tickets'
         post 'mobile_money_payment_initiation'
         get 'orange_money_payment_initialization'
+        get 'orange_money_sn_qrcode_initialization'
         get 'pay_plus_africa_payment_initialization'
         get 'touch_payment_new'
         post 'touch_payment_initialization'

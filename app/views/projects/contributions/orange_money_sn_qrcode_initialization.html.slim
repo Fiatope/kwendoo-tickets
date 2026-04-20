@@ -1,0 +1,80 @@
+- content_for :title, "Paiement Orange Money QR Code"
+/ Auto-refresh to /edit every 20s — reconcile_provider_payment will confirm if webhook landed
+meta http-equiv="refresh" content="20;url=#{edit_project_contribution_path(@project, @contribution)}"
+
+= hero_header_tag @project, class: "filter-black" do
+  .row
+    .large-10.columns.large-centered.text-center
+      h3 style="color:white;" | Paiement Orange Money — QR Code
+
+.row style="margin-top:2em;margin-bottom:3em;"
+  .large-6.columns.large-centered
+
+    .panel style="padding:2em;border-radius:8px;border:1px solid #e0e0e0;text-align:center;"
+
+      /-- Orange Money logo indicator
+      p style="font-size:1.1em;color:#444;margin-bottom:0.5em;"
+        strong | Scannez le QR code avec votre application Orange Money
+
+      p style="color:#888;font-size:0.9em;margin-bottom:1.5em;"
+        | Ouvrez Orange Money → Scanner → Confirmez avec votre code PIN
+
+      /-- QR Code image (base64 PNG from gutouch API)
+      - if @qr_code_base64.present?
+        div style="display:inline-block;padding:12px;border:3px solid #ff6600;border-radius:8px;background:white;margin-bottom:1em;"
+          = image_tag "data:image/png;base64,#{@qr_code_base64}", style: "width:220px;height:220px;display:block;", alt: "QR Code Orange Money"
+      - else
+        div style="width:220px;height:220px;background:#f5f5f5;border:2px dashed #ccc;margin:0 auto 1em;display:flex;align-items:center;justify-content:center;"
+          p style="color:#999;" | QR Code indisponible
+
+      /-- Deep link button (mobile)
+      - if @deep_link.present?
+        p style="margin-bottom:0.5em;"
+          a href="#{@deep_link}" class="btn" style="background:#ff6600;color:white;padding:0.75em 1.5em;border-radius:4px;text-decoration:none;display:inline-block;"
+            | 📱 Ouvrir Orange Money sur mobile
+
+      /-- Countdown timer
+      #om-qr-timer style="font-size:1.3em;font-weight:bold;color:#ff6600;margin:1em 0;"
+        | Expire dans : #{"#{@validity_secs / 60}:#{"%02d" % (@validity_secs % 60)}"}
+
+      hr
+
+      /-- Instructions
+      .text-left style="margin-bottom:1.5em;"
+        p style="font-size:0.9em;color:#555;"
+          strong | Comment payer :
+        ol style="font-size:0.9em;color:#555;padding-left:1.2em;"
+          li | Ouvrez votre application Orange Money
+          li | Sélectionnez "Scanner un QR Code" (ou "Payer par QR")
+          li | Scannez le QR code ci-dessus
+          li | Entrez votre code PIN pour confirmer le paiement
+          li | Attendez la confirmation (cette page se met à jour automatiquement)
+
+      /-- Verify button: redirects to /edit which runs reconcile
+      = link_to edit_project_contribution_path(@project, @contribution),
+                class: "btn btn-success",
+                style: "width:100%;background:#31a574;color:white;padding:0.9em;font-size:1em;border-radius:4px;display:block;text-align:center;text-decoration:none;margin-bottom:0.75em;" do
+        | ✓ J'ai payé — Vérifier mon paiement
+
+      /-- Cancel link
+      = link_to "Annuler et revenir", edit_project_contribution_path(@project, @contribution),
+                style: "color:#999;font-size:0.85em;"
+
+/-- Countdown timer only — meta refresh above handles the actual redirect every 20s.
+javascript:
+  (function() {
+    var validitySecs = #{@validity_secs};
+    var timerEl = document.getElementById('om-qr-timer');
+    var remaining = validitySecs;
+    var interval = setInterval(function() {
+      remaining -= 1;
+      if (remaining <= 0) {
+        clearInterval(interval);
+        if (timerEl) timerEl.textContent = 'QR Code expiré — veuillez relancer le paiement.';
+        return;
+      }
+      var m = Math.floor(remaining / 60);
+      var s = remaining % 60;
+      if (timerEl) timerEl.textContent = 'Expire dans : ' + m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+  })();
