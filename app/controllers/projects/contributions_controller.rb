@@ -54,15 +54,22 @@ class Projects::ContributionsController < ApplicationController
     @project      = parent
     @contribution = resource
 
-    puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-    puts @contribution.inspect
-    puts "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
-
     authorize resource
 
     if !@contribution.user
       @contribution.user = current_user
       @contribution.save!
+    end
+
+    # Self-healing: when the user lands back on /edit after paying, check
+    # whether a payment provider has already notified us successfully
+    # (transaction row has a txnid / reference set by their webhook).
+    # If so, promote the contribution to :confirmed here. Catches the rare
+    # cases where the async webhook was received but its state transition
+    # rolled back (generate_tickets exception, transient DB error, etc.)
+    # — without this, the user sees the payment form again forever.
+    unless @contribution.state == "confirmed" || @contribution.state == "canceled"
+      reconcile_provider_payment(@contribution)
     end
 
     if @contribution.state == "canceled"
@@ -272,38 +279,70 @@ class Projects::ContributionsController < ApplicationController
   end
 
 
+  # Server-to-server webhook hit by Orange Money once the user completes (or
+  # abandons) the payment on their side. Runs outside any user session, so:
+  #   - no CSRF (see skip_before_action above)
+  #   - no Pundit (see skip_after_action above)
+  #   - MUST be bulletproof: any 500 we return here causes Orange Money to
+  #     retry, and any 200 we return here tells them "we handled it", even if
+  #     we silently did not. The old code 'render json: { success: true }'
+  #     unconditionally + crashed silently on save! — the root cause of the
+  #     'payment succeeded but site asks me to pay again' regression.
   def orange_money_payment_confirmation
-    if params["status"] == "SUCCESS"
-      transaction = OrangeMoneyTransaction.find_by(notif_token: params["notif_token"])
-      transaction.update_column(:txnid, params["txnid"])
-      @contribution = Contribution.find_by(id: transaction.contribution_id)
+    Rails.logger.info "[webhook orange_money] params=#{params.to_unsafe_h.inspect}"
 
-      if params["status"] == "SUCCESS"
-        response_message = t('controllers.projects.contributions.orange_money_payment_confirmation.success')
-      else
-        response_message = t('controllers.projects.contributions.orange_money_payment_initialization.error', status: params["status"])
-      end
+    status      = params["status"]
+    notif_token = params["notif_token"]
+    txnid       = params["txnid"]
 
-      @contribution.response_code = params["status"]
-      @contribution.transaction_number = params["txnid"]
-      @contribution.response_message = response_message
-      @contribution.payment_method = "Orange Money"
-      @contribution.state_event = params["status"] == "SUCCESS" ? :confirm : :cancel
-      @contribution.save!
-      @contribution.notify_owner(:orange_money_payment_confirmed) if params["status"] == "SUCCESS"
-
-    #  puts "IF REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-    #  puts "IF REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-#
-    #  redirect_to project_contribution_path(project_id: @contribution.project.permalink, id: @contribution.id)
-   # else
-    #  puts "ELSE REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-   #   puts "ELSE REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-#
-    #  redirect_to edit_project_contribution_path(@contribution.project.permalink, @contribution)
+    if status != "SUCCESS"
+      Rails.logger.warn "[webhook orange_money] non-SUCCESS status=#{status.inspect}, ack and skip"
+      return render json: { success: true, note: "non-success status" }
     end
 
-    render json: { success: true }
+    transaction = OrangeMoneyTransaction.find_by(notif_token: notif_token)
+    unless transaction
+      Rails.logger.error "[webhook orange_money] no transaction for notif_token=#{notif_token.inspect}"
+      return render json: { success: false, error: "transaction not found" }, status: :not_found
+    end
+
+    transaction.update_column(:txnid, txnid) if txnid.present?
+
+    @contribution = Contribution.find_by(id: transaction.contribution_id)
+    unless @contribution
+      Rails.logger.error "[webhook orange_money] no contribution id=#{transaction.contribution_id} for notif_token=#{notif_token.inspect}"
+      return render json: { success: false, error: "contribution not found" }, status: :not_found
+    end
+
+    # Idempotence: if something already flipped this contribution to :confirmed
+    # (a previous retry of this webhook, or our /edit reconcile), just ack.
+    if @contribution.state == "confirmed"
+      Rails.logger.info "[webhook orange_money] contribution #{@contribution.id} already confirmed, ack"
+      return render json: { success: true, note: "already confirmed" }
+    end
+
+    begin
+      response_message = t('controllers.projects.contributions.orange_money_payment_confirmation.success')
+      @contribution.response_code = status
+      @contribution.transaction_number = txnid
+      @contribution.response_message = response_message
+      @contribution.payment_method = "Orange Money"
+      @contribution.state_event = :confirm
+      @contribution.save!
+      @contribution.notify_owner(:orange_money_payment_confirmed)
+      Rails.logger.info "[webhook orange_money] contribution #{@contribution.id} confirmed (txnid=#{txnid.inspect})"
+      render json: { success: true }
+    rescue => e
+      Rails.logger.error(
+        "[webhook orange_money] confirm failed for contribution #{@contribution.id}: " \
+        "#{e.class} #{e.message}\n#{(e.backtrace || []).first(15).join("\n")}"
+      )
+      # Return 5xx so Orange Money retries. The /edit reconcile is a second
+      # line of defense if the retry never succeeds: the txnid we just
+      # persisted on the transaction row is enough for the reconcile to
+      # flip the contribution to :confirmed server-side.
+      render json: { success: false, error: e.message }, status: :internal_server_error
+    end
   end
 
 
@@ -583,6 +622,46 @@ class Projects::ContributionsController < ApplicationController
 
 
   protected
+
+  # Look at provider transaction rows for this contribution and, if any of
+  # them carries a confirmation identifier set by the provider's webhook,
+  # promote the contribution to :confirmed here. No-op otherwise.
+  #
+  # Safe even if the provider is still pending: we only act when the
+  # provider has persisted proof of success on its transaction row
+  # (OrangeMoneyTransaction#txnid is written only on status=SUCCESS;
+  # PayPlusAfricaTransaction#invoice_number on response_code=="00";
+  # Touch writes payment_id + response_code on SUCCESSFUL).
+  def reconcile_provider_payment(contribution)
+    om_tx = contribution.orange_money_transactions.where.not(txnid: [nil, ""]).order(:id).last
+    if om_tx
+      Rails.logger.info "[reconcile contrib=#{contribution.id}] Orange Money txnid=#{om_tx.txnid} → confirm"
+      contribution.response_code       = "SUCCESS"
+      contribution.transaction_number  = om_tx.txnid
+      contribution.response_message  ||= t('controllers.projects.contributions.orange_money_payment_confirmation.success')
+      contribution.payment_method    ||= "Orange Money"
+      contribution.state_event = :confirm
+      contribution.save!
+      return true
+    end
+
+    ppa_tx = contribution.pay_plus_africa_transactions.where.not(invoice_number: [nil, ""]).order(:id).last
+    if ppa_tx
+      Rails.logger.info "[reconcile contrib=#{contribution.id}] PayPlusAfrica invoice=#{ppa_tx.invoice_number} → confirm"
+      contribution.response_code       = "00"
+      contribution.transaction_number  = ppa_tx.invoice_number
+      contribution.response_message  ||= t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.success')
+      contribution.payment_method    ||= "Pay Plus Africa"
+      contribution.state_event = :confirm
+      contribution.save!
+      return true
+    end
+
+    false
+  rescue => e
+    Rails.logger.error "[reconcile contrib=#{contribution.id}] failed: #{e.class} #{e.message}"
+    false
+  end
 
   def touch_params
     params.permit(:id, :phone, :country_operator, :id_client, :commit)

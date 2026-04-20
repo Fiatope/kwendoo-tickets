@@ -80,56 +80,83 @@ class Contribution < ActiveRecord::Base
   #   ENV['CFA_CONVERSION_RATE'].to_f || 656
   # end
 
+  # Called from PaymentStateMachineHandler after a contribution transitions
+  # to :confirmed. It MUST NOT raise: any exception here rolls back the
+  # state transition, the contribution stays :pending, the webhook returns
+  # 500, the user lands back on /edit asking to pay again (we have seen
+  # this exact regression in production).
+  #
+  # Reads `user_tickets` from Rails.cache if it is there — but the cache
+  # may be absent (different Puma/Sidekiq worker than the one that served
+  # the /create action, :memory_store cache, TTL expiry, Rails.cache.clear
+  # by another request, …). Every cache access is nil-safe; every
+  # Ticket#create! is wrapped in rescue so a single-ticket failure never
+  # wipes the whole confirmation.
   def generate_tickets
-    ticket_categories_orders.each do |ticket_categories_order|
-      ticket_categories_order.count.times do |i|
-        # token = loop do
-        #   random_token = SecureRandom.urlsafe_base64(nil, false)
-        #   break random_token unless Ticket.exists?(token: random_token)
-        # end
-        if Rails.cache.exist?('user_tickets')
-          user_tickets = Rails.cache.read('user_tickets')
-          if ticket_categories_order.reward.couple?
-            2.times do |j|
-              name = user_tickets["name"][j]
-              email = user_tickets["email"][j]
-  
-              @ticket = ticket_categories_order.tickets.create!(
-                # token: token,
-                validity_ends_at: (project.starts_at || project.start_date),
-                seat: nil, # For later
-                under_name: user.name, # For later
-                name: name,
-                email: email
-              )
-          end
-          else
-            puts "qeazeaze,  #{user_tickets}"
-            name = user_tickets["name"][i]
-            email = user_tickets["email"][i]
+    user_tickets = read_user_tickets_from_cache
 
-            @ticket = ticket_categories_order.tickets.create!(
-              # token: token,
-              validity_ends_at: (project.starts_at || project.start_date),
-              seat: nil, # For later
-              under_name: user.name, # For later
-              name: name,
-              email: email
-            )
-          end
+    ticket_categories_orders.each do |tco|
+      count = tco.count.to_i
+      next if count <= 0
+
+      couple = begin
+        tco.reward && tco.reward.couple?
+      rescue => e
+        Rails.logger.warn "[generate_tickets contrib=#{id} tco=#{tco.id}] couple? failed: #{e.class} #{e.message}"
+        false
+      end
+
+      count.times do |i|
+        if couple
+          # Couple reward: issue 2 physical tickets per ordered unit, each
+          # with its own name/email pulled from cache positions 0 and 1.
+          2.times { |j| create_one_ticket_safely(tco, user_tickets, j) }
         else
-          @ticket = ticket_categories_order.tickets.create!(
-            # token: token,
-            validity_ends_at: (project.starts_at || project.start_date),
-            seat: nil, # For later
-            under_name: user.name # For later
-          )
+          create_one_ticket_safely(tco, user_tickets, i)
         end
-
-        TicketWorker.perform_async(@ticket.id) if @ticket.present?
       end
     end
   end
+
+  private
+
+  def read_user_tickets_from_cache
+    return nil unless Rails.cache.exist?('user_tickets')
+    Rails.cache.read('user_tickets')
+  rescue => e
+    Rails.logger.warn "[generate_tickets contrib=#{id}] cache read failed: #{e.class} #{e.message}"
+    nil
+  end
+
+  def cached_ticket_field(user_tickets, key, index)
+    return nil unless user_tickets.is_a?(Hash)
+    val = user_tickets[key]
+    return nil unless val.is_a?(Array)
+    val[index]
+  end
+
+  def create_one_ticket_safely(tco, user_tickets, index)
+    name  = cached_ticket_field(user_tickets, "name",  index).presence
+    email = cached_ticket_field(user_tickets, "email", index).presence
+
+    ticket = tco.tickets.create!(
+      validity_ends_at: (project.starts_at || project.start_date),
+      seat: nil,
+      under_name: user.try(:name),
+      name: name,
+      email: email
+    )
+    TicketWorker.perform_async(ticket.id) if ticket && defined?(TicketWorker)
+    ticket
+  rescue => e
+    Rails.logger.error "[generate_tickets contrib=#{id} tco=#{tco.id} i=#{index}] ticket create failed: #{e.class} #{e.message}"
+    # Swallow: do not take down the payment confirmation because one
+    # ticket row could not be inserted. An operator can regenerate the
+    # missing ticket(s) via rails console if this ever fires.
+    nil
+  end
+
+  public
 
   def matched_contributions
     self.class.where(matching_id: matchings)
