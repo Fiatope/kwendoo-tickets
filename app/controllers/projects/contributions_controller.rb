@@ -360,8 +360,20 @@ class Projects::ContributionsController < ApplicationController
       Rails.logger.info "[OmSnQrCode init] status=#{@response['status']} contrib=#{@contribution.id}"
 
       if @response['status'] == 'INITIATED'
-        @qr_code_base64 = @response['qrCode']
-        @deep_link      = @response['deepLink'] || @response['OM'] || @response['MAXIT']
+        # Security: validate QR code is valid base64 (only A-Za-z0-9+/=\r\n chars).
+        # Prevents an attacker-controlled API response from injecting scripts via data URI.
+        raw_qr = @response['qrCode'].to_s.strip
+        @qr_code_base64 = (raw_qr =~ /\A[A-Za-z0-9+\/\r\n]+=*\z/) ? raw_qr : nil
+        raw_link        = @response['deepLink'] || @response['OM'] || @response['MAXIT']
+        # Security: only allow safe URL schemes (https, http, and OM deeplink protocols).
+        # Block javascript:, data:, vbscript:, etc. to prevent XSS.
+        @deep_link = if raw_link.present? &&
+                        raw_link.to_s =~ /\A[a-z][a-z0-9+.\-]*:\/\//i &&
+                        raw_link.to_s !~ /\A(javascript|vbscript|data|file|about|chrome|view-source):/i
+                       raw_link
+                     else
+                       nil
+                     end
         @validity_secs  = @response['validity'].to_i.nonzero? || 600
         render 'projects/contributions/orange_money_sn_qrcode_initialization'
       else
