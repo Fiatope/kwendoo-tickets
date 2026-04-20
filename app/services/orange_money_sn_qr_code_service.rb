@@ -16,15 +16,18 @@ require 'json'
 #   4. TouchPay POSTs result to callback URL (orange_money_sn_qrcode_payment_confirmation)
 #   5. App confirms the contribution
 #
-# Required ENV variables:
-#   TOUCH_HOST                    — e.g. https://api.gutouch.com
-#   TOUCH_SN_PATH_ID              — agent/path ID (e.g. ASFAT14242)
-#   TOUCH_SN_OM_QR_LOGIN_API      — loginAgent query param
-#   TOUCH_SN_OM_QR_PASSWORD_API   — passwordAgent query param
-#   TOUCH_SN_OM_QR_USERNAME       — Digest auth username (hashed)
-#   TOUCH_SN_OM_QR_PASSWORD       — Digest auth password (hashed)
-#   TOUCH_SN_OM_QR_RECIPIENT_NUMBER — Orange Money merchant number (Sénégal)
-#   TOUCH_SN_OM_QR_PARTNER_NAME   — Merchant name shown to user (default: Kwendoo)
+# Required ENV variables (réutilisation des variables existantes prod-fiatope/kwendoo):
+#   TOUCH_HOST                — e.g. https://api.gutouch.com
+#   TOUCH_SN_PATH_ID          — agent/path ID (e.g. ASFAT14242)
+#   TOUCH_SN_OM_LOGIN_API     — loginAgent query param (=697599242)
+#   TOUCH_SN_OM_PASSWORD_API  — passwordAgent query param
+#   TOUCH_SN_OM_USERNAME      — Digest auth username (SHA256 hex, 64 chars)
+#   TOUCH_SN_OM_PASSWORD      — Digest auth password (SHA256 hex)
+#   TOUCH_SN_OM_RECIPIENT_NUMBER — Numéro Orange Money du marchand (reçoit le paiement)
+#                                  Seule nouvelle variable à ajouter en prod.
+#
+# Variable à mettre à jour en prod:
+#   TOUCH_SN_OM_SERVICECODE   → doit valoir PAIEMENTMARCHANDOMQRCODE (pas PAIEMENTMARCHANDOM)
 class OrangeMoneySnQrCodeService < ApplicationService
   include Rails.application.routes.url_helpers
 
@@ -36,12 +39,12 @@ class OrangeMoneySnQrCodeService < ApplicationService
     @contribution   = contribution
     @touch_host     = ENV['TOUCH_HOST']
     @path_id        = ENV['TOUCH_SN_PATH_ID']
-    @login_api      = ENV['TOUCH_SN_OM_QR_LOGIN_API']
-    @password_api   = ENV['TOUCH_SN_OM_QR_PASSWORD_API']
-    @username       = ENV['TOUCH_SN_OM_QR_USERNAME']
-    @password       = ENV['TOUCH_SN_OM_QR_PASSWORD']
-    @recipient_num  = ENV['TOUCH_SN_OM_QR_RECIPIENT_NUMBER']
-    @partner_name   = ENV['TOUCH_SN_OM_QR_PARTNER_NAME'].presence || 'Kwendoo'
+    @login_api      = ENV['TOUCH_SN_OM_LOGIN_API']
+    @password_api   = ENV['TOUCH_SN_OM_PASSWORD_API']
+    @username       = ENV['TOUCH_SN_OM_USERNAME']
+    @password       = ENV['TOUCH_SN_OM_PASSWORD']
+    @recipient_num  = ENV['TOUCH_SN_OM_RECIPIENT_NUMBER']
+    @partner_name   = 'Kwendoo'
   end
 
   def self.initialize_payment_for(contribution)
