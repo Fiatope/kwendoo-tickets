@@ -66,7 +66,7 @@ class OrangeMoneySnQrCodeService < ApplicationService
         'recipientLastName' => sanitize_for_api(contribution.user.try(:name)),
         # Per InTouch official spec: destinataire = payer's phone (the customer scanning the QR)
         'destinataire'      => contribution.user.try(:phone_number),
-        'partner_name'      => sanitize_for_api(@partner_name),
+        'partner_name'      => sanitize_for_api(@partner_name).truncate(30, omission: '', separator: ' ').strip,
         'return_url'        => return_url,
         'cancel_url'        => return_url,
         'currency'          => 'XOF'
