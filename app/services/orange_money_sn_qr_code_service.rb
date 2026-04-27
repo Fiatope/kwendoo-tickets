@@ -23,8 +23,10 @@ require 'json'
 #   TOUCH_SN_OM_PASSWORD_API  — passwordAgent query param
 #   TOUCH_SN_OM_USERNAME      — Digest auth username (SHA256 hex, 64 chars)
 #   TOUCH_SN_OM_PASSWORD      — Digest auth password (SHA256 hex)
-#   TOUCH_SN_OM_RECIPIENT_NUMBER — Numéro Orange Money du marchand (reçoit le paiement)
-#                                  Seule nouvelle variable à ajouter en prod.
+#
+# Note (verified 2026-04-27 per InTouch official spec):
+#   recipientNumber + destinataire = payer's phone (contribution.user.phone_number)
+#   NOT the merchant's number — InTouch uses these fields to identify the customer paying.
 #
 # Variable à mettre à jour en prod:
 #   TOUCH_SN_OM_SERVICECODE   → doit valoir PAIEMENTMARCHANDOMQRCODE (pas PAIEMENTMARCHANDOM)
@@ -43,7 +45,6 @@ class OrangeMoneySnQrCodeService < ApplicationService
     @password_api   = ENV['TOUCH_SN_OM_PASSWORD_API']
     @username       = ENV['TOUCH_SN_OM_USERNAME']
     @password       = ENV['TOUCH_SN_OM_PASSWORD']
-    @recipient_num  = ENV['TOUCH_SN_OM_RECIPIENT_NUMBER']
     @partner_name   = 'Kwendoo'
   end
 
@@ -63,8 +64,8 @@ class OrangeMoneySnQrCodeService < ApplicationService
         'recipientEmail'    => contribution.user.try(:email),
         'recipientFirstName'=> contribution.user.try(:name),
         'recipientLastName' => contribution.user.try(:name),
-        # No 'destinataire' for QR code flow: the payer is identified by the QR scan, not a phone number.
-        # 'destinataire' would be the payer's phone — we do not collect it here.
+        # Per InTouch official spec: destinataire = payer's phone (the customer scanning the QR)
+        'destinataire'      => contribution.user.try(:phone_number),
         'partner_name'      => @partner_name,
         'return_url'        => return_url,
         'cancel_url'        => return_url,
@@ -72,7 +73,8 @@ class OrangeMoneySnQrCodeService < ApplicationService
       },
       'amount'          => amount,
       'callback'        => callback_url,
-      'recipientNumber' => @recipient_num,
+      # Per InTouch official spec: recipientNumber = payer's phone (same as destinataire)
+      'recipientNumber' => contribution.user.try(:phone_number),
       'serviceCode'     => SERVICE_CODE
     }
 
