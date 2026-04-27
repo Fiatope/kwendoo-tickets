@@ -62,11 +62,11 @@ class OrangeMoneySnQrCodeService < ApplicationService
       'idFromClient'   => id_from_client,
       'additionnalInfos' => {
         'recipientEmail'    => contribution.user.try(:email),
-        'recipientFirstName'=> contribution.user.try(:name),
-        'recipientLastName' => contribution.user.try(:name),
+        'recipientFirstName'=> sanitize_for_api(contribution.user.try(:name)),
+        'recipientLastName' => sanitize_for_api(contribution.user.try(:name)),
         # Per InTouch official spec: destinataire = payer's phone (the customer scanning the QR)
         'destinataire'      => contribution.user.try(:phone_number),
-        'partner_name'      => @partner_name,
+        'partner_name'      => sanitize_for_api(@partner_name),
         'return_url'        => return_url,
         'cancel_url'        => return_url,
         'currency'          => 'XOF'
@@ -105,6 +105,15 @@ class OrangeMoneySnQrCodeService < ApplicationService
   end
 
   private
+
+  def sanitize_for_api(str)
+    return '' if str.blank?
+    # Transliterate accented/special chars to ASCII equivalents (é→e, ç→c, à→a, ü→u, etc.)
+    # Orange Money API rejects requests containing accented or non-ASCII characters.
+    result = ActiveSupport::Inflector.transliterate(str.to_s)
+    # Remove any remaining non-ASCII chars; keep alphanumeric, spaces, and safe punctuation
+    result.gsub(/[^A-Za-z0-9\s\-\.,'\/\@]/, ' ').gsub(/\s+/, ' ').strip
+  end
 
   def perform_digest_request(data)
     api_path = "/dist/api/touchpayapi/v1/#{@path_id}/transaction"
