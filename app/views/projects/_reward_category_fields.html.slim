@@ -7,7 +7,7 @@
   .row
     br
     h4 = t('projects.new.tickets_available')
-    = f.simple_fields_for :rewards do |ff|
+    = f.simple_fields_for :rewards, f.object.rewards.not_soon do |ff|
       = render 'reward_fields', f: ff
     div
       = link_to_add_association t('projects.new.add_a_ticket'), f, :rewards, style: "display:block;padding:1rem;text-align:center;border:1px solid silver;width:100%;margin:1rem 0;border-radius:3px;"

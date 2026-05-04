@@ -27,7 +27,7 @@ class Projects::PromotionsController < ApplicationController
         @project      = parent
         @promotion = resource
         authorize @promotion
-        @rewards = @project.rewards
+        @rewards = @project.rewards.not_soon
         @selected_rewards = @promotion.rewards.map(&:id)
     end
 

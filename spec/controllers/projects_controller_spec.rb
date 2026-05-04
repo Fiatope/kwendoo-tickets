@@ -234,6 +234,50 @@ describe ProjectsController do
       let(:current_user){ create(:user, admin: true) }
       it_should_behave_like "updatable project"
     end
+
+    context "when removing rewards from event settings" do
+      let(:current_user) { project.user }
+      let!(:reward_category) { RewardCategory.create!(project: project, name: 'VIP') }
+      let!(:reward) do
+        Reward.create!(
+          reward_category: reward_category,
+          title: 'VIP Ticket',
+          minimum_value: 100,
+          description: 'VIP access'
+        )
+      end
+
+      let(:update_params) do
+        {
+          reward_categories_attributes: {
+            '0' => {
+              id: reward_category.id,
+              rewards_attributes: {
+                '0' => {
+                  id: reward.id,
+                  _destroy: '1'
+                }
+              }
+            }
+          }
+        }
+      end
+
+      it "deletes the reward when it has no linked data" do
+        put :update, id: project, project: update_params, locale: :pt
+
+        expect(Reward.where(id: reward.id)).to be_empty
+      end
+
+      it "hides the reward instead of deleting when it is already linked" do
+        create(:contribution, project: project, reward_id: reward.id, state: 'confirmed')
+
+        put :update, id: project, project: update_params, locale: :pt
+
+        reward.reload
+        expect(reward.soon).to eq(true)
+      end
+    end
   end
 
   describe "GET embed" do

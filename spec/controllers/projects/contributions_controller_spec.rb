@@ -156,6 +156,34 @@ describe Projects::ContributionsController do
       its(:body) { should =~ /#{project.name}/ }
     end
 
+    context "when event has hidden and visible ticket types" do
+      render_views
+
+      let!(:reward_category) { RewardCategory.create!(project: project, name: 'Zone A') }
+      let!(:visible_reward) do
+        Reward.create!(
+          reward_category: reward_category,
+          title: 'Visible Ticket',
+          minimum_value: 10,
+          description: 'Shown to buyers'
+        )
+      end
+      let!(:hidden_reward) do
+        Reward.create!(
+          reward_category: reward_category,
+          title: 'Hidden Ticket',
+          minimum_value: 10,
+          description: 'Should not be shown',
+          soon: true
+        )
+      end
+
+      it 'shows only visible rewards in checkout options' do
+        expect(response.body).to include('Visible Ticket')
+        expect(response.body).not_to include('Hidden Ticket')
+      end
+    end
+
     describe 'persistent warnings' do
       let(:set_expectations) do
         expect(controller).to_not receive(:set_persistent_warning)

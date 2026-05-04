@@ -85,7 +85,10 @@ class ProjectsController < ApplicationController
   def update
     authorize resource
 
-    respond_with Project.update(resource.id, permitted_params[:project].merge!(address_state: resource.country.capitalize)),
+    project_params = permitted_params[:project].merge!(address_state: resource.country.capitalize)
+    process_removed_rewards!(project_params)
+
+    respond_with Project.update(resource.id, project_params),
       location: project_path(@project)
   end
 
@@ -162,6 +165,29 @@ class ProjectsController < ApplicationController
 
   def permitted_params
     params.permit(policy(@project || Project).permitted_attributes)
+  end
+
+  def process_removed_rewards!(project_params)
+    reward_categories_attributes = project_params[:reward_categories_attributes]
+    return if reward_categories_attributes.blank?
+
+    reward_categories_attributes.each_value do |reward_category_params|
+      rewards_attributes = reward_category_params[:rewards_attributes]
+      next if rewards_attributes.blank?
+
+      rewards_attributes.each_value do |reward_params|
+        next unless ActiveModel::Type::Boolean.new.cast(reward_params[:_destroy])
+        next if reward_params[:id].blank?
+
+        reward = resource.rewards.find_by(id: reward_params[:id])
+        next unless reward
+
+        if reward.has_linked_tickets_or_contributions?
+          reward.update_column(:soon, true)
+          reward_params[:_destroy] = '0'
+        end
+      end
+    end
   end
 
   def resource

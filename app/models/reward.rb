@@ -47,4 +47,10 @@ class Reward < ActiveRecord::Base
     return nil unless maximum_contributions
     maximum_contributions - total_compromised 
   end
+
+  def has_linked_tickets_or_contributions?
+    ticket_categories_orders.exists? ||
+      tickets.exists? ||
+      Contribution.where(reward_id: id).exists?
+  end
 end

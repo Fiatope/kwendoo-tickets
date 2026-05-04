@@ -130,7 +130,7 @@ class Projects::ContributionsController < ApplicationController
     @contribution = ContributionForm.new(project: parent, user: current_user)
     @reward_categories = @contribution.reward_categories
     @ticket_categories_orders = {}
-    @project.rewards.select { |r| !r.sold_out? }.each do |r|
+    @project.rewards.not_soon.select { |r| !r.sold_out? }.each do |r|
       @ticket_categories_order = @contribution.ticket_categories_orders.build(reward_id: r.id)
       @ticket_categories_orders[@ticket_categories_order.reward.reward_category_id] = [] unless @ticket_categories_orders.key? @ticket_categories_order.reward.reward_category_id
       @ticket_categories_orders[@ticket_categories_order.reward.reward_category_id] << @ticket_categories_order

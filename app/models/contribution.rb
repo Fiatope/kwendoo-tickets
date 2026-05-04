@@ -203,7 +203,7 @@ class Contribution < ActiveRecord::Base
   end
 
   def available_rewards
-    Reward.where(project_id: self.project_id).where('minimum_value <= ?', self.value).order(:minimum_value)
+    Reward.not_soon.where(project_id: self.project_id).where('minimum_value <= ?', self.value).order(:minimum_value)
   end
 
   def net_value

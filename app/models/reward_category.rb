@@ -2,7 +2,7 @@ class RewardCategory < ActiveRecord::Base
   belongs_to :project
   has_many :rewards, dependent: :destroy
 
-  accepts_nested_attributes_for :rewards
+  accepts_nested_attributes_for :rewards, allow_destroy: true
 
   validates_presence_of :name
 end
