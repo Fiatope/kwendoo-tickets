@@ -4,7 +4,7 @@ class Projects::ContributionsController < ApplicationController
   # skip_before_action :set_persistent_warning
   # before_action :has_mangopay_prerequisites, only: [:edit] # DISABLED — MangoPay deprecated
   #before_action :has_mangopay_prerequisites, only: [:new, :create]
-  skip_before_action :verify_authenticity_token, only: [:orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation]
+  skip_before_action :verify_authenticity_token, only: [:orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_return]
   skip_after_action :verify_authorized, except: [:index, :tickets_show]
   skip_after_action :verify_authorized, only: [:cancel, :orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation, :orange_money_sn_qrcode_initialization, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_initialization]
 
@@ -532,19 +532,27 @@ class Projects::ContributionsController < ApplicationController
       else
         if @response['status'] == 'SUCCESSFUL'
           response_message = t('controllers.projects.contributions.paypal_payment_confirmation.success')
-    
-          @contribution.response_code = @response['status']
-          @contribution.payment_id = @response['idFromClient']
-          @contribution.response_message = response_message
-          @contribution.payment_method = "Touch"
-          @contribution.state_event = :confirm
-          @contribution.save!
-    
+
+          begin
+            unless @contribution.confirmed?
+              @contribution.response_code = @response['status']
+              @contribution.payment_id = @response['idFromClient']
+              @contribution.response_message = response_message
+              @contribution.payment_method = "Touch"
+              @contribution.state_event = :confirm
+              @contribution.save!
+            end
+          rescue => e
+            Rails.logger.error("[TouchService] touch_payment_status confirm error: #{e.class} #{e.message}")
+            # La contribution a pu être confirmée par le callback pendant cette requête
+            @contribution.reload
+          end
+
           flash.notice = response_message
     
           redirect_to project_contribution_path(project_id: @contribution.project, id: @contribution.id)
         else
-          response_message = t('controllers.projects.contributions.paypal_payment_confirmation.error', status: paypal_params[:payment_status])
+          response_message = t('controllers.projects.contributions.paypal_payment_confirmation.error', status: @response['status'])
     
           @contribution.response_code = @response['status']
           @contribution.payment_id = @response['idFromClient']
@@ -565,48 +573,109 @@ class Projects::ContributionsController < ApplicationController
 
 
   def touch_payment_return
-    @contribution = Contribution.find_by!(id: touch_params[:id])
-
+    @contribution = Contribution.find_by!(id: params[:id] || touch_params[:id])
     @project = @contribution.project
+
+    # Handle Touch API callback notification
+    payment_status = params[:status]
+    partner_transaction_id = params[:partner_transaction_id]
+
+    if payment_status.present? && partner_transaction_id.present?
+      begin
+        if payment_status == 'SUCCESSFUL'
+          unless @contribution.confirmed?
+            @contribution.response_code    = payment_status
+            @contribution.payment_id       = partner_transaction_id
+            @contribution.response_message = t('controllers.projects.contributions.create.success')
+            @contribution.payment_method   = 'Touch'
+            @contribution.state_event      = :confirm
+            @contribution.save!
+            Rails.logger.info("[TouchService] Payment confirmed via callback: #{partner_transaction_id}")
+          else
+            Rails.logger.info("[TouchService] Callback received but contribution #{@contribution.id} already confirmed — skipping")
+          end
+        else
+          unless @contribution.canceled? || @contribution.confirmed?
+            @contribution.response_code    = payment_status
+            @contribution.payment_id       = partner_transaction_id
+            @contribution.response_message = "Payment #{payment_status.downcase}"
+            @contribution.payment_method   = 'Touch'
+            @contribution.state_event      = :cancel
+            @contribution.save!
+            Rails.logger.info("[TouchService] Payment #{payment_status.downcase} via callback: #{partner_transaction_id}")
+          else
+            Rails.logger.info("[TouchService] Callback #{payment_status} received but contribution #{@contribution.id} already in terminal state — skipping")
+          end
+        end
+      rescue => e
+        Rails.logger.error("[TouchService] callback processing error for contribution #{@contribution.id}: #{e.class} #{e.message}")
+        # Still return 200 to prevent Touchpay from retrying indefinitely
+        head :ok and return
+      end
+
+      # Return HTTP 200 for API acknowledgment (no HTML response needed)
+      head :ok and return
+    end
+
+    # For user browser redirect (if accessed directly)
+    if @contribution.confirmed?
+      flash.notice = t('controllers.projects.contributions.create.success')
+      redirect_to project_contribution_path(project_id: @project, id: @contribution)
+    else
+      redirect_to edit_project_contribution_path(project_id: @project, id: @contribution)
+    end
   end
 
 
   def pay_plus_africa_payment_confirmation
-    transaction = PayPlusAfricaTransaction.find_by!(notif_token: params["token"])
-    @contribution = Contribution.find_by!(id: transaction.contribution_id)
-    response_status = PayPlusAfricaService.confirm_payment_for(@contribution, transaction)
+    transaction = payplus_transaction_from_callback
 
-    if response_status["response_code"] == "00"
-      transaction.update_column(:invoice_number, response_status["token"])
-
-      response_message = t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.success')
-
-      @contribution.response_code = response_status["status"]
-      @contribution.transaction_number = response_status["token"]
-      @contribution.response_message = response_message
-      @contribution.payment_method = "Pay Plus Africa"
-      @contribution.state_event = response_status["status"] == "completed" ? :confirm : :cancel
-      @contribution.save!
-      # @contribution.notify_owner(:pay_plus_africa_payment_confirmed) if response_status["status"] == "completed"
-
-      flash.notice = response_message
-
-      puts "IF REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-      puts "IF REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-
-      redirect_to project_contribution_path(project_id: @contribution.project.permalink, id: @contribution.id)
-    else
-      puts "ELSE REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-      puts "ELSE REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION REDIRECTION "
-
-      response_message = t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.error', status: params["status"])
-      flash.alert = response_message
-
-      redirect_to edit_project_contribution_path(@contribution.project.permalink, @contribution)
+    unless transaction
+      Rails.logger.warn "[PayPlus Callback] Transaction introuvable — payload: #{request.raw_post.to_s.truncate(500)}"
+      return head :not_found
     end
 
+    @contribution = Contribution.find_by(id: transaction.contribution_id)
+    return head :not_found unless @contribution
 
-    # render json: { success: true }
+    # Idempotence : PayPlus envoie 2 notifications par événement (form + json)
+    if @contribution.state == "confirmed" || @contribution.state == "canceled"
+      return payplus_callback_response(@contribution.state == "confirmed" ? :confirmed : :canceled)
+    end
+
+    # Toujours re-vérifier auprès de l'API PayPlus (ne jamais faire confiance au payload seul)
+    response_status = PayPlusAfricaService.confirm_payment_for(@contribution, transaction)
+    Rails.logger.info "[PayPlus Callback] contrib=#{@contribution.id} confirm=#{response_status.inspect}"
+
+    if response_status["response_code"] == "00"
+      case response_status["status"]
+      when "completed"
+        transaction.update_column(:invoice_number, response_status["token"]) if response_status["token"].present?
+        @contribution.response_code = "00"
+        @contribution.transaction_number = transaction.invoice_number.presence || transaction.notif_token
+        @contribution.response_message = t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.success')
+        @contribution.payment_method = "Pay Plus Africa"
+        @contribution.state_event = :confirm
+        @contribution.save!
+        payplus_callback_response(:confirmed)
+      when "pending"
+        # Paiement pas encore finalisé : ne rien faire, PayPlus notifiera à nouveau
+        payplus_callback_response(:pending)
+      else
+        @contribution.response_code = response_status["status"].to_s
+        @contribution.response_message = t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.error', status: response_status["status"])
+        @contribution.payment_method = "Pay Plus Africa"
+        @contribution.state_event = :cancel
+        @contribution.save!
+        payplus_callback_response(:canceled)
+      end
+    else
+      Rails.logger.error "[PayPlus Callback] Confirm API error contrib=#{@contribution.id}: #{response_status.inspect}"
+      head :ok
+    end
+  rescue => e
+    Rails.logger.error "[PayPlus Callback] #{e.class} #{e.message}\n#{e.backtrace.first(5).join("\n")}"
+    head :internal_server_error
   end
 
   def vpc_payment
@@ -680,6 +749,11 @@ class Projects::ContributionsController < ApplicationController
     @contribution = Contribution.find(oltranz_request["TRANSID"].last(8).to_i)
     # oltranz_request
     # => {"TRANSID"=>"9000000059", "CONTRACTID"=>"421001", "STATUSCODE"=>"100", "SPTRANSID"=>"818207", "STATUSDESC"=>"Success"}
+    if @contribution.state == "confirmed"
+      # Idempotence : Oltranz peut renvoyer la notification — ack sans retraiter
+      return render xml: "<COMMAND><RESPONDERSTATUS>100</RESPONDERSTATUS><REQUESTSTATUS>100</REQUESTSTATUS><REQUESTSTATUSDESC>Already confirmed</REQUESTSTATUSDESC></COMMAND>", layout: false
+    end
+
     if oltranz_request["STATUSCODE"] == "100" &&
       @contribution.update(
         response_code: "100",
@@ -776,6 +850,45 @@ class Projects::ContributionsController < ApplicationController
   rescue => e
     Rails.logger.error "[reconcile contrib=#{contribution.id}] failed: #{e.class} #{e.message}"
     false
+  end
+
+  # Identifie la transaction PayPlus depuis le callback :
+  # - via params["token"] (anciens callbacks PayPlus)
+  # - sinon via custom_data.return_data = "projectId-contributionId"
+  def payplus_transaction_from_callback
+    token = params["token"].presence
+    return PayPlusAfricaTransaction.find_by(notif_token: token) if token
+
+    entries = params["custom_data"]
+    entries = entries.values if entries.is_a?(Hash) || entries.is_a?(ActionController::Parameters)
+    Array(entries).each do |entry|
+      key   = (entry["keyof_customdata"] rescue nil)
+      value = (entry["valueof_customdata"] rescue nil)
+      next unless key == "return_data" && value.present?
+      _project_id, contribution_id = value.to_s.split("-")
+      next if contribution_id.blank?
+      return PayPlusAfricaTransaction.where(contribution_id: contribution_id)
+                                     .where.not(notif_token: [nil, ""])
+                                     .order(:id).last
+    end
+    nil
+  end
+
+  # Réponse du callback : 200 OK pour le serveur PayPlus (POST),
+  # redirection avec message pour le navigateur (GET legacy)
+  def payplus_callback_response(outcome)
+    if request.get?
+      case outcome
+      when :confirmed
+        redirect_to project_contribution_path(project_id: @contribution.project.permalink, id: @contribution.id), notice: t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.success')
+      when :pending
+        redirect_to edit_project_contribution_path(@contribution.project.permalink, @contribution), notice: t('controllers.projects.contributions.pay_plus_africa_payment_confirmation.pending', default: 'Paiement en cours de traitement...')
+      else
+        redirect_to edit_project_contribution_path(@contribution.project.permalink, @contribution), alert: @contribution.response_message
+      end
+    else
+      head :ok
+    end
   end
 
   def touch_params

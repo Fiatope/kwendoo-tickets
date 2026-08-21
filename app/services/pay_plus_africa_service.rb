@@ -70,7 +70,8 @@ class PayPlusAfricaService < ApplicationService
         },
         actions: {
           cancel_url: cancel_url,
-          return_url: return_url
+          return_url: return_url,
+          callback_url: notif_url
         },
         custom_data: {
           return_data: "#{contribution.project.id}-#{contribution.id}"
