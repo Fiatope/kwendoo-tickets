@@ -399,11 +399,19 @@ class Projects::ContributionsController < ApplicationController
     @html_operators = ''
     @operators = TouchService::LIST_OPERATORS
     @operators.each do |country, operators|
+      # N'afficher que les opérateurs réellement configurés (identifiants Touch présents)
+      configured = operators.select { |key, _| ENV["TOUCH_#{key}_SERVICECODE"].present? }
+      next if configured.empty?
       @html_operators += '<optgroup label="' + country + '">'
-      operators.each do |key, operator|
+      configured.each do |key, operator|
         @html_operators += '<option value="' + key + '">' + operator + '</option>'
       end
       @html_operators += '</optgroup>'
+    end
+
+    if @html_operators.blank?
+      redirect_to edit_project_contribution_path(@contribution.project, @contribution), alert: "Ce moyen de paiement est temporairement indisponible. Veuillez choisir une autre option."
+      return
     end
   end
 
@@ -414,11 +422,27 @@ class Projects::ContributionsController < ApplicationController
 
     @project = @contribution.project
 
-    country_operator = touch_params[:country_operator].split('_')
-    country = country_operator[0]
+    country_operator = (touch_params[:country_operator] || '').split('_')
+    country  = country_operator[0]
     operator = country_operator[1]
-    phone = touch_params[:phone]
+    phone    = clean_touch_phone(touch_params[:phone], country)
     @new_payment = false
+
+    unless country.present? && operator.present?
+      redirect_to touch_payment_new_project_contribution_path(@contribution.project, @contribution), notice: "Veuillez sélectionner un opérateur"
+      return
+    end
+
+    if phone.blank?
+      redirect_to touch_payment_new_project_contribution_path(@contribution.project, @contribution), notice: "Veuillez entrer votre numéro de téléphone"
+      return
+    end
+
+    phone_error = validate_touch_phone(phone, country)
+    if phone_error
+      redirect_to touch_payment_new_project_contribution_path(@contribution.project, @contribution), notice: phone_error
+      return
+    end
 
     payment = TouchService.new country, operator, phone, @contribution
     @response = payment.initiate_paiement
@@ -427,7 +451,7 @@ class Projects::ContributionsController < ApplicationController
       "country_operator" => touch_params[:country_operator]
     })
 
-    puts "======================== response #{@response} ========================"
+    Rails.logger.info("[TouchService] initiation contribution_id=#{@contribution.id} status=#{@response['status']} operator=#{country}_#{operator}")
 
     if @response['status'] == 'INITIATED'
       flash.now[:notice] = 'Valider le paiement sur votre téléphone'
@@ -888,6 +912,32 @@ class Projects::ContributionsController < ApplicationController
       end
     else
       head :ok
+    end
+  end
+
+  TOUCH_COUNTRY_CODES = { 'SN' => '221', 'CM' => '237', 'CI' => '225', 'GN' => '224' }.freeze
+  TOUCH_PHONE_LENGTHS = { 'SN' => 9, 'CM' => 9, 'GN' => 9, 'CI' => 10 }.freeze
+
+  def clean_touch_phone(phone, country)
+    return '' if phone.blank?
+    digits = phone.to_s.gsub(/[^0-9]/, '')
+    cc = TOUCH_COUNTRY_CODES[country.to_s.upcase]
+    if cc
+      if digits.start_with?("00#{cc}")
+        digits = digits[(2 + cc.length)..]
+      elsif digits.start_with?(cc) && digits.length > (TOUCH_PHONE_LENGTHS[country.to_s.upcase] || 9)
+        digits = digits[cc.length..]
+      end
+    end
+    digits
+  end
+
+  def validate_touch_phone(phone, country)
+    expected = TOUCH_PHONE_LENGTHS[country.to_s.upcase]
+    if expected && phone.length != expected
+      "Numéro de téléphone invalide (#{expected} chiffres requis, sans indicatif pays)."
+    elsif phone.length < 7 || phone.length > 12
+      "Numéro de téléphone invalide (#{phone.length} chiffres). Entrez uniquement les chiffres sans indicatif pays."
     end
   end
 
