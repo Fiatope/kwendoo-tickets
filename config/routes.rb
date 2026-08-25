@@ -209,6 +209,7 @@ Neighborly::Application.routes.draw do
         post 'touch_payment_initialization'
         post 'touch_payment_status'
         get 'touch_payment_return'
+        post 'touch_payment_return'
       end
     end
 

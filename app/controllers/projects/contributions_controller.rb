@@ -6,7 +6,7 @@ class Projects::ContributionsController < ApplicationController
   #before_action :has_mangopay_prerequisites, only: [:new, :create]
   skip_before_action :verify_authenticity_token, only: [:orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_return]
   skip_after_action :verify_authorized, except: [:index, :tickets_show]
-  skip_after_action :verify_authorized, only: [:cancel, :orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation, :orange_money_sn_qrcode_initialization, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_initialization]
+  skip_after_action :verify_authorized, only: [:cancel, :orange_money_payment_confirmation, :orange_money_sn_qrcode_payment_confirmation, :orange_money_sn_qrcode_initialization, :pay_plus_africa_payment_confirmation, :mobile_money_payment_confirmation, :touch_payment_initialization, :touch_payment_return]
 
   has_scope :available_to_count, type: :boolean
   has_scope :with_state
