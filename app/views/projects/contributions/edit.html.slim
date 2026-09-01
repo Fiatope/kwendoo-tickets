@@ -78,13 +78,17 @@
           div.payments
 
             - if ["Cameroon", "Cameroun", "Mali", "Côte d'Ivoire", "CI", "Sénégal", "Senegal"].include?(@project.country)
-              = render 'shared/payments/orange_money', resource: @contribution
-              = render 'shared/payments/touch', resource: @contribution
+              - if payment_method_visible?(:orange_money)
+                = render 'shared/payments/orange_money', resource: @contribution
+              - if payment_method_visible?(:touch)
+                = render 'shared/payments/touch', resource: @contribution
             - elsif ['Bénin', 'Benin', 'Togo', 'Burkina', 'Burkina Faso'].include?(@project.country)
-              = render 'shared/payments/pay_plus_africa', resource: @contribution
+              - if payment_method_visible?(:pay_plus_africa)
+                = render 'shared/payments/pay_plus_africa', resource: @contribution
 
         - elsif @project.currency.upcase == 'EUR'
-            = render 'shared/payments/form', resource: @contribution
+            - if payment_method_visible?(:credit_card)
+              = render 'shared/payments/form', resource: @contribution
 
   .row
     aside.large-4.medium-4.columns
